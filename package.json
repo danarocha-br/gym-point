@@ -1,0 +1,27 @@
+{
+  "name": "GymPoint",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/danarocha-br/gym-point.git",
+  "author": "danarocha <dana@danarocha.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "dev:debug": "nodemon --inspect src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "sequelize": "^5.21.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^5.5.1",
+    "eslint": "^6.5.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.18.2",
+    "sucrase": "^3.10.1"
+  }
+}
