@@ -23,8 +23,12 @@ class StudentController {
         .email()
         .required(),
       birthday: Yup.date().required(),
-      weight: Yup.number().required(),
-      height: Yup.number().required(),
+      weight: Yup.number()
+        .positive()
+        .required(),
+      height: Yup.number()
+        .positive()
+        .required(),
     });
 
     if (!(await schema.isValid(req.body))) {
