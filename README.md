@@ -6,7 +6,7 @@
  
  <p>
    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/danarocha-br/gym-point?style=for-the-badge">
-   <img alt="GitHub language count" src="https://img.shields.io/github/languages/top/danarocha-br/gym-point?style=for-the-badge">
+   <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/danarocha-br/gym-point?style=for-the-badge">
    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/danarocha-br/gym-point?style=for-the-badge">
 </p>
 
