@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { parseISO, differenceInYears } from 'date-fns';
 
 import Student from '../models/Student';
 
@@ -17,9 +18,10 @@ class StudentController {
   }
 
   async show(req, res) {
-    const { id } = req.params;
-
-    const student = await Student.findByPk(id);
+    const student = await Student.findOne({
+      where: { id: req.params.studentId },
+      attributes: ['id', 'name', 'email', 'birthday', 'weight', 'height'],
+    });
 
     return res.json(student);
   }
@@ -51,11 +53,35 @@ class StudentController {
       return res.status(400).json({ error: 'This student already exists.' });
     }
 
-    const { id, name, email, birthday, weight, height } = await Student.create(
-      req.body
-    );
+    // get age
 
-    return res.json({ id, name, email, birthday, weight, height });
+    const { birthday } = req.body;
+    const parsedBirthday = parseISO(birthday);
+
+    const age = differenceInYears(new Date(), parsedBirthday);
+
+    const { id, name, email, weight, height } = req.body;
+
+    // create student
+
+    await Student.create({
+      id,
+      name,
+      email,
+      weight,
+      height,
+      birthday: parsedBirthday,
+    });
+
+    return res.json({
+      id,
+      name,
+      email,
+      parsedBirthday,
+      age,
+      weight,
+      height,
+    });
   }
 
   async update(req, res) {
@@ -89,15 +115,32 @@ class StudentController {
       }
     }
 
-    const { id, name, birthday, weight, height } = await student.update(
-      req.body
-    );
+    // get age
+
+    const { birthday } = req.body;
+    const parsedBirthday = parseISO(birthday);
+
+    const age = differenceInYears(new Date(), parsedBirthday);
+
+    const { id, name, weight, height } = req.body;
+
+    // update students
+
+    await student.update({
+      id,
+      name,
+      email,
+      birthday: parsedBirthday,
+      weight,
+      height,
+    });
 
     return res.json({
       id,
       name,
       email,
       birthday,
+      age,
       weight,
       height,
     });
