@@ -1,4 +1,5 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 
 import Plan from '../models/Plan';
 
@@ -14,6 +15,15 @@ class PlanController {
     });
 
     return res.json(plans);
+  }
+
+  async show(req, res) {
+    const plan = await Plan.findOne({
+      where: { id: req.params.planId },
+      attributes: ['id', 'title', 'duration', 'price'],
+    });
+
+    return res.json(plan);
   }
 
   async store(req, res) {
@@ -57,8 +67,6 @@ class PlanController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    const { title } = req.body;
-
     const plan = await Plan.findByPk(req.params.planId);
 
     if (!plan) {
@@ -66,16 +74,23 @@ class PlanController {
         error: 'Plan with this given ID was not found.',
       });
     }
+    const { id, title, duration, price } = req.body;
 
-    if (plan !== plan.title) {
-      const planExists = await Plan.findOne({ where: { title } });
+    // check if plan already exists
 
-      if (planExists) {
-        return res.status(400).json({ error: 'This plan already exists.' });
-      }
+    const otherPlans = await Plan.findAll({
+      where: { id: { [Op.ne]: req.params.planId } },
+      attributes: ['title'],
+    });
+
+    const titles = otherPlans.map(p => p.title);
+    const planExist = titles.find(p => p === title);
+
+    if (planExist) {
+      return res.status(400).json({ error: 'This plan already exists.' });
     }
 
-    const { id, duration, price } = await plan.update(req.body);
+    await plan.update({ id, title, duration, price });
 
     return res.json({
       id,
