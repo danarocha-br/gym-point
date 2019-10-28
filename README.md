@@ -2,13 +2,15 @@
   GymPoint
 </h1>
 
-<h4>
-  A simple project to manage gym, representing my journey in learning Node js while implementing React Js and React Native. Still under development:
-</h4>
+ A simple project to manage gym, representing my journey in learning NodeJS while implementing ReactJS and React Native. Still under development.
+ 
+ <p>
+  ![GitHub language count](https://img.shields.io/github/languages/count/danarocha-br/gym-point?style=for-the-badge)
+  ![GitHub top language](https://img.shields.io/github/languages/top/danarocha-br/gym-point?style=for-the-badge)
+  ![GitHub last commit](https://img.shields.io/github/last-commit/danarocha-br/gym-point?style=for-the-badge)
 
-- [ ] REST API (with Node js)
-- [ ] iOS & Android Apps (based on react-native)
-- [ ] Website App in any browser (based on react)
+</p>
+
 
 ## Screenshots
 
@@ -106,7 +108,10 @@ Finally, you will need a rest client to test "**GymPoint**". Here are some:
 
 ## What's next
 
-- [ ] finish up rest api with tests.
+- [ ] REST API (with Node js) - tests
+- [ ] iOS & Android Apps (based on react-native)
+- [ ] Website App in any browser (based on react)
+
 
 
 ---
