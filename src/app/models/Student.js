@@ -1,4 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
+import Registration from './Registration';
 
 class Student extends Model {
   static init(sequelize) {
@@ -18,11 +19,12 @@ class Student extends Model {
     return this;
   }
 
-  // static associate(models) {
-  //   this.hasOne(models.Registration, {
-  //     foreignKey: 'student_id',
-  //   });
-  // }
+  static associate(models) {
+    this.hasOne(models.Registration, {
+      foreignKey: 'student_id',
+      as: 'student',
+    });
+  }
 }
 
 export default Student;

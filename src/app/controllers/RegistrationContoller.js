@@ -5,36 +5,57 @@ import Registration from '../models/Registration';
 import Plan from '../models/Plan';
 import Student from '../models/Student';
 
-class RegistrationController {
+class RegistrationContoller {
   async index(req, res) {
     const { page = 1 } = req.query;
 
-    const registrations = await Registration.findAll({
-      attributes: [
-        'id',
-        'student_id',
-        'plan_id',
-        'start_date',
-        'end_date',
-        'price',
-      ],
-      // include: [
-      //   {
-      //     model: Student,
-      //     as: 'student',
-      //     attributes: ['id', 'name', 'email'],
-      //   },
-      //   {
-      //     model: Plan,
-      //     as: 'plan',
-      //     attributes: ['id', 'title'],
-      //   },
-      // ],
+    const enrollments = await Registration.findAll({
+      order: ['id'],
       limit: 20,
       offset: (page - 1) * 20,
+      attributes: ['id', 'start_date', 'end_date', 'price'],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title', 'price', 'duration'],
+        },
+      ],
     });
 
-    return res.json(registrations);
+    return res.json(enrollments);
+  }
+
+  async show(req, res) {
+    const enrollment = await Registration.findOne({
+      where: { id: req.params.enrollmentId },
+      attributes: ['id', 'start_date', 'end_date', 'price'],
+      include: [
+        {
+          model: Student,
+          as: 'student',
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          model: Plan,
+          as: 'plan',
+          attributes: ['id', 'title', 'price', 'duration'],
+        },
+      ],
+    });
+
+    if (!enrollment) {
+      return res.status(404).json({
+        error: 'Enrollment with this given ID was not found.',
+      });
+    }
+
+    return res.json(enrollment);
   }
 
   async store(req, res) {
@@ -84,11 +105,11 @@ class RegistrationController {
 
     // check if student is already registered in a plan
 
-    const studentRegistered = await Registration.findOne({
+    const isStudentEnrolled = await Registration.findOne({
       where: { student_id: req.body.student_id },
     });
 
-    if (studentRegistered) {
+    if (studentEnrolled) {
       return res
         .status(400)
         .json({ error: 'This student is already enrolled to a plan.' });
@@ -98,13 +119,13 @@ class RegistrationController {
 
     const { duration } = plan;
     const price = plan.price * duration;
-    // const [year, month, day] = req.body.start_date.split('-');
+
     const end_date = addMonths(new Date(parsedDate), duration);
 
     await Registration.create({
       student_id: req.body.student_id,
       plan_id: req.body.plan_id,
-      start_date,
+      start_date: parsedDate,
       end_date,
       price,
     });
@@ -112,15 +133,13 @@ class RegistrationController {
     return res.json({
       student_id: req.body.student_id,
       plan_id: req.body.plan_id,
-      start_date,
+      started_date: parsedDate,
       end_date,
-      price,
     });
   }
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      student_id: Yup.number(),
       plan_id: Yup.number(),
       start_date: Yup.date(),
     });
@@ -129,20 +148,23 @@ class RegistrationController {
       return res.status(400).json({ error: 'Validation fails.' });
     }
 
-    const registration = await Registration.findByPk(req.params.registrationId);
+    const enrollment = await Registration.findByPk(req.params.enrollmentId);
 
-    if (!registration) {
+    if (!enrollment) {
       return res.status(404).json({
-        error: 'Registration with this given ID was not found.',
+        error: 'Enrollment with this given ID was not found.',
       });
     }
 
-    const { start_date } = req.body;
-
     // check for past dates
 
-    if (isBefore(parseISO(start_date), new Date())) {
-      return res.status(400).json({ error: 'Past dates are not allowed.' });
+    const { start_date } = req.body;
+    const parsedDate = parseISO(start_date);
+
+    if (isBefore(parsedDate, new Date())) {
+      return res
+        .status(400)
+        .json({ error: 'You cannot enroll in past dates.' });
     }
 
     // check if plan is available
@@ -157,15 +179,9 @@ class RegistrationController {
     }
 
     const student = await Student.findOne({
-      where: { id: req.body.student_id },
+      where: { id: enrollment.student_id },
       attributes: ['id', 'name', 'email'],
     });
-
-    if (!student) {
-      return res
-        .status(400)
-        .json({ error: 'This student is not in database.' });
-    }
 
     // calculations
 
@@ -173,36 +189,41 @@ class RegistrationController {
     const totalPrice = price * duration;
     const end_date = addMonths(parseISO(start_date), duration);
 
-    const { id, student_id, plan_id } = await registration.update({
-      ...req.body,
+    // update
+
+    const { id, plan_id } = req.body;
+
+    await enrollment.update({
+      plan_id,
+      start_date: parsedDate,
       price: totalPrice,
       end_date,
     });
 
     return res.json({
       id,
-      student_id,
-      plan_id,
-      start_date,
-      price,
+      student,
+      plan,
+      start_date: parsedDate,
+      price: totalPrice,
       end_date,
     });
   }
 
   async delete(req, res) {
-    const { registrationId } = req.params;
-    const registration = await Registration.findByPk(registrationId);
+    const { enrollmentId } = req.params;
+    const enrollment = await Registration.findByPk(enrollmentId);
 
-    if (!registration) {
+    if (!enrollment) {
       return res.status(404).json({
-        error: 'Registration with this given ID was not found.',
+        error: 'Enrollment with this given ID was not found.',
       });
     }
 
-    await registration.destroy();
+    await enrollment.destroy();
 
     return res.json();
   }
 }
 
-export default new RegistrationController();
+export default new RegistrationContoller();
