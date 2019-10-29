@@ -23,6 +23,12 @@ class StudentController {
       attributes: ['id', 'name', 'email', 'birthday', 'weight', 'height'],
     });
 
+    if (!student) {
+      return res.status(404).json({
+        error: 'Student with this given ID was not found.',
+      });
+    }
+
     return res.json(student);
   }
 
