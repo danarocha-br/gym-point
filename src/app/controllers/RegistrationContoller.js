@@ -109,7 +109,7 @@ class RegistrationContoller {
       where: { student_id: req.body.student_id },
     });
 
-    if (studentEnrolled) {
+    if (isStudentEnrolled) {
       return res
         .status(400)
         .json({ error: 'This student is already enrolled to a plan.' });

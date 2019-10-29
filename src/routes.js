@@ -5,6 +5,9 @@ import SessionController from './app/controllers/SessionController';
 import StudentController from './app/controllers/StudentController';
 import PlanController from './app/controllers/PlanController';
 import RegistrationContoller from './app/controllers/RegistrationContoller';
+import CheckinController from './app/controllers/CheckinController';
+import HelpOrderController from './app/controllers/HelpOrderController';
+import AdminHelpOrderController from './app/controllers/AdminHelpOrderController';
 import authMiddleware from './app/middlewares/auth';
 
 const routes = new Router();
@@ -16,11 +19,23 @@ routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
 
-routes.post('/students', StudentController.store);
 routes.get('/students', StudentController.index);
+routes.post('/students', StudentController.store);
 routes.get('/students/:studentId', StudentController.show);
 routes.put('/students/:studentId', StudentController.update);
 routes.delete('/students/:studentId', StudentController.delete);
+
+routes.get('/students/:studentId/checkins', CheckinController.index);
+routes.post('/students/:studentId/checkins', CheckinController.store);
+
+routes.get('/help-orders', AdminHelpOrderController.index);
+routes.post('/help-orders/:orderId/answer', AdminHelpOrderController.store);
+routes.get('/students/:studentId/help-orders', HelpOrderController.index);
+routes.post('/students/:studentId/help-orders', HelpOrderController.store);
+routes.delete(
+  '/students/:studentId/help-orders/:orderId',
+  HelpOrderController.delete
+);
 
 routes.post('/plans', PlanController.store);
 routes.get('/plans', PlanController.index);
