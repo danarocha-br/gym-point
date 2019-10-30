@@ -13,7 +13,10 @@
     "bcryptjs": "^2.4.3",
     "date-fns": "^2.0.0-beta.5",
     "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.3.1",
+    "nodemailer-express-handlebars": "^3.1.0",
     "pg": "^7.12.1",
     "sequelize": "^5.21.0",
     "yup": "^0.27.0"
