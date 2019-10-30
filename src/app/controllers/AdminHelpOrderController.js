@@ -1,9 +1,9 @@
 import * as Yup from 'yup';
-import { format } from 'date-fns';
 
 import Student from '../models/Student';
 import HelpOrder from '../models/HelpOrder';
-import Mail from '../../lib/Mail';
+import Queue from '../../lib/Queue';
+import AnswerMail from '../jobs/AnswerMail';
 
 class AdminHelpOrderController {
   async index(req, res) {
@@ -50,12 +50,6 @@ class AdminHelpOrderController {
       ],
     });
 
-    // if (helpOrder.answer_at) {
-    //   return res
-    //     .status(401)
-    //     .json({ error: 'You can only answer a help order once' });
-    // }
-
     // update the order
 
     const { answer } = req.body;
@@ -64,17 +58,8 @@ class AdminHelpOrderController {
 
     await helpOrder.save();
 
-    await Mail.sendMail({
-      to: `${helpOrder.student.name} <${helpOrder.student.email}>`,
-      subject: 'You have a new answer to your order. Check it out!',
-      template: 'answer',
-      context: {
-        student: helpOrder.student.name,
-        order: helpOrder.id,
-        question: helpOrder.question,
-        answer: helpOrder.answer,
-        answerDate: format(helpOrder.answer_at, "'on' dd MMMM, 'at' H:mm'h'"),
-      },
+    await Queue.add(AnswerMail.key, {
+      helpOrder,
     });
 
     return res.json({ helpOrder });
