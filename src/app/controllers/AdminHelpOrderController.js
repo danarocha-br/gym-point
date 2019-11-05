@@ -2,6 +2,8 @@ import * as Yup from 'yup';
 
 import Student from '../models/Student';
 import HelpOrder from '../models/HelpOrder';
+import Queue from '../../lib/Queue';
+import AnswerMail from '../jobs/AnswerMail';
 
 class AdminHelpOrderController {
   async index(req, res) {
@@ -43,7 +45,7 @@ class AdminHelpOrderController {
         {
           model: Student,
           as: 'student',
-          attributes: ['id', 'name', 'email'],
+          attributes: ['name', 'email'],
         },
       ],
     });
@@ -53,6 +55,12 @@ class AdminHelpOrderController {
     const { answer } = req.body;
 
     await helpOrder.update({ answer, answer_at: new Date() });
+
+    await helpOrder.save();
+
+    await Queue.add(AnswerMail.key, {
+      helpOrder,
+    });
 
     return res.json({ helpOrder });
   }

@@ -7,15 +7,24 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "dev:debug": "nodemon --inspect src/server.js"
+    "dev:debug": "nodemon --inspect src/server.js",
+    "queue": "nodemon --inspect src/queue.js"
   },
   "dependencies": {
+    "@sentry/node": "5.7.1",
     "bcryptjs": "^2.4.3",
+    "bee-queue": "^1.2.2",
     "date-fns": "^2.0.0-beta.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-handlebars": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
+    "nodemailer": "^6.3.1",
+    "nodemailer-express-handlebars": "^3.1.0",
     "pg": "^7.12.1",
     "sequelize": "^5.21.0",
+    "youch": "^2.0.10",
     "yup": "^0.27.0"
   },
   "devDependencies": {
