@@ -39,13 +39,6 @@ You need to install these prerequisites on your computer before you can use "**G
 
 <h4>PostgreSQL</h4> <a href="https://hub.docker.com/_/postgres" target="_blank">with these instructions</a>.
 
-<h4>Some Params</h4>
-
-<ul>
-  <li>POSTGRES_DB=gympoint</li>
-  <li>POSTGRES_USER=postgres</li>
-  <li>POSTGRES_PASSWORD=docker</li>
-</ul>
 
 ```bash
 # Docker
