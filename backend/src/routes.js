@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import multer from 'multer';
 
 import UserController from './app/controllers/UserController';
 import SessionController from './app/controllers/SessionController';
@@ -8,9 +9,13 @@ import RegistrationContoller from './app/controllers/RegistrationContoller';
 import CheckinController from './app/controllers/CheckinController';
 import HelpOrderController from './app/controllers/HelpOrderController';
 import AdminHelpOrderController from './app/controllers/AdminHelpOrderController';
+import FileController from './app/controllers/FileController';
+
 import authMiddleware from './app/middlewares/auth';
+import multerConfig from './config/multer';
 
 const routes = new Router();
+const upload = multer(multerConfig);
 
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
@@ -48,5 +53,7 @@ routes.get('/enrollments', RegistrationContoller.index);
 routes.get('/enrollments/:enrollmentId', RegistrationContoller.show);
 routes.put('/enrollments/:enrollmentId', RegistrationContoller.update);
 routes.delete('/enrollments/:enrollmentId', RegistrationContoller.delete);
+
+routes.post('/files', upload.single('file'), FileController.store);
 
 export default routes;
