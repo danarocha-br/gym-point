@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { parseISO, isBefore, addMonths } from 'date-fns';
+import { parseISO, isBefore, addMonths, isAfter } from 'date-fns';
 
 import Registration from '../models/Registration';
 import Plan from '../models/Plan';
@@ -9,11 +9,15 @@ class RegistrationContoller {
   async index(req, res) {
     const { page = 1 } = req.query;
 
+    // check if plan is still valid.
+
+    // const isEnrollmentValid = !isAfter(end_date, new Date());
+
     const enrollments = await Registration.findAll({
-      order: ['id'],
+      order: [['createdAt', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
-      attributes: ['id', 'start_date', 'end_date', 'price'],
+      attributes: ['id', 'start_date', 'end_date', 'price', 'enrolled'],
       include: [
         {
           model: Student,
@@ -106,7 +110,9 @@ class RegistrationContoller {
     // check if student is already registered in a plan
 
     const isStudentEnrolled = await Registration.findOne({
-      where: { student_id: req.body.student_id },
+      where: {
+        student_id: req.body.student_id,
+      },
     });
 
     if (isStudentEnrolled) {
@@ -128,6 +134,7 @@ class RegistrationContoller {
       start_date: parsedDate,
       end_date,
       price,
+      enrolled: true,
     });
 
     return res.json({
@@ -135,6 +142,7 @@ class RegistrationContoller {
       plan_id: req.body.plan_id,
       started_date: parsedDate,
       end_date,
+      enrolled: true,
     });
   }
 
@@ -198,6 +206,7 @@ class RegistrationContoller {
       start_date: parsedDate,
       price: totalPrice,
       end_date,
+      enrolled: true,
     });
 
     return res.json({
@@ -207,6 +216,7 @@ class RegistrationContoller {
       start_date: parsedDate,
       price: totalPrice,
       end_date,
+      enrolled: true,
     });
   }
 

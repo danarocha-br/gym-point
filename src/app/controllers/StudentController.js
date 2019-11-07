@@ -1,10 +1,28 @@
 import * as Yup from 'yup';
+import { Op } from 'sequelize';
 import { parseISO, differenceInYears } from 'date-fns';
 
 import Student from '../models/Student';
 
 class StudentController {
   async index(req, res) {
+    // With Query Params
+    const { name } = req.query;
+
+    if (name) {
+      const students = await Student.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `%${name}%`,
+          },
+        },
+      });
+
+      return res.status(200).json(students);
+    }
+
+    // All Students
+
     const { page = 1 } = req.query;
 
     const students = await Student.findAll({
