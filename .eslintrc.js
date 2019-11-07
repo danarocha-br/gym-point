@@ -19,9 +19,10 @@ module.exports = {
   plugins: ['react', 'jsx-a11y', 'import', 'react-hooks', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'class-methods-use-this': 'off',
     'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
     'import/prefer-default-export': 'off',
-    'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    'no-unused-vars': ['error', { argsIgnorePattern: 'next' }],
     'react/jsx-one-expression-per-line': 'off',
     'global-require': 'off',
     'react-native/no-raw-text': 'off',
