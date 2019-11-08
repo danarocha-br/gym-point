@@ -13,7 +13,7 @@ export default function RouteWrapper({
     return <Redirect to="/" />;
   }
 
-  if (!logged && !isPrivate) {
+  if (logged && !isPrivate) {
     return <Redirect to="/dashboard" />;
   }
 
