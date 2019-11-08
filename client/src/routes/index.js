@@ -3,9 +3,9 @@ import { Switch } from 'react-router-dom';
 
 import Route from './Route';
 
-import Dashboard from '../pages/Dashboard';
-import Login from '../pages/Login';
-import Profile from '../pages/Profile';
+import Dashboard from '~/pages/Dashboard';
+import Login from '~/pages/Login';
+import Profile from '~/pages/Profile';
 
 function Routes() {
   return (
