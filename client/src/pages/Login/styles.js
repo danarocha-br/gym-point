@@ -40,9 +40,12 @@ export const Col = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    input,
-    a {
+    input {
       margin-bottom: 15px;
+    }
+
+    button {
+      margin-top: 35px;
     }
 
     span {

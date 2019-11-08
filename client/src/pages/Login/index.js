@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 import { Wrapper, Col, Container } from './styles';
 import logo from '~/assets/logo.svg';
 import Card from '~/components/Card';
+import Button from '~/components/Button';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -39,8 +40,8 @@ export default function Login() {
                   type="passord"
                   placeholder="Your passord"
                 />
-                <Link to="">Forgot password?</Link>
-                <button type="submit">Login</button>
+
+                <Button label="Login" onSubmit />
               </Form>
             </Card>
           </Col>
