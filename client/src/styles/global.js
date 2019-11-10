@@ -21,8 +21,15 @@ export default createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
-    background-image: linear-gradient(-20deg, #ddd6f3 0%, #f4cad9 100%);
-  }
+    ${
+      '' /* background-image: linear-gradient(-20deg, #ddd6f3 0%, #f4cad9 100%); */
+    }
+    background-image: linear-gradient(-20deg, #e23e77 0%,#ec3650 100%);
+}
+
+
+
+
 
   body, input, button {
     font: 1rem 'Rubik', sans-serif;

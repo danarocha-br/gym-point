@@ -2,18 +2,20 @@ import React from 'react';
 import Proptypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 
+import { store } from '~/store';
+
 export default function RouteWrapper({
   component: Component,
   isPrivate,
   ...rest
 }) {
-  const logged = false;
+  const authenticated = store.getState().auth.authenticated;
 
-  if (!logged && isPrivate) {
+  if (!authenticated && isPrivate) {
     return <Redirect to="/" />;
   }
 
-  if (logged && !isPrivate) {
+  if (authenticated && !isPrivate) {
     return <Redirect to="/dashboard" />;
   }
 

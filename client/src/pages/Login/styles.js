@@ -26,13 +26,14 @@ export const Col = styled.div`
   }
 
   h1 {
-    color: var(--color-grey-dark);
+    color: #fff;
     font-weight: 600;
   }
 
   h2 {
-    color: var(--color-grey-md);
+    color: #fff;
     margin-top: 15px;
+    opacity: 0.5;
   }
 
   form {

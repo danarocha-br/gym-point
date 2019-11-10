@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
@@ -7,6 +7,7 @@ import { Wrapper, Col, Container } from './styles';
 import logo from '~/assets/logo.svg';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
+import { signInRequest } from '~/store/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -16,8 +17,11 @@ const schema = Yup.object().shape({
 });
 
 export default function Login() {
-  function handleSubmit(data) {
-    console.tron.log(data);
+  const dispatch = useDispatch();
+  const loading = useSelector(state => state.auth.loading);
+
+  function handleSubmit({ email, password }) {
+    dispatch(signInRequest(email, password));
   }
 
   return (
@@ -41,7 +45,7 @@ export default function Login() {
                   placeholder="Your passord"
                 />
 
-                <Button label="Login" onSubmit />
+                <Button label={loading ? 'Loading...' : 'Login'} onSubmit />
               </Form>
             </Card>
           </Col>
