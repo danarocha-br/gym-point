@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { darken, transitions } from 'polished';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Rubik:400,500,700&display=swap');
@@ -22,9 +23,8 @@ export default createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     ${
-      '' /* background-image: linear-gradient(-20deg, #ddd6f3 0%, #f4cad9 100%); */
+      '' /* background-image: linear-gradient(-20deg, #e23e77 0%,#ec3650 100%); */
     }
-    background-image: linear-gradient(-20deg, #e23e77 0%,#ec3650 100%);
 }
 
 
