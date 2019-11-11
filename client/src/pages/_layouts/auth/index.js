@@ -8,5 +8,8 @@ export default function AuthLayout({ children }) {
 }
 
 AuthLayout.propTypes = {
+  /**
+   * Defines the children for the component.
+   */
   children: PropTypes.element.isRequired,
 };
