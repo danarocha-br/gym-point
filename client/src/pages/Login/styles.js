@@ -37,10 +37,6 @@ export const Col = styled.div`
   }
 
   form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
     input {
       margin-bottom: 15px;
     }

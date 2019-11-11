@@ -24,6 +24,7 @@ export const Profile = styled.button`
   position: relative;
   top: -8px;
   border: 0;
+  background: none;
 
   img {
     width: 40px;

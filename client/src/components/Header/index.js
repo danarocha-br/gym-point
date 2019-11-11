@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import logo from '~/assets/logo.svg';
 import { Nav, Menu, Profile, ProfileList } from './styles';
+import { signOut } from '~/store/actions';
 
 export default function Header() {
   const [visible, setVisibility] = useState(false);
 
   const profile = useSelector(state => state.user.profile);
 
+  const dispatch = useDispatch();
+
   function handleToogleProfile() {
     setVisibility(!visible);
+  }
+
+  function handleSignOut(params) {
+    dispatch(signOut());
   }
 
   return (
@@ -31,12 +38,10 @@ export default function Header() {
         <img src={profile.avatar.url} alt="" />
         <ProfileList visible={visible}>
           <li>{profile.name}</li>
-          <li>
-            <Link to="/profile">My Profile</Link>
-          </li>
-          <li>
+          <li>{/* <Link to="/profile">My Profile</Link> */}</li>
+          {/* <li onClick={handleSignOut}>
             <Link>Logout</Link>
-          </li>
+          </li> */}
         </ProfileList>
       </Profile>
     </Nav>
