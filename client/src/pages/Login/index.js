@@ -41,7 +41,7 @@ export default function Login() {
                 <Input name="email" type="email" placeholder="Your email" />
                 <Input
                   name="password"
-                  type="passord"
+                  type="password"
                   placeholder="Your passord"
                 />
 
