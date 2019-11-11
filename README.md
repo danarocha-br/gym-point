@@ -2,17 +2,15 @@
   GymPoint
 </h1>
 
- A simple project to manage gym, representing my journey in learning NodeJS while implementing ReactJS and React Native. Still under development.
- 
+A simple project to manage gym, representing my journey in learning NodeJS while implementing ReactJS and React Native. Still under development.
+
  <p>
    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/danarocha-br/gym-point?style=for-the-badge">
    <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/danarocha-br/gym-point?style=for-the-badge">
    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/danarocha-br/gym-point?style=for-the-badge">
 </p>
 
-
 ## Screenshots
-
 
 ## Browser Support
 
@@ -26,8 +24,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 You will need:
 
-- NodeJS | Yarn or Npm | Docker | PostgreSQL
-
+- NodeJS | Yarn or Npm | Docker | PostgreSQL | Redis
 
 You need to install these prerequisites on your computer before you can use "**GymPoint**".
 
@@ -38,7 +35,6 @@ You need to install these prerequisites on your computer before you can use "**G
 <h4>Docker</h4> <a href="https://www.docker.com/get-started" target="_blank">with these instructions</a>.
 
 <h4>PostgreSQL</h4> <a href="https://hub.docker.com/_/postgres" target="_blank">with these instructions</a>.
-
 
 ```bash
 # Docker
@@ -51,7 +47,7 @@ $ cd gym-point
 $ yarn install
 
 # Create the migrations
-$ yarn sequelize db:migrate 
+$ yarn sequelize db:migrate
 
 # Sync admin user seeders
 $ yarn sequelize db:seed:all
@@ -70,23 +66,19 @@ Finally, you will need a rest client to test "**GymPoint**". Here are some:
   <li><a href="https://www.getpostman.com/" target="_blank">Postman</a></li>
 </ul>
 
-
-
 ## :rocket: Built With
--  [NodJS](https://nodejs.org/en/)
--  [Docker](https://www.docker.com/)
--  [PostgreSQL](https://www.postgresql.org/)
--  [Mongodb](https://mongodb.com)
--  [Redis](https://redis.io/)
--  [PostgreSQL](https://www.postgresql.org/)
--  [Expo](https://expo.io/)
--  [React-Native](https://facebook.github.io/react-native/)
--  [React Native Gesture Handler](https://kmagiera.github.io/react-native-gesture-handler/)
--  [React Navigation](https://reactnavigation.org/)
--  [Redux](https://redux.js.org/)
--  [PropTypes](https://github.com/facebook/prop-types)
 
-
+- [NodJS](https://nodejs.org/en/)
+- [Docker](https://www.docker.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Redis](https://redis.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Expo](https://expo.io/)
+- [React-Native](https://facebook.github.io/react-native/)
+- [React Native Gesture Handler](https://kmagiera.github.io/react-native-gesture-handler/)
+- [React Navigation](https://reactnavigation.org/)
+- [Redux](https://redux.js.org/)
+- [PropTypes](https://github.com/facebook/prop-types)
 
 ## Tools
 
@@ -103,8 +95,6 @@ Finally, you will need a rest client to test "**GymPoint**". Here are some:
 - [ ] REST API (with Node js) - tests
 - [ ] iOS & Android Apps (based on react-native)
 - [ ] Website App in any browser (based on react)
-
-
 
 ---
 
