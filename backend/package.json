@@ -9,7 +9,9 @@
     "dev": "nodemon src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
     "queue": "nodemon --inspect src/queue.js",
-    "test": "NODE_ENV=test jest"
+    "pretest": "NODE_ENV=test sequelize db:migrate",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "@sentry/node": "5.7.1",
@@ -43,6 +45,8 @@
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
     "sequelize-cli": "^5.5.1",
-    "sucrase": "^3.10.1"
+    "sqlite3": "^4.1.0",
+    "sucrase": "^3.10.1",
+    "supertest": "^4.0.2"
   }
 }
