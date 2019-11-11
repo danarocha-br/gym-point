@@ -1,8 +1,0 @@
-{
-  "name": "gym-point",
-  "version": "1.0.0",
-  "main": "index.js",
-  "repository": "https://github.com/danarocha-br/gym-point.git",
-  "author": "Dana Rocha <dana.rocha@bigbank.ee>",
-  "license": "MIT"
-}
