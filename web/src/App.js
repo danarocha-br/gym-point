@@ -12,14 +12,14 @@ import GlobalStyle from '~/styles/global';
 
 function App() {
   return (
-    // <Provider store={store}>
-    // <PersistGate persistor={persistor}>
-    <Router history={history}>
-      <Routes />
-      <GlobalStyle />
-    </Router>
-    // </PersistGate>
-    // </Provider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <Router history={history}>
+          <Routes />
+          <GlobalStyle />
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 

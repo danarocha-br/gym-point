@@ -17,9 +17,9 @@ export default function Header() {
     setVisibility(!visible);
   }
 
-  // function handleSignOut() {
-  //   dispatch(signOut());
-  // }
+  function handleSignOut() {
+    dispatch(signOut());
+  }
 
   return (
     <Nav>
@@ -38,10 +38,12 @@ export default function Header() {
         <img src={profile.avatar.url} alt="" />
         <ProfileList visible={visible}>
           <li>{profile.name}</li>
-          <li>{/* <Link to="/profile">My Profile</Link> */}</li>
-          {/* <li onClick={handleSignOut}>
+          <li>
+            <Link to="/profile">My Profile</Link>
+          </li>
+          <li onClick={handleSignOut}>
             <Link>Logout</Link>
-          </li> */}
+          </li>
         </ProfileList>
       </Profile>
     </Nav>
