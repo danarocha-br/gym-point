@@ -22,14 +22,8 @@ export default createGlobalStyle`
 
   body {
     -webkit-font-smoothing: antialiased;
-    ${
-      '' /* background-image: linear-gradient(-20deg, #e23e77 0%,#ec3650 100%); */
-    }
+    color: var(--color-grey-dark);
 }
-
-
-
-
 
   body, input, button {
     font: 1rem 'Rubik', sans-serif;
@@ -67,6 +61,12 @@ export default createGlobalStyle`
 
   h2 {
     font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  h3 {
+    ${'' /* font-size: 28px; */}
+    margin-bottom: 15px;
   }
 
   button {

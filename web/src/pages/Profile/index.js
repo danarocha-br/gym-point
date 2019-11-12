@@ -3,7 +3,7 @@ import { Input } from '@rocketseat/unform';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
-import { Container, Col2, Col3 } from './styles';
+import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Form from '~/components/Form';
@@ -28,12 +28,12 @@ export default function Profile() {
   }
 
   return (
-    <Container>
-      <Col2>
+    <PageWrapper>
+      <ColLeft>
         <h3>Profile</h3>
-      </Col2>
+      </ColLeft>
 
-      <Col3>
+      <ColRight>
         <Card>
           <Form initialData={profile} onSubmit={handleSubmit}>
             <Avatar name="avatar_id" />
@@ -63,7 +63,7 @@ export default function Profile() {
             />
           </Form>
         </Card>
-      </Col3>
-    </Container>
+      </ColRight>
+    </PageWrapper>
   );
 }

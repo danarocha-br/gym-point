@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const PageWrapper = styled.div`
   display: flex;
-  flex: 1;
   padding-bottom: 50px;
 `;
 
-export const Col2 = styled.div`
+export const ColLeft = styled.div`
   display: flex;
+  flex-direction: column;
   flex: 1;
+  padding: 15px 70px 20px 0;
 `;
 
-export const Col3 = styled.div`
+export const ColRight = styled.div`
   display: flex;
   width: 100%;
   flex: 2;
