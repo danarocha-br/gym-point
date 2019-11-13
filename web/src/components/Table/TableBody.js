@@ -30,9 +30,9 @@ TableBody.propTypes = {
   /**
    * Defines the number and data labels.
    */
-  data: PropTypes.objectOf.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
   /**
    * Defines the number and data labels.
    */
-  columns: PropTypes.arrayOf.isRequired,
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

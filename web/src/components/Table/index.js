@@ -18,7 +18,7 @@ Table.propTypes = {
   /**
    * Defines the number and columns labels.
    */
-  columns: PropTypes.arrayOf.isRequired,
+  columns: PropTypes.arrayOf(PropTypes.object).isRequired,
   /**
    * Defines the aria label for the table.
    */
@@ -26,5 +26,5 @@ Table.propTypes = {
   /**
    * Defines the data for the table.
    */
-  data: PropTypes.objectOf.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Form, Input } from '@rocketseat/unform';
 import { format, parseISO, differenceInYears } from 'date-fns';
-import { IoIosAdd } from 'react-icons/io';
 
 import api from '~/services/api';
 
@@ -12,12 +12,18 @@ import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Table from '~/components/Table';
 
+const baseUrl = 'http://localhost:3333';
+
 export default function Students() {
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
     async function loadStudents() {
       const response = await api.get('students');
+
+      // const search = await api.get('students', {
+      //   params: { name },
+      // });
 
       const data = response.data.map(student => {
         const parsedBirthday = parseISO(student.birthday);
@@ -41,9 +47,26 @@ export default function Students() {
     loadStudents();
   }, []);
 
-  function handleDelete(student) {}
+  async function handleDelete(student) {
+    // await api.delete('students', {
+    //   id: student.id,
+    // });
+    const response = await axios.delete(`${baseUrl}/${student.id}`);
+    console.tron.log(response.data);
 
-  function handleEdit(student) {}
+    const data = students.filter(stud => stud.id !== student.id);
+    setStudents(data);
+  }
+
+  async function handleEdit(student) {
+    // const data = await api.put(student.id, student);
+    // console.tron.log(data);
+  }
+
+  async function handleAddStudent(student) {
+    // const data = await api.put(student.id, student);
+    // console.tron.log(data);
+  }
 
   const [columns] = useState([
     { path: 'name', label: 'Name' },
@@ -88,7 +111,7 @@ export default function Students() {
           <Form>
             <Search>
               <Input name="search" placeholder="Search a student..." />
-              <Button kind="icon" icon="plus" onSubmit />
+              <Button kind="icon" icon="plus" onClick={handleAddStudent} />
             </Search>
           </Form>
 

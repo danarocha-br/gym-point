@@ -36,6 +36,7 @@ Button.defaultProps = {
   kind: 'default',
   color: 'primary',
   icon: null,
+  label: '',
 };
 
 Button.propTypes = {
@@ -50,7 +51,7 @@ Button.propTypes = {
   /**
    * Defines the action for the button.
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   /**
    * Defines the icon for the button.
    */
@@ -62,9 +63,9 @@ Button.propTypes = {
   /**
    * Defines the look for disabled state.
    */
-  isDisabled: PropTypes.func,
+  isDisabled: PropTypes.bool,
   /**
    * Defines the look for loading state.
    */
-  isLoading: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };

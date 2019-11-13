@@ -15,9 +15,9 @@ Card.propTypes = {
   /**
    * Defines the children for the component.
    */
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.any).isRequired,
   /**
    * Defines if the card has fullHeight.
    */
-  fullHeight: PropTypes.element,
+  fullHeight: PropTypes.bool,
 };
