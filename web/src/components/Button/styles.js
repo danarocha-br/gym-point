@@ -7,7 +7,8 @@ export const ButtonWrapper = styled.button`
   background-color: var(--color-primary);
   opacity: ${props => (props.isDisabled ? 0.5 : 1)};
   height: 50px;
-  border-radius: 5px;
+  width: ${props => (props.kind === 'icon' ? '50px' : '100%')};
+  border-radius: 13px;
   border: 0;
   display: flex;
   align-items: center;

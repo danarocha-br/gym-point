@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
   display: flex;
-  padding-bottom: 50px;
+  height: 100%;
 `;
 
 export const ColLeft = styled.div`
@@ -15,15 +15,11 @@ export const ColLeft = styled.div`
 export const ColRight = styled.div`
   display: flex;
   width: 100%;
-  flex: 2;
+  flex: 3;
 
   form {
     input {
       margin-bottom: 15px;
-    }
-
-    button {
-      margin-top: 35px;
     }
 
     span {

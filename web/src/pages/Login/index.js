@@ -4,7 +4,7 @@ import { Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import { Wrapper, Col, Container } from './styles';
-import logo from '~/assets/logo.svg';
+import logo from '~/assets/logoNegative.svg';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Form from '~/components/Form';

@@ -6,6 +6,7 @@ import Route from './Route';
 import Dashboard from '~/pages/Dashboard';
 import Login from '~/pages/Login';
 import Profile from '~/pages/Profile';
+import Students from '~/pages/Students';
 
 function Routes() {
   return (
@@ -13,6 +14,7 @@ function Routes() {
       <Route exact path="/" component={Login} />
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
+      <Route path="/students" component={Students} isPrivate />
       <Route path="/" component={() => <h1>404</h1>} />
     </Switch>
   );

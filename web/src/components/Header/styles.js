@@ -5,7 +5,8 @@ export const Nav = styled.nav`
   justify-content: space-between;
   width: 100%;
   height: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 15px;
+  padding-right: 40px;
 `;
 
 export const Menu = styled.div`

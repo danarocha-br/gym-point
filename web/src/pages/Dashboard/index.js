@@ -1,15 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import api from '~/services/api';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
-// import { Container, Col2, Col3 } from './styles';
 
 import Card from '~/components/Card';
 
 export default function Dashboard() {
-  // api.get('students');
-
   const profile = useSelector(state => state.user.profile);
 
   return (

@@ -34,7 +34,7 @@ export default function Profile() {
       </ColLeft>
 
       <ColRight>
-        <Card>
+        <Card fullHeight>
           <Form initialData={profile} onSubmit={handleSubmit}>
             <Avatar name="avatar_id" />
             <Input name="name" placeholder="Your name" />
