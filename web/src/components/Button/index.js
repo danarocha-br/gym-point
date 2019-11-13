@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { IoIosAdd } from 'react-icons/io';
+import { FiTrash, FiEdit2 } from 'react-icons/fi';
 
 import { ButtonWrapper } from './styles';
 
@@ -11,6 +12,7 @@ export default function Button({
   isLoading,
   kind,
   icon,
+  color,
 }) {
   return (
     <ButtonWrapper
@@ -19,8 +21,11 @@ export default function Button({
       onClick={onClick}
       loading={isLoading}
       kind={kind}
+      color={color}
     >
       {kind === 'icon' && icon === 'plus' && <IoIosAdd size="30px" />}
+      {kind === 'icon' && icon === 'trash' && <FiTrash size="20px" />}
+      {kind === 'icon' && icon === 'edit' && <FiEdit2 size="20px" />}
       {label}
     </ButtonWrapper>
   );
@@ -29,6 +34,7 @@ export default function Button({
 Button.defaultProps = {
   isDisabled: false,
   kind: 'default',
+  color: 'primary',
   icon: null,
 };
 
@@ -38,13 +44,17 @@ Button.propTypes = {
    */
   kind: PropTypes.oneOf(['default', 'icon']),
   /**
+   * Defines the button type.
+   */
+  color: PropTypes.oneOf(['primary', 'transparent']),
+  /**
    * Defines the action for the button.
    */
   label: PropTypes.string.isRequired,
   /**
    * Defines the icon for the button.
    */
-  icon: PropTypes.string,
+  icon: PropTypes.oneOf(['plus', 'trash', 'edit']),
   /**
    * Defines the action for the button.
    */

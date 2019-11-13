@@ -26,7 +26,15 @@ class StudentController {
     const { page = 1 } = req.query;
 
     const students = await Student.findAll({
-      attributes: ['id', 'name', 'email', 'birthday', 'weight', 'height'],
+      attributes: [
+        'id',
+        'name',
+        'email',
+        'birthday',
+        'weight',
+        'height',
+        'updated_at',
+      ],
       sort: { createdAt: 'desc' },
       limit: 20,
       offset: (page - 1) * 20,
