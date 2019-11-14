@@ -31,7 +31,7 @@ export default function Header() {
         <Link to="/students">Students</Link>
         <Link to="/plans">Plans</Link>
         <Link to="/enrollments">Enrollments</Link>
-        <Link to="/help">Help</Link>
+        <Link to="/help-orders">Help</Link>
       </Menu>
 
       <Profile onClick={handleToogleProfile}>

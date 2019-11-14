@@ -11,6 +11,7 @@ class AdminHelpOrderController {
       where: {
         answer: null,
       },
+      order: [['createdAt']],
       attributes: ['id', 'question', 'answer', 'answer_at', 'createdAt'],
       include: [
         {

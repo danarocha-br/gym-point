@@ -9,7 +9,7 @@ export const ColLeft = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 15px 70px 20px 0;
+  padding: 35px 70px 20px 0;
 `;
 
 export const ColRight = styled.div`

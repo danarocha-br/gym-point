@@ -17,8 +17,7 @@ export default createGlobalStyle`
   }
 
   html, body, #root {
-    height: 100vh;
-    overflow: hidden;
+    height: 100%;
   }
 
   body {
@@ -33,7 +32,7 @@ export default createGlobalStyle`
   :root {
     --color-primary: #EE4D64;
     --color-grey-dark: #282331;
-    --color-grey-md: #7d7a88;
+    --color-grey-md: #778899;
     --color-grey-light: #ddd6f3;
     --color-grey-lightest: #f5f7fa;
     --color-blue: #536cfa;
@@ -67,8 +66,8 @@ export default createGlobalStyle`
   }
 
   h3 {
-    ${'' /* font-size: 28px; */}
-    margin-bottom: 15px;
+    font-size: 22px;
+    margin-bottom: 25px;
   }
 
   button {

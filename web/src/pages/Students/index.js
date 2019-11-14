@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState, useMemo } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import { format, parseISO, differenceInYears } from 'date-fns';
 
 import api from '~/services/api';
+import history from '~/services/history';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
 import { Search } from './styles';
@@ -12,55 +12,45 @@ import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Table from '~/components/Table';
 
-const baseUrl = 'http://localhost:3333';
-
 export default function Students() {
   const [students, setStudents] = useState([]);
+  const [search, setSearch] = useState('');
 
-  useEffect(() => {
-    async function loadStudents() {
-      const response = await api.get('students');
+  async function loadStudents() {
+    const response = await api.get('students');
 
-      // const search = await api.get('students', {
-      //   params: { name },
-      // });
+    const data = response.data.map(student => {
+      const parsedBirthday = parseISO(student.birthday);
+      const parsedUpdated = parseISO(student.updated_at);
 
-      const data = response.data.map(student => {
-        const parsedBirthday = parseISO(student.birthday);
-        const parsedUpdated = parseISO(student.updated_at);
+      return {
+        ...student,
+        weight: `${student.weight} kg`,
+        height: `${student.height} m`,
+        birthday: `${differenceInYears(new Date(), parsedBirthday)} years old`,
+        updated_at: format(parsedUpdated, 'dd/MM/yyyy'),
+      };
+    });
 
-        return {
-          name: student.name,
-          email: student.email,
-          weight: `${student.weight} kg`,
-          height: `${student.height} m`,
-          birthday: `${differenceInYears(
-            new Date(),
-            parsedBirthday
-          )} years old`,
-          updated_at: format(parsedUpdated, 'dd/MM/yyyy'),
-        };
-      });
-
-      setStudents(data);
-    }
-    loadStudents();
-  }, []);
-
-  async function handleDelete(student) {
-    // await api.delete('students', {
-    //   id: student.id,
-    // });
-    const response = await axios.delete(`${baseUrl}/${student.id}`);
-    console.tron.log(response.data);
-
-    const data = students.filter(stud => stud.id !== student.id);
     setStudents(data);
   }
 
-  async function handleEdit(student) {
-    // const data = await api.put(student.id, student);
-    // console.tron.log(data);
+  useEffect(() => {
+    loadStudents();
+  }, []);
+
+  const studentsTotal = useMemo(() => students.length, [students]);
+
+  async function handleDelete(student) {
+    if (
+      window.confirm(`Are you sure you want to delete ${student.name}?`) ===
+      true
+    ) {
+      await api.delete(`students/${student.id}`);
+
+      setStudents(students.filter(s => s.id !== student.id));
+      loadStudents();
+    }
   }
 
   async function handleAddStudent(student) {
@@ -93,7 +83,7 @@ export default function Students() {
           kind="icon"
           icon="edit"
           color="transparent"
-          onClick={() => handleEdit(student)}
+          onClick={() => history.push(`/students/${student.id}`)}
         />
       ),
     },
@@ -103,7 +93,7 @@ export default function Students() {
     <PageWrapper>
       <ColLeft>
         <h3>Managing Students</h3>
-        {students.length}
+        {studentsTotal}
       </ColLeft>
 
       <ColRight>
