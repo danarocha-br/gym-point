@@ -11,13 +11,11 @@ class RegistrationContoller {
 
     // check if plan is still valid.
 
-    // const isEnrollmentValid = !isAfter(end_date, new Date());
-
     const enrollments = await Registration.findAll({
       order: [['createdAt', 'DESC']],
       limit: 20,
       offset: (page - 1) * 20,
-      attributes: ['id', 'start_date', 'end_date', 'price', 'enrolled'],
+      attributes: ['id', 'start_date', 'end_date', 'price'],
       include: [
         {
           model: Student,
@@ -30,6 +28,12 @@ class RegistrationContoller {
           attributes: ['id', 'title', 'price', 'duration'],
         },
       ],
+    });
+
+    enrollments.map(enrollment => {
+      enrollment.active = !isBefore(enrollment.end_date, new Date());
+
+      return enrollment;
     });
 
     return res.json(enrollments);
@@ -134,7 +138,7 @@ class RegistrationContoller {
       start_date: parsedDate,
       end_date,
       price,
-      enrolled: true,
+      active: true,
     });
 
     return res.json({
@@ -142,7 +146,7 @@ class RegistrationContoller {
       plan_id: req.body.plan_id,
       started_date: parsedDate,
       end_date,
-      enrolled: true,
+      active: true,
     });
   }
 

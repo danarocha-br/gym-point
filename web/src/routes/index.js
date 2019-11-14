@@ -10,6 +10,7 @@ import Students from '~/pages/Students';
 import StudentProfile from '~/pages/Students/StudentProfile';
 import Plans from '~/pages/Plans';
 import PlanDetails from '~/pages/Plans/PlanDetails';
+import Enrollments from '~/pages/Enrollments';
 
 function Routes() {
   return (
@@ -21,6 +22,7 @@ function Routes() {
       <Route exact path="/students/:id" component={StudentProfile} isPrivate />
       <Route path="/plans" component={Plans} isPrivate />
       <Route path="/plans/:id" component={PlanDetails} isPrivate />
+      <Route path="/enrollments" component={Enrollments} isPrivate />
     </Switch>
   );
 }
