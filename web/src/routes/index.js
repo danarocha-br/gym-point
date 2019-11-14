@@ -11,6 +11,7 @@ import StudentProfile from '~/pages/Students/StudentProfile';
 import Plans from '~/pages/Plans';
 import PlanDetails from '~/pages/Plans/PlanDetails';
 import Enrollments from '~/pages/Enrollments';
+import HelpOrders from '~/pages/HelpOrders';
 
 function Routes() {
   return (
@@ -23,6 +24,7 @@ function Routes() {
       <Route path="/plans" component={Plans} isPrivate />
       <Route path="/plans/:id" component={PlanDetails} isPrivate />
       <Route path="/enrollments" component={Enrollments} isPrivate />
+      <Route path="/help-orders" component={HelpOrders} isPrivate />
     </Switch>
   );
 }

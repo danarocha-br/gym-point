@@ -66,8 +66,8 @@ export default createGlobalStyle`
   }
 
   h3 {
-    ${'' /* font-size: 28px; */}
-    margin-bottom: 15px;
+    font-size: 22px;
+    margin-bottom: 25px;
   }
 
   button {

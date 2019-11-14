@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { format, parseISO, isAfter } from 'date-fns';
+import React, { useEffect, useState, useMemo } from 'react';
+import { format, parseISO } from 'date-fns';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 
 import api from '~/services/api';
@@ -36,6 +36,8 @@ export default function Enrollments() {
   useEffect(() => {
     loadEnrollments();
   }, []);
+
+  const enrollmentsTotal = useMemo(() => enrollments.length, [enrollments]);
 
   function handleAddPlan() {}
 
@@ -87,10 +89,13 @@ export default function Enrollments() {
       <ColRight>
         <Card fullHeight>
           <ButtonWrapper>
+            <h4>
+              Total of <strong>{enrollmentsTotal}</strong> enrollments.
+            </h4>
             <Button kind="icon" icon="plus" onClick={handleAddPlan} />
           </ButtonWrapper>
 
-          <Table columns={columns} data={enrollments} ariaLabel="plans" />
+          <Table columns={columns} data={enrollments} ariaLabel="enrollments" />
         </Card>
       </ColRight>
     </PageWrapper>
