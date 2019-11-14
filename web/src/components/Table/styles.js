@@ -17,6 +17,7 @@ export const TableWrapper = styled.table`
     height: 55px;
     background-color: white;
     border-bottom: 1px solid black;
+    width: 100%;
 
     &:hover {
       background-color: var(--color-grey-lightest);
