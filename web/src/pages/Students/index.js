@@ -7,6 +7,7 @@ import {
   loadStudentsRequest,
   deleteStudentRequest,
 } from '~/store/reducers/students/actions';
+import { showModal } from '~/store/reducers/modals/actions';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
 import { Search } from './styles';
@@ -20,6 +21,7 @@ export default function Students() {
   const students = useSelector(state => state.students.list);
   const isLoading = useSelector(state => state.students.loading);
   const hasError = useSelector(state => state.students.showError);
+  const modal = useSelector(state => state.modals.modal);
 
   const dispatch = useDispatch();
 
@@ -71,14 +73,17 @@ export default function Students() {
           kind="icon"
           icon="edit"
           color="transparent"
-          onClick={() => history.push(`/students/${student.id}`)}
+          // onClick={() => history.push(`/students/${student.id}`)}
+          onClick={() => dispatch(showModal('ModalAddStudent', { student }))}
         />
       ),
     },
   ]);
 
+  const pose = modal !== null ? 'withModal' : 'init';
+
   return (
-    <PageWrapper>
+    <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Students</h3>
         {studentsTotal}

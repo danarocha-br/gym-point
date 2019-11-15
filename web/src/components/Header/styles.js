@@ -12,10 +12,18 @@ export const Nav = styled.nav`
 export const Menu = styled.div`
   display: flex;
   padding-top: 5px;
+  @media (min-width: 900px) {
+    margin-left: -24%;
+  }
 
   a {
     padding: 0 20px;
-    color: var(--color-grey-dark);
+    color: white;
+
+    &:hover,
+    &:active {
+      color: var(--color-primary);
+    }
   }
 `;
 
@@ -28,9 +36,10 @@ export const Profile = styled.button`
   background: none;
 
   img {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     border-radius: 10px;
+    border: 3px solid #fff9;
   }
 `;
 
