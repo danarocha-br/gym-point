@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
-import { format, parseISO, differenceInYears } from 'date-fns';
 
-import api from '~/services/api';
 import history from '~/services/history';
+import {
+  loadStudentsRequest,
+  deleteStudentRequest,
+} from '~/store/reducers/students/actions';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
 import { Search } from './styles';
@@ -11,47 +14,32 @@ import { Search } from './styles';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Table from '~/components/Table';
+import Error from '~/components/Error';
 
 export default function Students() {
-  const [students, setStudents] = useState([]);
-  const [search, setSearch] = useState('');
+  const students = useSelector(state => state.students.list);
+  const isLoading = useSelector(state => state.students.loading);
+  const hasError = useSelector(state => state.students.showError);
 
-  async function loadStudents() {
-    const response = await api.get('students');
-
-    const data = response.data.map(student => {
-      const parsedBirthday = parseISO(student.birthday);
-      const parsedUpdated = parseISO(student.updated_at);
-
-      return {
-        ...student,
-        weight: `${student.weight} kg`,
-        height: `${student.height} m`,
-        birthday: `${differenceInYears(new Date(), parsedBirthday)} years old`,
-        updated_at: format(parsedUpdated, 'dd/MM/yyyy'),
-      };
-    });
-
-    setStudents(data);
-  }
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    loadStudents();
-  }, []);
+    dispatch(loadStudentsRequest());
+  }, []); // eslint-disable-line
 
-  const studentsTotal = useMemo(() => students.length, [students]);
+  const studentsTotal = useMemo(() => students && students.length, [students]);
 
-  async function handleDelete(student) {
-    if (
-      window.confirm(`Are you sure you want to delete ${student.name}?`) ===
-      true
-    ) {
-      await api.delete(`students/${student.id}`);
+  // async function handleDelete(student) {
+  //   if (
+  //     window.confirm(`Are you sure you want to delete ${student.name}?`) ===
+  //     true
+  //   ) {
+  //     await api.delete(`students/${student.id}`);
 
-      setStudents(students.filter(s => s.id !== student.id));
-      loadStudents();
-    }
-  }
+  //     setStudents(students.filter(s => s.id !== student.id));
+  //     loadStudents();
+  //   }
+  // }
 
   async function handleAddStudent(student) {
     // const data = await api.put(student.id, student);
@@ -66,18 +54,18 @@ export default function Students() {
     { path: 'birthday', label: 'Age' },
     { path: 'updated_at', label: 'Last updated' },
     {
-      key: 'edit',
+      key: 'delete',
       content: student => (
         <Button
           kind="icon"
           icon="trash"
           color="transparent"
-          onClick={() => handleDelete(student)}
+          onClick={() => dispatch(deleteStudentRequest(student.id))}
         />
       ),
     },
     {
-      key: 'delete',
+      key: 'edit',
       content: student => (
         <Button
           kind="icon"
@@ -105,7 +93,16 @@ export default function Students() {
             </Search>
           </Form>
 
-          <Table columns={columns} data={students} ariaLabel="students" />
+          {hasError ? (
+            <Error data="students" status={hasError.response.status} />
+          ) : (
+            <Table
+              isLoading={isLoading}
+              columns={columns}
+              data={students}
+              ariaLabel="students"
+            />
+          )}
         </Card>
       </ColRight>
     </PageWrapper>
