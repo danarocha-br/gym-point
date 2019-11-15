@@ -1,11 +1,37 @@
 import styled from 'styled-components';
+import posed from 'react-pose';
 
-export const PageWrapper = styled.div`
-  display: flex;
-  height: 100%;
-`;
+// export const PageWrapper = styled.div`
+//   display: flex;
+//   height: 100%;
+// `;
+
+export const PageWrapper = posed.div({
+  init: {
+    display: 'flex',
+    height: '100%',
+    position: 'relative',
+    left: 0,
+    opacity: 1,
+    transition: {
+      x: { type: 'spring', stiffness: 1000, damping: 15 },
+      default: { duration: 300 },
+    },
+  },
+  withModal: {
+    display: 'flex',
+    height: '100%',
+    left: -500,
+    opacity: 0.5,
+    transition: {
+      x: { type: 'spring', stiffness: 1000, damping: 15 },
+      default: { duration: 300 },
+    },
+  },
+});
 
 export const ColLeft = styled.div`
+  color: white;
   display: flex;
   flex-direction: column;
   flex: 1;

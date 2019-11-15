@@ -19,11 +19,11 @@ function Routes() {
       <Route exact path="/" component={Login} />
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/profile" component={Profile} isPrivate />
-      <Route path="/students" component={Students} isPrivate />
-      <Route exact path="/students/:id" component={StudentProfile} isPrivate />
-      <Route path="/plans" component={Plans} isPrivate />
+      <Route exact path="/students" component={Students} isPrivate />
+      <Route path="/students/:id" component={StudentProfile} isPrivate />
+      <Route exact path="/plans" component={Plans} isPrivate />
       <Route path="/plans/:id" component={PlanDetails} isPrivate />
-      <Route path="/enrollments" component={Enrollments} isPrivate />
+      <Route exact path="/enrollments" component={Enrollments} isPrivate />
       <Route path="/help-orders" component={HelpOrders} isPrivate />
     </Switch>
   );

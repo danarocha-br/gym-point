@@ -1,16 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Skeleton from 'react-loading-skeleton';
 
 import { TableWrapper } from './styles';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 
-export default function Table({ columns, data, ariaLabel }) {
+export default function Table({ columns, data, ariaLabel, isLoading }) {
   return (
-    <TableWrapper role="table" aria-label={ariaLabel}>
-      <TableHeader columns={columns} />
-      <TableBody columns={columns} data={data} />
-    </TableWrapper>
+    <>
+      {isLoading && <Skeleton count={6} height={50} />}
+      {data && (
+        <TableWrapper role="table" aria-label={ariaLabel}>
+          <TableHeader columns={columns} />
+          <TableBody columns={columns} data={data} />
+        </TableWrapper>
+      )}
+    </>
   );
 }
 
@@ -27,4 +33,8 @@ Table.propTypes = {
    * Defines the data for the table.
    */
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  /**
+   * Defines the loading style for the table.
+   */
+  isLoading: PropTypes.bool.isRequired,
 };

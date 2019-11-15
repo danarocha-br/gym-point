@@ -88,4 +88,9 @@ export default createGlobalStyle`
     }
 
   }
+
+  #root .react-loading-skeleton {
+    border-radius: 14px;
+    margin-bottom: 5px;
+  }
 `;
