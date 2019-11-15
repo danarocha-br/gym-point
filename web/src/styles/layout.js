@@ -6,6 +6,7 @@ export const PageWrapper = styled.div`
 `;
 
 export const ColLeft = styled.div`
+  color: white;
   display: flex;
   flex-direction: column;
   flex: 1;
