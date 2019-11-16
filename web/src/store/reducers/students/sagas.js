@@ -10,7 +10,12 @@ import {
   loadStudentsFailure,
   addStudentFailure,
   deleteStudentSuccess,
+  updateStudentSuccess,
+  updateStudentFailure,
+  addStudentSuccess,
 } from './actions';
+
+import { hideModal } from '../modals/actions';
 
 function* loadStudents({ payload }) {
   try {
@@ -37,18 +42,41 @@ function* loadStudents({ payload }) {
 
 function* addStudent({ payload }) {
   try {
-    const { name, email, birthday, weight, height } = payload;
-    yield call(api.post, 'students', {
-      name,
-      email,
-      birthday,
-      weight,
-      height,
-    });
+    const response = yield call(api.post, '/students', payload);
 
-    history.push('/students');
+    toast.success('Student added successfully.');
+
+    yield put(hideModal());
+    yield put(addStudentSuccess(response.data));
   } catch (error) {
+    toast.error(
+      `There was an error when adding the student: ${error.response.data.error}`
+    );
     yield put(addStudentFailure(error));
+  }
+}
+
+export function* updateStudent({ payload }) {
+  try {
+    const { id, name, email, birthday, weight, height } = payload;
+    const parsedBirthday = parseISO(birthday);
+
+    const data = {
+      ...payload.data,
+      birthday: parsedBirthday,
+    };
+
+    const response = yield call(api.put, `/students/${id}`, data);
+    toast.success('Student successfully updated.');
+
+    yield put(updateStudentSuccess(response.data));
+
+    yield put(hideModal());
+  } catch (error) {
+    toast.error(
+      `There was an error when updating the student: ${error.response.data.error}`
+    );
+    yield put(updateStudentFailure());
   }
 }
 
@@ -69,5 +97,6 @@ function* deleteStudent({ payload }) {
 export default all([
   takeLatest('@student/LOAD_REQUEST', loadStudents),
   takeLatest('@student/ADD_REQUEST', addStudent),
+  takeLatest('@student/UPDATE_REQUEST', updateStudent),
   takeLatest('@student/DELETE_REQUEST', deleteStudent),
 ]);

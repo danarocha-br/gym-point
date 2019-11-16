@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
-import history from '~/services/history';
 import {
   loadStudentsRequest,
   deleteStudentRequest,
@@ -31,23 +30,6 @@ export default function Students() {
 
   const studentsTotal = useMemo(() => students && students.length, [students]);
 
-  // async function handleDelete(student) {
-  //   if (
-  //     window.confirm(`Are you sure you want to delete ${student.name}?`) ===
-  //     true
-  //   ) {
-  //     await api.delete(`students/${student.id}`);
-
-  //     setStudents(students.filter(s => s.id !== student.id));
-  //     loadStudents();
-  //   }
-  // }
-
-  async function handleAddStudent(student) {
-    // const data = await api.put(student.id, student);
-    // console.tron.log(data);
-  }
-
   const [columns] = useState([
     { path: 'name', label: 'Name' },
     { path: 'email', label: 'Email' },
@@ -73,8 +55,7 @@ export default function Students() {
           kind="icon"
           icon="edit"
           color="transparent"
-          // onClick={() => history.push(`/students/${student.id}`)}
-          onClick={() => dispatch(showModal('ModalAddStudent', { student }))}
+          onClick={() => dispatch(showModal('ModalUpdateStudent', { student }))}
         />
       ),
     },
@@ -94,7 +75,11 @@ export default function Students() {
           <Form>
             <Search>
               <Input name="search" placeholder="Search a student..." />
-              <Button kind="icon" icon="plus" onClick={handleAddStudent} />
+              <Button
+                kind="icon"
+                icon="plus"
+                onClick={() => dispatch(showModal('ModalAddStudent'))}
+              />
             </Search>
           </Form>
 

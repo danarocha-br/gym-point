@@ -27,6 +27,19 @@ export default function students(state = INITIAL_STATE, action) {
         break;
       }
 
+      // UPDATE
+      case '@student/UPDATE_SUCCESS': {
+        draft.student = action.payload.student;
+        break;
+      }
+
+      // ADD
+      case '@student/ADD_SUCCESS': {
+        draft.student = action.payload.student;
+        draft.list = [...draft.list, action.payload.student];
+        break;
+      }
+
       // DELETE
       case '@student/DELETE_REQUEST': {
         draft.loading = false;
