@@ -5,6 +5,7 @@ import user from './user';
 import students from './students';
 import modals from './modals';
 import plans from './plans';
+import enrollments from './enrollments';
 
 export default combineReducers({
   auth,
@@ -12,4 +13,5 @@ export default combineReducers({
   students,
   modals,
   plans,
+  enrollments,
 });

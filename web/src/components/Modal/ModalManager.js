@@ -5,6 +5,8 @@ import ModalUpdateStudent from 'pages/Students/ModalUpdateStudent';
 import ModalAddStudent from 'pages/Students/ModalAddStudent';
 import ModalAddPlan from 'pages/Plans/ModalAddPlan';
 import ModalUpdatePlan from 'pages/Plans/ModalUpdatePlan';
+import ModalAddEnrollment from 'pages/Enrollments/ModalAddEnrollment';
+import ModalUpdateEnrollment from 'pages/Enrollments/ModalUpdateEnrollment';
 
 export default function ModalManager() {
   const modalLookup = {
@@ -12,6 +14,8 @@ export default function ModalManager() {
     ModalUpdateStudent,
     ModalAddPlan,
     ModalUpdatePlan,
+    ModalAddEnrollment,
+    ModalUpdateEnrollment,
   };
 
   const currentModal = useSelector(state => state.modals.modal);

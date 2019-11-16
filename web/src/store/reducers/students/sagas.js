@@ -58,7 +58,7 @@ function* addStudent({ payload }) {
 
 export function* updateStudent({ payload }) {
   try {
-    const { id, name, email, birthday, weight, height } = payload;
+    const { id, birthday, weight, height } = payload;
     const parsedBirthday = parseISO(birthday);
 
     const data = {

@@ -83,7 +83,11 @@ export default function Plans() {
         <Card fullHeight>
           <ButtonWrapper>
             <h4>
-              Total of <strong>{plansTotal}</strong> plans
+              <h4>
+                {plansTotal <= 0 || null
+                  ? 'No plans found.'
+                  : `Total of ${plansTotal} plans.`}
+              </h4>
             </h4>
             <Button
               kind="icon"
