@@ -62,4 +62,8 @@ export const Body = styled.div`
   input {
     margin-bottom: 10px;
   }
+
+  button {
+    margin-top: 30px;
+  }
 `;

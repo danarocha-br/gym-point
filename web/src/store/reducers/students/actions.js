@@ -21,10 +21,17 @@ export function addStudentFailure() {
 
 // UPDATE
 
-export function updateStudentRequest(data) {
+export function updateStudentRequest(
+  id,
+  name,
+  email,
+  birthday,
+  weight,
+  height
+) {
   return {
     type: '@student/UPDATE_REQUEST',
-    payload: { data },
+    payload: { id, name, email, birthday, weight, height },
   };
 }
 

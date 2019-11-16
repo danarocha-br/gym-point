@@ -1,20 +1,28 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Input } from '@rocketseat/unform';
 
-// import { Container } from './styles';
+import { addStudentRequest } from '~/store/reducers/students/actions';
 
 import Modal from '~/components/Modal';
 import Form from '~/components/Form';
+import Button from '~/components/Button';
 
-export default function ModalAddStudent({ student }) {
+export default function ModalAddStudent() {
+  const dispatch = useDispatch();
+
+  function handleSubmit({ name, email, birthday, weight, height }) {
+    dispatch(addStudentRequest(name, email, birthday, weight, height));
+  }
   return (
-    <Modal title={`Edit ${student.name} Details:`}>
-      <Form initialData={student}>
-        <Input name="name" placeholder="Your password" />
-        <Input name="email" type="email" placeholder="Your password" />
-        <Input name="birthday" placeholder="Your password" />
-        <Input name="weight" placeholder="Your password" />
-        <Input name="height" placeholder="Your password" />
+    <Modal title="Add New Student">
+      <Form onSubmit={handleSubmit}>
+        <Input name="name" placeholder="Student name" />
+        <Input name="email" type="email" placeholder="Student email" />
+        <Input name="birthday" placeholder="Student birthday" />
+        <Input name="weight" placeholder="Student weight" />
+        <Input name="height" placeholder="Student height" />
+        <Button label="Add Student" />
       </Form>
     </Modal>
   );
