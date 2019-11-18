@@ -19,10 +19,45 @@ export const Menu = styled.div`
   a {
     padding: 0 20px;
     color: white;
+    opacity: 0.4;
+    font-weight: 500;
+    transition: all 1s;
 
-    &:hover,
-    &:active {
-      color: var(--color-primary);
+    &::after {
+      content: '';
+      background-color: var(--color-primary);
+      display: block;
+      position: relative;
+      top: 10px;
+      left: 0px;
+      width: 0px;
+      height: 3px;
+      border-radius: 5px;
+      transition: width 0.3s;
+    }
+
+    &:hover {
+      color: white;
+      opacity: 1;
+
+      &::after {
+        width: 30px;
+      }
+    }
+  }
+  .is-active {
+    color: white;
+    opacity: 1;
+    &::after {
+      content: '';
+      background-color: var(--color-primary);
+      display: block;
+      position: relative;
+      top: 10px;
+      left: 0px;
+      width: 30px;
+      height: 3px;
+      border-radius: 5px;
     }
   }
 `;
