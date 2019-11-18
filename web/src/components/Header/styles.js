@@ -87,6 +87,7 @@ export const ProfileList = styled.ul`
   border-radius: 15px;
   box-shadow: 1px 15px 18px rgba(0, 0, 0, 0.03);
   display: ${props => (props.visible ? 'block' : 'none')};
+  z-index: 2;
 
   li {
     padding: 8px 20px;
