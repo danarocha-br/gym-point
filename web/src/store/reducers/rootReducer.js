@@ -6,6 +6,7 @@ import students from './students';
 import modals from './modals';
 import plans from './plans';
 import enrollments from './enrollments';
+import helpOrders from './helpOrders';
 
 export default combineReducers({
   auth,
@@ -14,4 +15,5 @@ export default combineReducers({
   modals,
   plans,
   enrollments,
+  orders: helpOrders,
 });

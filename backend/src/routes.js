@@ -34,7 +34,7 @@ routes.get('/students/:studentId/checkins', CheckinController.index);
 routes.post('/students/:studentId/checkins', CheckinController.store);
 
 routes.get('/help-orders', AdminHelpOrderController.index);
-routes.post('/help-orders/:orderId/answer', AdminHelpOrderController.store);
+routes.post('/help-orders/:orderId', AdminHelpOrderController.store);
 routes.get('/students/:studentId/help-orders', HelpOrderController.index);
 routes.post('/students/:studentId/help-orders', HelpOrderController.store);
 routes.delete(
