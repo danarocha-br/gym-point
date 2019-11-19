@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
   FaUserGraduate,
   FaCheckCircle,
   FaQuestionCircle,
 } from 'react-icons/fa';
+import { MdGroup } from 'react-icons/md';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
-import { SummaryCard, VerticalContainer, Container } from './styles';
+import {
+  SummaryCard,
+  SummaryWrapper,
+  Container,
+  SecondaryContainer,
+  Overview,
+  IconFrame,
+} from './styles';
 
 import Card from '~/components/Card';
+import Gym from '~/assets/gym.svg';
 
 export default function Dashboard() {
   const profile = useSelector(state => state.user.profile);
+
+  const students = useSelector(state => state.students.list);
+  const enrollments = useSelector(state => state.enrollments.list);
+  const plans = useSelector(state => state.plans.list);
+  const studentsTotal = useMemo(() => students && students.length, [students]);
+
+  // AVG Active Registered Students
+
+  const getStudentTotal = students && students.length;
+  const getEnrollmentsTotal = enrollments && enrollments.length;
+
+  const activeMembersAvg = useMemo(() => getEnrollmentsTotal / getStudentTotal);
+
+  // AVG Plans
+  const getPlansTotal = plans && plans.length;
 
   return (
     <PageWrapper>
@@ -28,34 +52,62 @@ export default function Dashboard() {
       </ColLeft>
 
       <ColRight>
-        <Card>
+        <Card fullHeight>
           <h3 style={{ marginBottom: '30px' }}>
             <strong>Feed</strong>
           </h3>
           <Container>
-            <VerticalContainer small>
+            <SummaryWrapper>
               <SummaryCard student>
-                <p>30 students</p>
+                <IconFrame>
+                  <FaUserGraduate size="25px" />
+                </IconFrame>
 
-                <FaUserGraduate size="25px" />
+                <p>{students && `${studentsTotal} Students`}</p>
               </SummaryCard>
 
               <SummaryCard enrollment>
-                <p>20 active students</p>
-                <FaCheckCircle size="25px" />
+                <IconFrame>
+                  <FaCheckCircle size="25px" />
+                </IconFrame>
+
+                <p>{`${getEnrollmentsTotal} Active Members`}</p>
               </SummaryCard>
 
               <SummaryCard orders>
-                <p>20 open help orders</p>
-                <FaQuestionCircle size="25px" />
-              </SummaryCard>
-            </VerticalContainer>
+                <IconFrame>
+                  <MdGroup size="25px" />
+                </IconFrame>
 
-            <VerticalContainer>
-              <SummaryCard student>30 students</SummaryCard>
-            </VerticalContainer>
-            <VerticalContainer small>test</VerticalContainer>
+                <p>{`${activeMembersAvg} Avg Active`}</p>
+              </SummaryCard>
+            </SummaryWrapper>
+
+            <Overview>
+              <strong>Gym Plans</strong>
+              <ul>
+                <li>
+                  Total Plans <strong>{getPlansTotal}</strong>
+                </li>
+                <li>
+                  Most Popular Plan <strong>10</strong>
+                </li>
+                <li>
+                  Least Popular Plan <strong>10</strong>
+                </li>
+              </ul>
+              <img src={Gym} alt="gym" />
+            </Overview>
+
+            <Overview bordered>
+              <strong style={{ color: 'var(--color-blue)' }}>
+                Help Orders
+              </strong>
+            </Overview>
           </Container>
+          <SecondaryContainer>
+            <p>some content goes here ... </p>
+          </SecondaryContainer>
         </Card>
       </ColRight>
     </PageWrapper>

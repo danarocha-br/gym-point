@@ -5,3 +5,7 @@ export const ButtonWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const Question = styled.p`
+  margin-bottom: 20px;
+`;

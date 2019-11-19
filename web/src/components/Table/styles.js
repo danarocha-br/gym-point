@@ -18,20 +18,30 @@ export const TableWrapper = styled.table`
     background-color: white;
     width: 100%;
     border: 1px solid black;
+    transition: background-color, 0.5s, ease-in;
 
     &:hover {
       background-color: var(--color-grey-lightest);
     }
   }
 
+  thead tr:hover {
+    background-color: white;
+  }
+
   td {
+    border-bottom: 1px dashed var(--color-grey-light);
+
     &:first-child {
       font-weight: 500;
     }
 
     &:nth-last-child(-n + 2) {
       text-align: right;
-      float: right;
+
+      button {
+        float: right;
+      }
     }
   }
 `;

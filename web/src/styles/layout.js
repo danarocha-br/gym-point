@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import posed from 'react-pose';
 
-// export const PageWrapper = styled.div`
-//   display: flex;
-//   height: 100%;
-// `;
-
 export const PageWrapper = posed.div({
   init: {
     display: 'flex',

@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { format, parseISO, differenceInDays } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
 
-import api from '~/services/api';
-import history from '~/services/history';
-import { formatPrice } from '~/util/format';
+import { loadOrdersRequest } from '~/store/reducers/helpOrders/actions';
+import { showModal } from '~/store/reducers/modals/actions';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
 import { ButtonWrapper } from './styles';
@@ -11,40 +10,27 @@ import { ButtonWrapper } from './styles';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Table from '~/components/Table';
+import Error from '~/components/Error';
 
 export default function HelpOrders() {
-  const [orders, setOrders] = useState([]);
+  const orders = useSelector(state => state.orders.list);
+  const isLoading = useSelector(state => state.orders.loading);
+  const hasError = useSelector(state => state.orders.showError);
+  const modal = useSelector(state => state.modals.modal);
 
-  async function loadOrders() {
-    const response = await api.get('help-orders');
-
-    const data = response.data.map(order => {
-      const parsedDate = parseISO(order.createdAt);
-      const openFor = differenceInDays(new Date(), parsedDate);
-      return {
-        ...order,
-        student: order.student.name,
-        createdAt: `${openFor === 0 ? 'today' : `${openFor} ago`}`,
-      };
-    });
-
-    setOrders(data);
-  }
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    loadOrders();
-  }, []);
+    dispatch(loadOrdersRequest());
+  }, []); // eslint-disable-line
 
-  const ordersTotal = useMemo(() => orders.length, [orders]);
-
-  function handleAddPlan() {}
+  const ordersTotal = useMemo(() => orders && orders.length, [orders]);
 
   const [columns] = useState([
     { path: 'student', label: 'Student' },
     { path: 'createdAt', label: 'Open Since' },
     {
       key: 'empty',
-      content: order => '',
     },
     {
       key: 'answer',
@@ -54,14 +40,16 @@ export default function HelpOrders() {
           kind="icon"
           icon="edit"
           color="transparent"
-          onClick={() => 'clicked'}
+          onClick={() => dispatch(showModal('ModalAnswerOrder', { order }))}
         />
       ),
     },
   ]);
 
+  const pose = modal !== null ? 'withModal' : 'init';
+
   return (
-    <PageWrapper>
+    <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Student Questions</h3>
       </ColLeft>
@@ -69,13 +57,21 @@ export default function HelpOrders() {
       <ColRight>
         <Card fullHeight>
           <ButtonWrapper>
-            <h4>
-              Total of <strong>{ordersTotal}</strong> orders.
-            </h4>
-            <Button kind="icon" icon="plus" onClick={handleAddPlan} />
+            {ordersTotal <= 0 || null
+              ? 'No helping orders found.'
+              : `Total of ${ordersTotal} helping orders.`}
           </ButtonWrapper>
 
-          <Table columns={columns} data={orders} ariaLabel="orders" />
+          {hasError ? (
+            <Error data="orders" status={hasError.response.status} />
+          ) : (
+            <Table
+              isLoading={isLoading}
+              columns={columns}
+              data={orders}
+              ariaLabel="orders"
+            />
+          )}
         </Card>
       </ColRight>
     </PageWrapper>

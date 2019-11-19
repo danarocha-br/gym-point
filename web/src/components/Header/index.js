@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import logo from '~/assets/logo.svg';
@@ -23,15 +23,23 @@ export default function Header() {
 
   return (
     <Nav>
-      <Link to="/dashboard">
+      <NavLink activeClassName="is-active" to="/dashboard">
         <img src={logo} alt="GymPoint" />
-      </Link>
+      </NavLink>
 
       <Menu>
-        <Link to="/students">Students</Link>
-        <Link to="/plans">Plans</Link>
-        <Link to="/enrollments">Enrollments</Link>
-        <Link to="/help-orders">Help</Link>
+        <NavLink activeClassName="is-active" to="/students">
+          Students
+        </NavLink>
+        <NavLink activeClassName="is-active" to="/plans">
+          Plans
+        </NavLink>
+        <NavLink activeClassName="is-active" to="/enrollments">
+          Enrollments
+        </NavLink>
+        <NavLink activeClassName="is-active" to="/help-orders">
+          Help
+        </NavLink>
       </Menu>
 
       <Profile onClick={handleToogleProfile}>

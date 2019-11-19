@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { format, parseISO } from 'date-fns';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 
 import {
@@ -64,27 +63,24 @@ export default function Enrollments() {
         ),
     },
     {
-      key: 'delete',
+      key: 'actions',
       content: enrollment => (
-        <Button
-          kind="icon"
-          icon="trash"
-          color="transparent"
-          onClick={() => dispatch(deleteEnrollmentRequest(enrollment.id))}
-        />
-      ),
-    },
-    {
-      key: 'edit',
-      content: enrollment => (
-        <Button
-          kind="icon"
-          icon="edit"
-          color="transparent"
-          onClick={() =>
-            dispatch(showModal('ModalUpdateEnrollment', { enrollment }))
-          }
-        />
+        <>
+          <Button
+            kind="icon"
+            icon="trash"
+            color="transparent"
+            onClick={() => dispatch(deleteEnrollmentRequest(enrollment.id))}
+          />
+          <Button
+            kind="icon"
+            icon="edit"
+            color="transparent"
+            onClick={() =>
+              dispatch(showModal('ModalUpdateEnrollment', { enrollment }))
+            }
+          />
+        </>
       ),
     },
   ]);
