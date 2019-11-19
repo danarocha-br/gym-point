@@ -63,27 +63,24 @@ export default function Enrollments() {
         ),
     },
     {
-      key: 'delete',
+      key: 'actions',
       content: enrollment => (
-        <Button
-          kind="icon"
-          icon="trash"
-          color="transparent"
-          onClick={() => dispatch(deleteEnrollmentRequest(enrollment.id))}
-        />
-      ),
-    },
-    {
-      key: 'edit',
-      content: enrollment => (
-        <Button
-          kind="icon"
-          icon="edit"
-          color="transparent"
-          onClick={() =>
-            dispatch(showModal('ModalUpdateEnrollment', { enrollment }))
-          }
-        />
+        <>
+          <Button
+            kind="icon"
+            icon="trash"
+            color="transparent"
+            onClick={() => dispatch(deleteEnrollmentRequest(enrollment.id))}
+          />
+          <Button
+            kind="icon"
+            icon="edit"
+            color="transparent"
+            onClick={() =>
+              dispatch(showModal('ModalUpdateEnrollment', { enrollment }))
+            }
+          />
+        </>
       ),
     },
   ]);

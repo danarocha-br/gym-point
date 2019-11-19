@@ -48,25 +48,22 @@ export default function Plans() {
     { path: 'duration', label: 'Duration' },
     { path: 'price', label: 'Price per Month' },
     {
-      key: 'delete',
+      key: 'actions',
       content: plan => (
-        <Button
-          kind="icon"
-          icon="trash"
-          color="transparent"
-          onClick={() => dispatch(deletePlanRequest(plan.id))}
-        />
-      ),
-    },
-    {
-      key: 'edit',
-      content: plan => (
-        <Button
-          kind="icon"
-          icon="edit"
-          color="transparent"
-          onClick={() => dispatch(showModal('ModalUpdatePlan', { plan }))}
-        />
+        <>
+          <Button
+            kind="icon"
+            icon="trash"
+            color="transparent"
+            onClick={() => dispatch(deletePlanRequest(plan.id))}
+          />
+          <Button
+            kind="icon"
+            icon="edit"
+            color="transparent"
+            onClick={() => dispatch(showModal('ModalUpdatePlan', { plan }))}
+          />
+        </>
       ),
     },
   ]);

@@ -30,6 +30,21 @@ export default function Students() {
 
   const studentsTotal = useMemo(() => students && students.length, [students]);
 
+  // AVG Student Ages
+
+  const getStudentAges =
+    students &&
+    students.map(student => {
+      return parseInt(student.birthday.split(' ', 1)[0], 0);
+    });
+
+  const ageSumResult = getStudentAges.reduce((avg, total) => avg + total, 0);
+
+  const studentsAverageAge = useMemo(
+    () => parseInt(ageSumResult / students.length, 0),
+    [students]
+  );
+
   const [columns] = useState([
     { path: 'name', label: 'Name' },
     { path: 'email', label: 'Email' },
@@ -38,25 +53,24 @@ export default function Students() {
     { path: 'birthday', label: 'Age' },
     { path: 'updated_at', label: 'Last updated' },
     {
-      key: 'delete',
+      key: 'actions',
       content: student => (
-        <Button
-          kind="icon"
-          icon="trash"
-          color="transparent"
-          onClick={() => dispatch(deleteStudentRequest(student.id))}
-        />
-      ),
-    },
-    {
-      key: 'edit',
-      content: student => (
-        <Button
-          kind="icon"
-          icon="edit"
-          color="transparent"
-          onClick={() => dispatch(showModal('ModalUpdateStudent', { student }))}
-        />
+        <>
+          <Button
+            kind="icon"
+            icon="trash"
+            color="transparent"
+            onClick={() => dispatch(deleteStudentRequest(student.id))}
+          />
+          <Button
+            kind="icon"
+            icon="edit"
+            color="transparent"
+            onClick={() =>
+              dispatch(showModal('ModalUpdateStudent', { student }))
+            }
+          />
+        </>
       ),
     },
   ]);
