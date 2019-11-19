@@ -15,6 +15,7 @@ import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Table from '~/components/Table';
 import Error from '~/components/Error';
+import Stats from '~/components/Stats';
 
 export default function Students() {
   const students = useSelector(state => state.students.list);
@@ -81,7 +82,14 @@ export default function Students() {
     <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Students</h3>
-        {studentsTotal}
+        <p style={{ marginBottom: '30px' }}>
+          Check out some data from students.
+        </p>
+        <Stats
+          label="Total of Students"
+          data={studentsTotal <= 0 || null ? '0.' : `${studentsTotal}`}
+        />
+        <Stats label="Age Average of Students" data={studentsAverageAge} />
       </ColLeft>
 
       <ColRight>
@@ -97,16 +105,12 @@ export default function Students() {
             </Search>
           </Form>
 
-          {hasError ? (
-            <Error data="students" status={hasError.response.status} />
-          ) : (
-            <Table
-              isLoading={isLoading}
-              columns={columns}
-              data={students}
-              ariaLabel="students"
-            />
-          )}
+          <Table
+            isLoading={isLoading}
+            columns={columns}
+            data={students}
+            ariaLabel="students"
+          />
         </Card>
       </ColRight>
     </PageWrapper>

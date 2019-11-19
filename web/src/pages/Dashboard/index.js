@@ -1,10 +1,6 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  FaUserGraduate,
-  FaCheckCircle,
-  FaQuestionCircle,
-} from 'react-icons/fa';
+import { FaUserGraduate, FaCheckCircle } from 'react-icons/fa';
 import { MdGroup } from 'react-icons/md';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
