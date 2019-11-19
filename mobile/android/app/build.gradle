@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.mobile"
+        applicationId "com.mob"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -197,5 +197,11 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
+
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf', 'Ionicons.ttf', 'Feather.ttf', 'MaterialCommunityIcons.ttf' ]
+]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

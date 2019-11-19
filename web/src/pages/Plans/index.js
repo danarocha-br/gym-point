@@ -15,6 +15,7 @@ import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Table from '~/components/Table';
 import Error from '~/components/Error';
+import Stats from '~/components/Stats';
 
 export default function Plans() {
   const plans = useSelector(state => state.plans.list);
@@ -29,6 +30,24 @@ export default function Plans() {
   }, []); // eslint-disable-line
 
   const plansTotal = useMemo(() => plans && plans.length, [plans]);
+
+  // AVG Plans Price
+
+  const getPlansPrice =
+    plans &&
+    plans.map(plan => {
+      return parseInt(plan.price.split('$', 2)[1], 0);
+    });
+
+  const getPlansPriceResult = getPlansPrice.reduce(
+    (avg, total) => avg + total,
+    0
+  );
+
+  const plansAvgPrice = useMemo(
+    () => parseInt(getPlansPriceResult / plans.length, 0),
+    [plans]
+  );
 
   // async function handleDelete(plan) {
   //   if (
@@ -74,17 +93,23 @@ export default function Plans() {
     <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Gym Plans</h3>
+        <p style={{ marginBottom: '30px' }}>
+          Check out some data from current plans.
+        </p>
+        <Stats
+          label="Current Plans"
+          data={plansTotal <= 0 || null ? '0' : `${plansTotal}`}
+        />
+        <Stats label="Age Average Plans Price" data={plansAvgPrice} />
+        <Stats label="Most Popular Plan" data="Start" />
+        <Stats label="Least Popular Plan" data="Gold" />
       </ColLeft>
 
       <ColRight>
         <Card fullHeight>
           <ButtonWrapper>
             <h4>
-              <h4>
-                {plansTotal <= 0 || null
-                  ? 'No plans found.'
-                  : `Total of ${plansTotal} plans.`}
-              </h4>
+              <h4>Your current plans</h4>
             </h4>
             <Button
               kind="icon"
