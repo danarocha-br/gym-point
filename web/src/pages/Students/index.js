@@ -34,14 +34,10 @@ export default function Students() {
   // AVG Student Ages
 
   function studentsAverageAge() {
-    const getStudentAges =
-      students && students.map(student => student.birthday);
-
+    const getStudentAges = students && students.map(student => student.age);
     const ageSumResult = getStudentAges.reduce((avg, total) => avg + total, 0);
 
-    return studentsTotal === null || students.length
-      ? 0
-      : parseInt(ageSumResult / students.length, 0);
+    return parseInt(ageSumResult / studentsTotal, 0);
   }
 
   const [columns] = useState([
@@ -89,7 +85,7 @@ export default function Students() {
         />
         <Stats
           label="Age Average of Students"
-          data={students && studentsAverageAge()}
+          data={students ? studentsAverageAge() : '0'}
         />
       </ColLeft>
 
