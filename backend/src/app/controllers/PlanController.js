@@ -9,7 +9,7 @@ class PlanController {
 
     const plans = await Plan.findAll({
       attributes: ['id', 'title', 'duration', 'price'],
-      sort: { createdAt: 'desc' },
+      order: [['price', 'ASC']],
       limit: 20,
       offset: (page - 1) * 20,
     });

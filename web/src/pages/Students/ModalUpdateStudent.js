@@ -28,16 +28,12 @@ export default function ModalAddStudent({ student }) {
 
   const { id } = student;
 
-  const initialData = {
-    ...student,
-  };
-
   function handleSubmit({ name, email, birthday, weight, height }) {
     dispatch(updateStudentRequest(id, name, email, birthday, weight, height));
   }
   return (
     <Modal title={`Edit ${student.name} Details:`}>
-      <Form initialData={initialData} onSubmit={handleSubmit}>
+      <Form initialData={student} onSubmit={handleSubmit}>
         <Input name="name" placeholder="Student name" />
         <Input name="email" type="email" placeholder="Student e-mail" />
         <Input name="birthday" placeholder="Student birthday" />

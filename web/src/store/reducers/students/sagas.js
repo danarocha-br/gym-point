@@ -58,12 +58,11 @@ function* addStudent({ payload }) {
   }
 }
 
-export function* updateStudent({ payload }) {
+function* updateStudent({ payload }) {
   try {
     const { id } = payload;
 
     const response = yield call(api.put, `/students/${id}`, payload);
-    toast.success('Student successfully updated.');
 
     yield put(updateStudentSuccess(response.data));
 

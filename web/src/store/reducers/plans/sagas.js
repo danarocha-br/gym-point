@@ -13,6 +13,7 @@ import {
   deletePlanFailure,
   updatePlanSuccess,
   updatePlanFailure,
+  loadPlansRequest,
 } from './actions';
 
 import { hideModal } from '../modals/actions';
@@ -22,7 +23,6 @@ function* loadPlans() {
     const response = yield call(api.get, 'plans');
     const plans = response.data.map(plan => ({
       ...plan,
-      duration: `${plan.duration}/month`,
       price: formatPrice(plan.price),
     }));
 
@@ -37,6 +37,7 @@ function* addPlan({ payload }) {
     const response = yield call(api.post, '/plans', payload);
 
     yield put(hideModal());
+    yield put(loadPlansRequest());
     toast.success('Plan added successfully.');
 
     yield put(addPlanSuccess(response.data));
@@ -59,10 +60,10 @@ function* updatePlan({ payload }) {
       price,
     });
 
-    toast.success('Plan successfully updated.');
     yield put(updatePlanSuccess(response.data));
 
     yield put(hideModal());
+    yield put(loadPlansRequest());
   } catch (error) {
     toast.error(
       `There was an error when updating the plan: ${error.response.data.error}`
