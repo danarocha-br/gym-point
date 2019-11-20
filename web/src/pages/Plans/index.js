@@ -25,29 +25,23 @@ export default function Plans() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadPlansRequest());
-  }, []); // eslint-disable-line
-
-  const plansTotal = useMemo(() => plans && plans.length, [plans]);
+  // const plansTotal = useMemo(() => plans && plans.length, [plans]);
 
   // AVG Plans Price
 
-  const getPlansPrice =
-    plans &&
-    plans.map(plan => {
-      return parseInt(plan.price.split('$', 2)[1], 0);
-    });
+  // const getPlansPrice =
+  //   plans &&
+  //   plans.map(plan => {
+  //     return parseInt(plan.price.split('$', 2)[1], 0);
+  //   });
 
-  const getPlansPriceResult = getPlansPrice.reduce(
-    (avg, total) => avg + total,
-    0
-  );
+  // const getPlansPriceResult =
+  //   plans && getPlansPrice.reduce((avg, total) => avg + total, 0);
 
-  const plansAvgPrice = useMemo(
-    () => parseInt(getPlansPriceResult / plans.length, 0),
-    [plans]
-  );
+  // const plansAvgPrice = useMemo(
+  //   () => parseInt(getPlansPriceResult / plans && plans.length, 0),
+  //   [plans]
+  // );
 
   // async function handleDelete(plan) {
   //   if (
@@ -98,9 +92,9 @@ export default function Plans() {
         </p>
         <Stats
           label="Current Plans"
-          data={plansTotal <= 0 || null ? '0' : `${plansTotal}`}
+          // data={plansTotal <= 0 || null ? '0' : `${plansTotal}`}
         />
-        <Stats label="Age Average Plans Price" data={plansAvgPrice} />
+        {/* <Stats label="Age Average Plans Price" data={plansAvgPrice} /> */}
         <Stats label="Most Popular Plan" data="Start" />
         <Stats label="Least Popular Plan" data="Gold" />
       </ColLeft>

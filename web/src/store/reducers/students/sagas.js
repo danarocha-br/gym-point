@@ -23,14 +23,12 @@ function* loadStudents({ payload }) {
 
     const students = response.data.map(student => {
       const parsedBirthday = parseISO(student.birthday);
-      const parsedUpdated = parseISO(student.updated_at);
+      const parsedUpdated = parseISO(student.updatedAt);
 
       return {
         ...student,
-        weight: `${student.weight} kg`,
-        height: `${student.height} m`,
-        birthday: `${differenceInYears(new Date(), parsedBirthday)} years old`,
-        updated_at: format(parsedUpdated, 'dd/MM/yyyy'),
+        birthday: differenceInYears(new Date(), parsedBirthday),
+        updatedAt: format(parsedUpdated, 'dd/MM/yyyy'),
       };
     });
 
@@ -48,6 +46,7 @@ function* addStudent({ payload }) {
 
     yield put(hideModal());
     yield put(addStudentSuccess(response.data));
+    // yield put(loadStudents());
   } catch (error) {
     toast.error(
       `There was an error when adding the student: ${error.response.data.error}`

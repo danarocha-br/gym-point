@@ -18,7 +18,10 @@ export default function TableBody({ data, columns }) {
       {data.map(item => (
         <tr key={item.id}>
           {columns.map(column => (
-            <td key={createKey(item, column)}>{renderCell(item, column)}</td>
+            <td key={createKey(item, column)}>
+              {renderCell(item, column)}
+              {column.suffix && ` ${column.suffix}`}
+            </td>
           ))}
         </tr>
       ))}
