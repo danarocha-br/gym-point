@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { parseISO, format, differenceInYears } from 'date-fns';
 
 const INITIAL_STATE = {
   student: null,
@@ -29,6 +30,7 @@ export default function students(state = INITIAL_STATE, action) {
 
       // UPDATE
       case '@student/UPDATE_SUCCESS': {
+        draft.loading = false;
         draft.student = action.payload.student;
         break;
       }
@@ -37,6 +39,7 @@ export default function students(state = INITIAL_STATE, action) {
       case '@student/ADD_SUCCESS': {
         draft.student = action.payload.student;
         draft.list = [...draft.list, action.payload.student];
+        draft.loading = false;
         break;
       }
 

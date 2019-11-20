@@ -36,7 +36,7 @@ export const TableWrapper = styled.table`
       font-weight: 500;
     }
 
-    &:nth-last-child(-n + 2) {
+    &:nth-last-child(-n + 1) {
       text-align: right;
 
       button {

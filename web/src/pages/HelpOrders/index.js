@@ -20,10 +20,6 @@ export default function HelpOrders() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadOrdersRequest());
-  }, []); // eslint-disable-line
-
   const ordersTotal = useMemo(() => orders && orders.length, [orders]);
 
   const [columns] = useState([

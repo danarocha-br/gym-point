@@ -13,6 +13,7 @@ import {
   updateStudentSuccess,
   updateStudentFailure,
   addStudentSuccess,
+  loadStudentsRequest,
 } from './actions';
 
 import { hideModal } from '../modals/actions';
@@ -46,8 +47,9 @@ function* addStudent({ payload }) {
 
     yield put(hideModal());
     yield put(addStudentSuccess(response.data));
-    // yield put(loadStudents());
+    yield put(loadStudentsRequest());
   } catch (error) {
+    console.tron.log(error);
     toast.error(
       `There was an error when adding the student: ${error.response.data.error}`
     );

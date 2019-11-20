@@ -25,6 +25,10 @@ export default function Students() {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(loadStudentsRequest());
+  }, []);
+
   const studentsTotal = useMemo(() => students && students.length, [students]);
 
   // AVG Student Ages
@@ -45,7 +49,11 @@ export default function Students() {
     { path: 'email', label: 'Email' },
     { path: 'weight', suffix: 'kg', label: 'Weight' },
     { path: 'height', suffix: 'm', label: 'Height' },
-    { path: 'birthday', suffix: 'years old', label: 'Age' },
+    {
+      path: 'birthday',
+      suffix: 'years old',
+      label: 'Age',
+    },
     { path: 'updatedAt', label: 'Last updated' },
     {
       key: 'actions',

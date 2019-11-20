@@ -83,7 +83,7 @@ class StudentController {
 
     const age = differenceInYears(new Date(), parsedBirthday);
 
-    const { id, name, email, weight, height } = req.body;
+    const { id, name, email, weight, height, created_at } = req.body;
 
     // create student
 
@@ -100,10 +100,11 @@ class StudentController {
       id,
       name,
       email,
-      parsedBirthday,
+      birthday,
       age,
       weight,
       height,
+      updated_at: created_at,
     });
   }
 

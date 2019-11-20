@@ -24,10 +24,6 @@ export default function Enrollments() {
   const modal = useSelector(state => state.modals.modal);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadEnrollmentsRequest());
-  }, []); // eslint-disable-line
-
   // function formattedEnrollments() {
   //   enrollments.map(enrollment => {
   //     const parsedStartDate = parseISO(enrollment.start_date);
