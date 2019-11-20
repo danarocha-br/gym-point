@@ -28,7 +28,8 @@ function* loadStudents({ payload }) {
 
       return {
         ...student,
-        birthday: differenceInYears(new Date(), parsedBirthday),
+        birthday: format(parsedBirthday, 'yyyy-MM-dd'),
+        age: differenceInYears(new Date(), parsedBirthday),
         updatedAt: format(parsedUpdated, 'dd/MM/yyyy'),
       };
     });
@@ -59,18 +60,14 @@ function* addStudent({ payload }) {
 
 export function* updateStudent({ payload }) {
   try {
-    const { id, birthday, weight, height } = payload;
-    const parsedBirthday = parseISO(birthday);
+    const { id } = payload;
 
-    const data = {
-      ...payload.data,
-      birthday: parsedBirthday,
-    };
-
-    const response = yield call(api.put, `/students/${id}`, data);
+    const response = yield call(api.put, `/students/${id}`, payload);
     toast.success('Student successfully updated.');
 
     yield put(updateStudentSuccess(response.data));
+
+    yield put(loadStudentsRequest());
 
     yield put(hideModal());
   } catch (error) {

@@ -49,11 +49,7 @@ export default function Students() {
     { path: 'email', label: 'Email' },
     { path: 'weight', suffix: 'kg', label: 'Weight' },
     { path: 'height', suffix: 'm', label: 'Height' },
-    {
-      path: 'birthday',
-      suffix: 'years old',
-      label: 'Age',
-    },
+    { path: 'age', suffix: 'years old', label: 'Age' },
     { path: 'updatedAt', label: 'Last updated' },
     {
       key: 'actions',

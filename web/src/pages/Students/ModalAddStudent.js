@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Input } from '@rocketseat/unform';
 
@@ -11,12 +12,26 @@ import Button from '~/components/Button';
 export default function ModalAddStudent() {
   const dispatch = useDispatch();
 
+  const schema = Yup.object().shape({
+    name: Yup.string().required(),
+    email: Yup.string()
+      .email()
+      .required(),
+    birthday: Yup.date().required(),
+    weight: Yup.number()
+      .positive()
+      .required(),
+    height: Yup.number()
+      .positive()
+      .required(),
+  });
+
   function handleSubmit({ name, email, birthday, weight, height }) {
     dispatch(addStudentRequest(name, email, birthday, weight, height));
   }
   return (
     <Modal title="Add New Student">
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit} schema={schema}>
         <Input name="name" placeholder="Student name" />
         <Input name="email" type="email" placeholder="Student email" />
         <Input name="birthday" placeholder="Student birthday" />

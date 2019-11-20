@@ -1,4 +1,5 @@
 import React from 'react';
+import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { Input } from '@rocketseat/unform';
 
@@ -11,20 +12,38 @@ import Button from '~/components/Button';
 export default function ModalAddStudent({ student }) {
   const dispatch = useDispatch();
 
+  const schema = Yup.object().shape({
+    name: Yup.string().required(),
+    email: Yup.string()
+      .email()
+      .required(),
+    birthday: Yup.date().required(),
+    weight: Yup.number()
+      .positive()
+      .required(),
+    height: Yup.number()
+      .positive()
+      .required(),
+  });
+
   const { id } = student;
+
+  const initialData = {
+    ...student,
+  };
 
   function handleSubmit({ name, email, birthday, weight, height }) {
     dispatch(updateStudentRequest(id, name, email, birthday, weight, height));
   }
   return (
     <Modal title={`Edit ${student.name} Details:`}>
-      <Form initialData={student} onSubmit={handleSubmit}>
-        <Input name="name" placeholder="Your password" />
-        <Input name="email" type="email" placeholder="Your password" />
-        <Input name="birthday" placeholder="Your password" />
-        <Input name="weight" placeholder="Your password" />
-        <Input name="height" placeholder="Your password" />
-        <Button label="Update your Data" />
+      <Form initialData={initialData} onSubmit={handleSubmit}>
+        <Input name="name" placeholder="Student name" />
+        <Input name="email" type="email" placeholder="Student e-mail" />
+        <Input name="birthday" placeholder="Student birthday" />
+        <Input name="weight" placeholder="Student weight" />
+        <Input name="height" placeholder="Student height" />
+        <Button label="Update Data" />
       </Form>
     </Modal>
   );
