@@ -11,14 +11,21 @@ import Button from '~/components/Button';
 export default function ModalUpdatePlan({ plan }) {
   const dispatch = useDispatch();
 
-  const { id } = plan;
+  const { id, price } = plan;
+
+  const unformattedPrice = price.split('$', 2)[1];
+
+  const initialData = {
+    ...plan,
+    price: unformattedPrice,
+  };
 
   function handleSubmit({ title, duration, price }) {
     dispatch(updatePlanRequest(id, title, duration, price));
   }
   return (
     <Modal title={`Edit ${plan.title} Details:`}>
-      <Form initialData={plan} onSubmit={handleSubmit}>
+      <Form initialData={initialData} onSubmit={handleSubmit}>
         <Input name="title" placeholder="Plan title" />
         <Input name="duration" type="number" placeholder="Plan duration" />
         <Input name="price" type="number" placeholder="Plan price" />

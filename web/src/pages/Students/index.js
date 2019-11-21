@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Input } from '@rocketseat/unform';
 
 import {
-  loadStudentsRequest,
   deleteStudentRequest,
+  loadStudentsRequest,
 } from '~/store/reducers/students/actions';
 import { showModal } from '~/store/reducers/modals/actions';
 
@@ -27,32 +27,26 @@ export default function Students() {
 
   useEffect(() => {
     dispatch(loadStudentsRequest());
-  }, []); // eslint-disable-line
+  }, []);
 
   const studentsTotal = useMemo(() => students && students.length, [students]);
 
   // AVG Student Ages
 
-  const getStudentAges =
-    students &&
-    students.map(student => {
-      return parseInt(student.birthday.split(' ', 1)[0], 0);
-    });
+  function studentsAverageAge() {
+    const getStudentAges = students && students.map(student => student.age);
+    const ageSumResult = getStudentAges.reduce((avg, total) => avg + total, 0);
 
-  const ageSumResult = getStudentAges.reduce((avg, total) => avg + total, 0);
-
-  const studentsAverageAge = useMemo(
-    () => parseInt(ageSumResult / students.length, 0),
-    [students]
-  );
+    return parseInt(ageSumResult / studentsTotal, 0);
+  }
 
   const [columns] = useState([
     { path: 'name', label: 'Name' },
     { path: 'email', label: 'Email' },
-    { path: 'weight', label: 'Weight' },
-    { path: 'height', label: 'Height' },
-    { path: 'birthday', label: 'Age' },
-    { path: 'updated_at', label: 'Last updated' },
+    { path: 'weight', suffix: 'kg', label: 'Weight' },
+    { path: 'height', suffix: 'm', label: 'Height' },
+    { path: 'age', suffix: 'years old', label: 'Age' },
+    { path: 'updatedAt', label: 'Last updated' },
     {
       key: 'actions',
       content: student => (
@@ -87,9 +81,12 @@ export default function Students() {
         </p>
         <Stats
           label="Total of Students"
-          data={studentsTotal <= 0 || null ? '0.' : `${studentsTotal}`}
+          data={studentsTotal <= 0 || null ? '0' : `${studentsTotal}`}
         />
-        <Stats label="Age Average of Students" data={studentsAverageAge} />
+        <Stats
+          label="Age Average of Students"
+          data={students ? studentsAverageAge() : '0'}
+        />
       </ColLeft>
 
       <ColRight>
@@ -105,12 +102,16 @@ export default function Students() {
             </Search>
           </Form>
 
-          <Table
-            isLoading={isLoading}
-            columns={columns}
-            data={students}
-            ariaLabel="students"
-          />
+          {hasError ? (
+            <Error data="studentss" status={hasError.response.status} />
+          ) : (
+            <Table
+              isLoading={isLoading}
+              columns={columns}
+              data={students}
+              ariaLabel="students"
+            />
+          )}
         </Card>
       </ColRight>
     </PageWrapper>

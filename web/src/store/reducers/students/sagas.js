@@ -13,6 +13,7 @@ import {
   updateStudentSuccess,
   updateStudentFailure,
   addStudentSuccess,
+  loadStudentsRequest,
 } from './actions';
 
 import { hideModal } from '../modals/actions';
@@ -23,14 +24,13 @@ function* loadStudents({ payload }) {
 
     const students = response.data.map(student => {
       const parsedBirthday = parseISO(student.birthday);
-      const parsedUpdated = parseISO(student.updated_at);
+      const parsedUpdated = parseISO(student.updatedAt);
 
       return {
         ...student,
-        weight: `${student.weight} kg`,
-        height: `${student.height} m`,
-        birthday: `${differenceInYears(new Date(), parsedBirthday)} years old`,
-        updated_at: format(parsedUpdated, 'dd/MM/yyyy'),
+        birthday: format(parsedBirthday, 'yyyy-MM-dd'),
+        age: differenceInYears(new Date(), parsedBirthday),
+        updatedAt: format(parsedUpdated, 'dd/MM/yyyy'),
       };
     });
 
@@ -48,7 +48,9 @@ function* addStudent({ payload }) {
 
     yield put(hideModal());
     yield put(addStudentSuccess(response.data));
+    yield put(loadStudentsRequest());
   } catch (error) {
+    console.tron.log(error);
     toast.error(
       `There was an error when adding the student: ${error.response.data.error}`
     );
@@ -56,20 +58,15 @@ function* addStudent({ payload }) {
   }
 }
 
-export function* updateStudent({ payload }) {
+function* updateStudent({ payload }) {
   try {
-    const { id, birthday, weight, height } = payload;
-    const parsedBirthday = parseISO(birthday);
+    const { id } = payload;
 
-    const data = {
-      ...payload.data,
-      birthday: parsedBirthday,
-    };
-
-    const response = yield call(api.put, `/students/${id}`, data);
-    toast.success('Student successfully updated.');
+    const response = yield call(api.put, `/students/${id}`, payload);
 
     yield put(updateStudentSuccess(response.data));
+
+    yield put(loadStudentsRequest());
 
     yield put(hideModal());
   } catch (error) {

@@ -1,7 +1,12 @@
-import React, { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useMemo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaUserGraduate, FaCheckCircle } from 'react-icons/fa';
 import { MdGroup } from 'react-icons/md';
+
+import { loadStudentsRequest } from '~/store/reducers/students/actions';
+import { loadPlansRequest } from '~/store/reducers/plans/actions';
+import { loadEnrollmentsRequest } from '~/store/reducers/enrollments/actions';
+import { loadOrdersRequest } from '~/store/reducers/helpOrders/actions';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
 import {
@@ -17,6 +22,15 @@ import Card from '~/components/Card';
 import Gym from '~/assets/gym.svg';
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadStudentsRequest());
+    dispatch(loadPlansRequest());
+    dispatch(loadEnrollmentsRequest());
+    dispatch(loadOrdersRequest());
+  }, []); // eslint-disable-line
+
   const profile = useSelector(state => state.user.profile);
 
   const students = useSelector(state => state.students.list);
@@ -29,7 +43,7 @@ export default function Dashboard() {
   const getStudentTotal = students && students.length;
   const getEnrollmentsTotal = enrollments && enrollments.length;
 
-  const activeMembersAvg = useMemo(() => getEnrollmentsTotal / getStudentTotal);
+  const activeMembersAvg = getEnrollmentsTotal / getStudentTotal;
 
   // AVG Plans
   const getPlansTotal = plans && plans.length;

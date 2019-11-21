@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   loadPlansRequest,
   deletePlanRequest,
-  updatePlanRequest,
 } from '~/store/reducers/plans/actions';
 import { showModal } from '~/store/reducers/modals/actions';
 
@@ -27,44 +26,28 @@ export default function Plans() {
 
   useEffect(() => {
     dispatch(loadPlansRequest());
-  }, []); // eslint-disable-line
+  }, []);
 
   const plansTotal = useMemo(() => plans && plans.length, [plans]);
 
   // AVG Plans Price
 
-  const getPlansPrice =
-    plans &&
-    plans.map(plan => {
-      return parseInt(plan.price.split('$', 2)[1], 0);
-    });
+  function getPlansAvgPrice() {
+    const getPlansPrice =
+      plans &&
+      plans.map(plan => {
+        return parseInt(plan.price.split('$', 2)[1], 0);
+      });
 
-  const getPlansPriceResult = getPlansPrice.reduce(
-    (avg, total) => avg + total,
-    0
-  );
+    const getPlansPriceResult =
+      plans && getPlansPrice.reduce((avg, total) => avg + total, 0);
 
-  const plansAvgPrice = useMemo(
-    () => parseInt(getPlansPriceResult / plans.length, 0),
-    [plans]
-  );
-
-  // async function handleDelete(plan) {
-  //   if (
-  //     window.confirm(
-  //       `'Are you sure you want to delete the ${plan.title} plan?`
-  //     ) === true
-  //   ) {
-  //     await api.delete(`plans/${plan.id}`);
-
-  //     setPlans(plans.filter(p => p.id !== plan.id));
-  //     loadPlans();
-  //   }
-  // }
+    return parseInt(getPlansPriceResult / plansTotal, 0);
+  }
 
   const [columns] = useState([
     { path: 'title', label: 'Plan' },
-    { path: 'duration', label: 'Duration' },
+    { path: 'duration', suffix: '/month', label: 'Duration' },
     { path: 'price', label: 'Price per Month' },
     {
       key: 'actions',
@@ -100,7 +83,10 @@ export default function Plans() {
           label="Current Plans"
           data={plansTotal <= 0 || null ? '0' : `${plansTotal}`}
         />
-        <Stats label="Age Average Plans Price" data={plansAvgPrice} />
+        <Stats
+          label="Age Average Plans Price"
+          data={plans ? getPlansAvgPrice() : '0'}
+        />
         <Stats label="Most Popular Plan" data="Start" />
         <Stats label="Least Popular Plan" data="Gold" />
       </ColLeft>
@@ -108,9 +94,7 @@ export default function Plans() {
       <ColRight>
         <Card fullHeight>
           <ButtonWrapper>
-            <h4>
-              <h4>Your current plans</h4>
-            </h4>
+            <h4>Your current plans</h4>
             <Button
               kind="icon"
               icon="plus"
