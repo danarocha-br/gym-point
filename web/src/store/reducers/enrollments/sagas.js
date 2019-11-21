@@ -7,6 +7,7 @@ import history from '~/services/history';
 import { formatPrice } from '~/util/format';
 import {
   loadEnrollmentsSuccess,
+  loadEnrollmentsRequest,
   loadEnrollmentsFailure,
   addEnrollmentSuccess,
   addEnrollmentFailure,
@@ -30,6 +31,7 @@ function* loadEnrollments() {
         ...enrollment,
         student: enrollment.student.name,
         plan: enrollment.plan.title,
+        plan_id: enrollment.plan.id,
         start_date: format(parsedStartDate, 'dd/MM/yyyy'),
         end_date: format(parsedEndDate, 'dd/MM/yyyy'),
       };
@@ -46,7 +48,7 @@ function* addEnrollment({ payload }) {
     const response = yield call(api.post, '/enrollments', payload);
 
     yield put(hideModal());
-    toast.success('Enrollment added successfully.');
+    yield put(loadEnrollmentsRequest());
 
     yield put(addEnrollmentSuccess(response.data));
   } catch (error) {
@@ -57,28 +59,26 @@ function* addEnrollment({ payload }) {
   }
 }
 
-// function* updateEnrollment({ payload }) {
-//   try {
-//     const { title, duration, price, id } = payload;
+function* updateEnrollment({ payload }) {
+  try {
+    const { plan_id, start_date, id } = payload;
 
-//     const response = yield call(api.put, `/plans/${id}`, {
-//       id,
-//       title,
-//       duration,
-//       price,
-//     });
+    const response = yield call(api.put, `/enrollments/${id}`, {
+      plan_id,
+      start_date,
+    });
 
-//     toast.success('Plan successfully updated.');
-//     yield put(updatePlanSuccess(response.data));
+    yield put(updateEnrollmentSuccess(response.data));
+    yield put(loadEnrollmentsRequest());
 
-//     yield put(hideModal());
-//   } catch (error) {
-//     toast.error(
-//       `There was an error when updating the plan: ${error.response.data.error}`
-//     );
-//     yield put(updatePlanFailure());
-//   }
-// }
+    yield put(hideModal());
+  } catch (error) {
+    toast.error(
+      `There was an error when updating the enrollment: ${error.response.data.error}`
+    );
+    yield put(updateEnrollmentFailure());
+  }
+}
 
 function* deleteEnrollment({ payload }) {
   try {
@@ -97,6 +97,6 @@ function* deleteEnrollment({ payload }) {
 export default all([
   takeLatest('@enrollment/LOAD_REQUEST', loadEnrollments),
   takeLatest('@enrollment/ADD_REQUEST', addEnrollment),
-  // takeLatest('@enrollment/UPDATE_REQUEST', updateEnrollment),
+  takeLatest('@enrollment/UPDATE_REQUEST', updateEnrollment),
   takeLatest('@enrollment/DELETE_REQUEST', deleteEnrollment),
 ]);

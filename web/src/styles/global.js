@@ -76,6 +76,7 @@ export default createGlobalStyle`
 
   input, textarea {
     color: var(--color-grey-dark);
+    font-size: 16px;
     font-weight: 500;
     border: 1px solid #d9dfe5;
     border-radius: 4px;
@@ -88,10 +89,11 @@ export default createGlobalStyle`
     }
   }
 
-  textarea::placeholder {
-    font-size: 16px;
+  textarea {
     padding: 10px;
   }
+
+
 
   #root .react-loading-skeleton {
     border-radius: 14px;

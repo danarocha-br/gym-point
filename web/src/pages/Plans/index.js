@@ -7,8 +7,7 @@ import {
 } from '~/store/reducers/plans/actions';
 import { showModal } from '~/store/reducers/modals/actions';
 
-import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
-import { ButtonWrapper } from './styles';
+import { PageWrapper, ColLeft, ColRight, ButtonWrapper } from '~/styles/layout';
 
 import Card from '~/components/Card';
 import Button from '~/components/Button';
@@ -79,6 +78,7 @@ export default function Plans() {
         <p style={{ marginBottom: '30px' }}>
           Check out some data from current plans.
         </p>
+
         <Stats
           label="Current Plans"
           data={plansTotal <= 0 || null ? '0' : `${plansTotal}`}
@@ -94,7 +94,7 @@ export default function Plans() {
       <ColRight>
         <Card fullHeight>
           <ButtonWrapper>
-            <h4>Your current plans</h4>
+            <h4>Your current plans:</h4>
             <Button
               kind="icon"
               icon="plus"

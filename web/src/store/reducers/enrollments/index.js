@@ -43,18 +43,6 @@ export default function enrollments(state = INITIAL_STATE, action) {
       // ADD
       case '@enrollment/ADD_SUCCESS': {
         draft.enrollment = action.payload.enrollment;
-        // const formattedEnrollment = draft.enrollment.map(enrollment => {
-        //   const parsedStartDate = parseISO(enrollment.start_date);
-        //   const parsedEndDate = parseISO(enrollment.end_date);
-
-        //   return {
-        //     ...enrollment,
-        //     student: enrollment.student.name,
-        //     plan: enrollment.plan.title,
-        //     start_date: format(parsedStartDate, 'dd/MM/yyyy'),
-        //     end_date: format(parsedEndDate, 'dd/MM/yyyy'),
-        //   };
-        // });
         draft.list = [...draft.list, action.payload.enrollment];
         break;
       }

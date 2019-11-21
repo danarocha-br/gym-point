@@ -38,7 +38,6 @@ function* addPlan({ payload }) {
 
     yield put(hideModal());
     yield put(loadPlansRequest());
-    toast.success('Plan added successfully.');
 
     yield put(addPlanSuccess(response.data));
   } catch (error) {

@@ -8,6 +8,7 @@ import history from '~/services/history';
 import {
   loadOrdersSuccess,
   loadOrdersFailure,
+  loadOrdersRequest,
   answerOrderSuccess,
   answerOrderFailure,
 } from './actions';
@@ -46,6 +47,7 @@ function* answerOrder({ payload }) {
     yield put(answerOrderSuccess(response.data));
 
     yield put(hideModal());
+    yield put(loadOrdersRequest());
   } catch (error) {
     toast.error(
       `There was an error when answering this order: ${error.response.data.error}`

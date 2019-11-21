@@ -23,6 +23,11 @@ export const TableWrapper = styled.table`
     &:hover {
       background-color: var(--color-grey-lightest);
     }
+
+    &:active,
+    &:focus-within {
+      background: #536cfa20;
+    }
   }
 
   thead tr:hover {

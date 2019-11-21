@@ -22,7 +22,6 @@ export const ModalWrapper = posed.div({
   exit: {
     x: 50,
     opacity: 0,
-
     transition: { duration: 150 },
   },
 });
