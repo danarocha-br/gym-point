@@ -1,5 +1,4 @@
 import produce from 'immer';
-import { parseISO, format, differenceInYears } from 'date-fns';
 
 const INITIAL_STATE = {
   student: null,

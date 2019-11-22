@@ -4,7 +4,7 @@ import { format, parseISO } from 'date-fns';
 
 import api from '~/services/api';
 import history from '~/services/history';
-import { formatPrice } from '~/util/format';
+
 import {
   loadEnrollmentsSuccess,
   loadEnrollmentsRequest,

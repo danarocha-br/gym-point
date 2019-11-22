@@ -38,7 +38,7 @@ export default function Avatar() {
   return (
     <Container>
       <label htmlFor="avatar">
-        <img src={preview} alt="" />
+        <img src={preview} alt="Profile" />
         <input
           type="file"
           id="avatar"

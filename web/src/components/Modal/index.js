@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { PoseGroup } from 'react-pose';
 import { useDispatch } from 'react-redux';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
@@ -7,7 +8,7 @@ import { ModalWrapper, Overlay, Header, Body } from './styles';
 
 import { hideModal } from '~/store/reducers/modals/actions';
 
-const Modal = props => {
+const Modal = ({ children, title }) => {
   const [isVisible, setVisibility] = useState({ isVisible: false });
 
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const Modal = props => {
         <Overlay key="overlay" onClick={() => handleHideModal()} />,
         <ModalWrapper key="modal">
           <Header>
-            <h3>{props.title}</h3>
+            <h3>{title}</h3>
 
             <IoIosCloseCircleOutline
               color="white"
@@ -40,7 +41,7 @@ const Modal = props => {
             />
           </Header>
 
-          <Body>{props.children}</Body>
+          <Body>{children}</Body>
         </ModalWrapper>,
       ]}
     </PoseGroup>
@@ -48,3 +49,14 @@ const Modal = props => {
 };
 
 export default Modal;
+
+Modal.propTypes = {
+  /**
+   * Defines the title for the modal.
+   */
+  title: PropTypes.string.isRequired,
+  /**
+   * Defines the children for the component.
+   */
+  children: PropTypes.element.isRequired,
+};

@@ -16,9 +16,9 @@ Stats.propTypes = {
   /**
    * Defines the title for the stat.
    */
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   /**
    * Defines the data for the stat.
    */
-  data: PropTypes.string.isRequired,
+  data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import Proptypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Form } from '@rocketseat/unform';
 
 export default function FormWrapper({
@@ -24,21 +24,26 @@ export default function FormWrapper({
   );
 }
 
+FormWrapper.defaultProps = {
+  initialData: '',
+};
+
 FormWrapper.propTypes = {
   /**
    * Defines the validation schema for the form.
    */
-  schema: Proptypes.func.isRequired,
+  schema: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).isRequired,
   /**
    * Defines the action for form submit.
    */
-  onSubmit: Proptypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   /**
    * Defines the children for the component.
    */
-  children: Proptypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
+    .isRequired,
   /**
    * If need an initial data.
    */
-  initialData: Proptypes.object,
+  initialData: PropTypes.objectOf(PropTypes.any),
 };

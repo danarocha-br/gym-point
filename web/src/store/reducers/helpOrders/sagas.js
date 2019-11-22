@@ -1,9 +1,8 @@
-import { call, put, all, takeLatest, select } from 'redux-saga/effects';
+import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import { parseISO, differenceInDays } from 'date-fns';
 
 import api from '~/services/api';
-import history from '~/services/history';
 
 import {
   loadOrdersSuccess,

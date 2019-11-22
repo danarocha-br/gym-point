@@ -27,7 +27,7 @@ export default function Students() {
 
   useEffect(() => {
     dispatch(loadStudentsRequest());
-  }, []);
+  }, []); // eslint-disable-line
 
   const studentsTotal = useMemo(() => students && students.length, [students]);
 
@@ -103,7 +103,7 @@ export default function Students() {
           </Form>
 
           {hasError ? (
-            <Error data="studentss" status={hasError.response.status} />
+            <Error data="students" status={hasError.response.status} />
           ) : (
             <Table
               isLoading={isLoading}

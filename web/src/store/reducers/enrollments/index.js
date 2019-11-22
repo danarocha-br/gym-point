@@ -1,5 +1,4 @@
 import produce from 'immer';
-import { format, parseISO } from 'date-fns';
 
 const INITIAL_STATE = {
   enrollment: null,

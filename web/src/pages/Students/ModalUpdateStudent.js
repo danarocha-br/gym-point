@@ -33,7 +33,7 @@ export default function ModalAddStudent({ student }) {
   }
   return (
     <Modal title={`Edit ${student.name} Details:`}>
-      <Form initialData={student} onSubmit={handleSubmit}>
+      <Form schema={schema} initialData={student} onSubmit={handleSubmit}>
         <Input name="name" placeholder="Student name" />
         <Input name="email" type="email" placeholder="Student e-mail" />
         <Input name="birthday" placeholder="Student birthday" />

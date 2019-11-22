@@ -10,13 +10,19 @@ import Form from '~/components/Form';
 import Avatar from '~/components/Avatar';
 import { updateProfileRequest } from '~/store/actions';
 
-// const schema = Yup.object().shape({
-//   email: Yup.string()
-//     .name('Please provide your name.')
-//     .email('Please insert a valid email.')
-//     .required('Email is mandatory.'),
-//   password: Yup.string().required('Password is mandatory.'),
-// });
+const schema = Yup.object().shape({
+  name: Yup.string(),
+  email: Yup.string().email(),
+  oldPassword: Yup.string().min(6),
+  password: Yup.string()
+    .min(6)
+    .when('oldPassword', (oldPassword, field) =>
+      oldPassword ? field.required() : field
+    ),
+  confirmPassword: Yup.string().when('password', (password, field) =>
+    password ? field.required().oneOf([Yup.ref('password')]) : field
+  ),
+});
 
 export default function Profile() {
   const loading = useSelector(state => state.auth.loading);
@@ -35,7 +41,7 @@ export default function Profile() {
 
       <ColRight>
         <Card fullHeight>
-          <Form initialData={profile} onSubmit={handleSubmit}>
+          <Form schema={schema} initialData={profile} onSubmit={handleSubmit}>
             <Avatar name="avatar_id" />
             <Input name="name" placeholder="Your name" />
             <Input name="email" type="email" placeholder="Your email" />

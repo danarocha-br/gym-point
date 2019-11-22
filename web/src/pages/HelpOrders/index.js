@@ -22,7 +22,7 @@ export default function HelpOrders() {
 
   useEffect(() => {
     dispatch(loadOrdersRequest());
-  }, []);
+  }, []); // eslint-disable-line
 
   const ordersTotal = useMemo(() => orders && orders.length, [orders]);
 

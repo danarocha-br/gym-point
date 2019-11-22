@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Input } from '@rocketseat/unform';
 
-import {
-  updateEnrollmentRequest,
-  getEnrollmentRequest,
-} from '~/store/reducers/enrollments/actions';
+import { updateEnrollmentRequest } from '~/store/reducers/enrollments/actions';
 
 import Modal from '~/components/Modal';
 import Form from '~/components/Form';

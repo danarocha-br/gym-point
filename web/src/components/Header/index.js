@@ -49,9 +49,7 @@ export default function Header() {
           <li>
             <Link to="/profile">My Profile</Link>
           </li>
-          <li onClick={handleSignOut}>
-            <Link>Logout</Link>
-          </li>
+          <li onClick={handleSignOut}>Logout</li>
         </ProfileList>
       </Profile>
     </Nav>

@@ -20,6 +20,10 @@ export default function Table({ columns, data, ariaLabel, isLoading }) {
   );
 }
 
+Table.defaultProps = {
+  data: null,
+};
+
 Table.propTypes = {
   /**
    * Defines the number and columns labels.
@@ -32,7 +36,7 @@ Table.propTypes = {
   /**
    * Defines the data for the table.
    */
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
   /**
    * Defines the loading style for the table.
    */

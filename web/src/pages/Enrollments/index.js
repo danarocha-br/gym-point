@@ -5,7 +5,6 @@ import { IoIosCheckmarkCircle } from 'react-icons/io';
 import {
   loadEnrollmentsRequest,
   deleteEnrollmentRequest,
-  updateEnrollmentRequest,
 } from '~/store/reducers/enrollments/actions';
 import { showModal } from '~/store/reducers/modals/actions';
 
@@ -27,7 +26,7 @@ export default function Enrollments() {
 
   useEffect(() => {
     dispatch(loadEnrollmentsRequest());
-  }, []);
+  }, []); // eslint-disable-line
 
   const enrollmentsTotal = useMemo(() => enrollments && enrollments.length, [
     enrollments,

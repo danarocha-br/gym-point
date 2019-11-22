@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container, Content, Image } from './styles';
 import NotFound from '~/assets/404.svg';
@@ -52,3 +53,14 @@ export default function Error({ data, status }) {
 
   return <Container>{getStatus()}</Container>;
 }
+
+Error.propTypes = {
+  /**
+   * Defines the data the error refers to.
+   */
+  data: PropTypes.string.isRequired,
+  /**
+   * Defines the status type from the response.
+   */
+  status: PropTypes.number.isRequired,
+};

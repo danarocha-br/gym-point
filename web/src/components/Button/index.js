@@ -33,10 +33,12 @@ export default function Button({
 
 Button.defaultProps = {
   isDisabled: false,
+  isLoading: null,
   kind: 'default',
   color: 'primary',
   icon: null,
   label: '',
+  onClick: null,
 };
 
 Button.propTypes = {
@@ -59,7 +61,7 @@ Button.propTypes = {
   /**
    * Defines the action for the button.
    */
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   /**
    * Defines the look for disabled state.
    */
@@ -67,5 +69,5 @@ Button.propTypes = {
   /**
    * Defines the look for loading state.
    */
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
 };

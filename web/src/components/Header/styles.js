@@ -92,6 +92,7 @@ export const ProfileList = styled.ul`
   li {
     padding: 8px 20px;
     border-bottom: 1px solid var(--color-grey-light);
+    color: var(--color-primary);
 
     &:hover {
       background-color: #f8f5fe;

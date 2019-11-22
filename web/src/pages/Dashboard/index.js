@@ -32,7 +32,6 @@ export default function Dashboard() {
   }, []); // eslint-disable-line
 
   const profile = useSelector(state => state.user.profile);
-
   const students = useSelector(state => state.students.list);
   const enrollments = useSelector(state => state.enrollments.list);
   const plans = useSelector(state => state.plans.list);
@@ -42,8 +41,7 @@ export default function Dashboard() {
 
   const getStudentTotal = students && students.length;
   const getEnrollmentsTotal = enrollments && enrollments.length;
-
-  const activeMembersAvg = getEnrollmentsTotal / getStudentTotal;
+  const activeMembersAvg = (getEnrollmentsTotal / getStudentTotal).toFixed(1);
 
   // AVG Plans
   const getPlansTotal = plans && plans.length;
@@ -100,10 +98,10 @@ export default function Dashboard() {
                   Total Plans <strong>{getPlansTotal}</strong>
                 </li>
                 <li>
-                  Most Popular Plan <strong>10</strong>
+                  Most Popular Plan <strong>Gold</strong>
                 </li>
                 <li>
-                  Least Popular Plan <strong>10</strong>
+                  Least Popular Plan <strong>Start</strong>
                 </li>
               </ul>
               <img src={Gym} alt="gym" />
