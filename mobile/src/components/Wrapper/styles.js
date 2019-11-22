@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 
+import colors from '~/styles/colors';
+
 export const Container = styled.View`
-  background-color: #3b3179;
+  background-color: ${colors.purple};
   flex: 1;
 `;
