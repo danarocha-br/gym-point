@@ -8,9 +8,13 @@ export const TableWrapper = styled.table`
 
   th {
     color: var(--color-grey-md);
-    font-size: ${size.type12};
+    font-size: 10px;
     text-align: left;
     text-transform: uppercase;
+
+    @media (min-width: 991px) {
+      font-size: ${size.type12};
+    }
   }
 
   tr {
@@ -36,6 +40,7 @@ export const TableWrapper = styled.table`
 
   td {
     border-bottom: 1px dashed var(--color-grey-light);
+    font-size: ${size.type12};
 
     &:first-child {
       font-weight: 500;
@@ -47,6 +52,10 @@ export const TableWrapper = styled.table`
       button {
         float: right;
       }
+    }
+
+    @media (min-width: 991px) {
+      font-size: 15px;
     }
   }
 `;

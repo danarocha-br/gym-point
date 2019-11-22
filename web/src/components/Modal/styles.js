@@ -25,6 +25,30 @@ export const ModalWrapper = posed.div({
     transition: { duration: 150 },
   },
 });
+export const ModalWrapperMob = posed.div({
+  enter: {
+    x: 0,
+    color: 'var(--color-purple)',
+    opacity: 1,
+    position: 'fixed',
+    top: '45px',
+    right: 0,
+    height: '100%',
+    width: '100%',
+    padding: '20px',
+    zIndex: 1,
+    delay: 1000,
+    transition: {
+      x: { type: 'spring', stiffness: 1000, damping: 15 },
+      default: { duration: 300 },
+    },
+  },
+  exit: {
+    x: 50,
+    opacity: 0,
+    transition: { duration: 150 },
+  },
+});
 
 export const Overlay = posed.div({
   enter: {

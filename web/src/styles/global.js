@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { darken, transitions } from 'polished';
+import { darken, transitions, fluidRange } from 'polished';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
@@ -18,6 +18,7 @@ export default createGlobalStyle`
 
   html, body, #root {
     height: 100%;
+    width: 100%;
   }
 
   body {
@@ -36,6 +37,7 @@ export default createGlobalStyle`
     --color-grey-light: #ddd6f3;
     --color-grey-lightest: #f5f7fa;
     --color-blue: #536cfa;
+    --color-purple: #3b3179;
 }
 
   a {
@@ -57,17 +59,54 @@ export default createGlobalStyle`
   }
 
   h1 {
-    font-size: 42px;
+    ${fluidRange(
+      {
+        prop: 'font-size',
+        fromSize: '24px',
+        toSize: '42px',
+      },
+      '320px',
+      '991px'
+    )}
   }
 
   h2 {
-    font-size: 28px;
+    ${fluidRange(
+      {
+        prop: 'font-size',
+        fromSize: '18px',
+        toSize: '28px',
+      },
+      '320px',
+      '991px'
+    )}
     margin-bottom: 15px;
   }
 
   h3 {
-    font-size: 22px;
+    ${fluidRange(
+      {
+        prop: 'font-size',
+        fromSize: '16px',
+        toSize: '22px',
+      },
+      '320px',
+      '991px'
+    )}
     margin-bottom: 25px;
+  }
+
+  h4 {
+    ${fluidRange(
+      {
+        prop: 'font-size',
+        fromSize: '13px',
+        toSize: '18px',
+      },
+      '320px',
+      '991px'
+    )}
+
   }
 
   button {

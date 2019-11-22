@@ -9,7 +9,7 @@ import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Form from '~/components/Form';
 
-import { signInRequest } from '~/store/actions';
+import { signInRequest } from '~/store/reducers/auth/actions';
 
 const schema = Yup.object().shape({
   email: Yup.string()

@@ -1,7 +1,16 @@
 import styled from 'styled-components';
+import { fluidRange } from 'polished';
 
 export const Wrapper = styled.div`
-  padding: 8rem;
+  ${fluidRange(
+    {
+      prop: 'padding',
+      fromSize: '3.5rem',
+      toSize: '8rem',
+    },
+    '320px',
+    '991px'
+  )}
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -10,8 +19,12 @@ export const Wrapper = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
+
+  @media (min-width: 991px) {
+    flex-direction: row;
+  }
 `;
 
 export const Col = styled.div`
@@ -19,10 +32,19 @@ export const Col = styled.div`
   flex-direction: column;
   margin-right: auto;
   flex: 1;
+  width: 100%;
 
   h1,
   ~ div {
-    margin-top: 80px;
+    ${fluidRange(
+      {
+        prop: 'margin-top',
+        fromSize: '40px',
+        toSize: '80px',
+      },
+      '320px',
+      '991px'
+    )}
   }
 
   h1 {

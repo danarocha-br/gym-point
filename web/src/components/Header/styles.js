@@ -1,23 +1,64 @@
 import styled from 'styled-components';
+import { fluidRange } from 'polished';
 
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 50px;
-  margin-bottom: 15px;
+  height: 40px;
+  ${fluidRange(
+    {
+      prop: 'margin-bottom',
+      fromSize: '5px',
+      toSize: '15px',
+    },
+    '320px',
+    '991px'
+  )}
+  ${fluidRange(
+    {
+      prop: 'padding-left',
+      fromSize: '10px',
+      toSize: '0px',
+    },
+    '320px',
+    '991px'
+  )}
   padding-right: 40px;
+
+  @media (max-width: 991px) {
+    img {
+      width: 80%;
+    }
+    padding-right: 10px;
+  }
 `;
 
 export const Menu = styled.div`
   display: flex;
   padding-top: 5px;
-  @media (min-width: 900px) {
+
+  @media (min-width: 992px) {
     margin-left: -24%;
   }
 
+  @media (max-width: 991px) {
+    font-size: 14px;
+    height: 55px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: var(--color-purple);
+    box-shadow: -1px -4px 32px 0px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+  }
+
   a {
-    padding: 0 20px;
+    padding: 0 7px;
     color: white;
     opacity: 0.4;
     font-weight: 500;
@@ -44,10 +85,16 @@ export const Menu = styled.div`
         width: 30px;
       }
     }
+
+    @media (min-width: 991px) {
+      padding: 0 20px;
+    }
   }
+
   .is-active {
     color: white;
     opacity: 1;
+
     &::after {
       content: '';
       background-color: var(--color-primary);
@@ -67,14 +114,15 @@ export const Profile = styled.button`
   height: 40px;
   position: relative;
   top: -8px;
+  right: 0;
   border: 0;
   background: none;
 
   img {
-    width: 45px;
-    height: 45px;
+    width: 41px;
+    height: 41px;
     border-radius: 10px;
-    border: 3px solid #fff9;
+    border: 3px solid #ffffff99;
   }
 `;
 
@@ -85,7 +133,7 @@ export const ProfileList = styled.ul`
   width: 180px;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 1px 15px 18px rgba(0, 0, 0, 0.03);
+  box-shadow: 1px 15px 18px rgba(0, 0, 0, 0.1);
   display: ${props => (props.visible ? 'block' : 'none')};
   z-index: 2;
 
@@ -121,6 +169,9 @@ export const ProfileList = styled.ul`
       border-top-left-radius: 15px;
       border-top-right-radius: 15px;
       border-bottom: 0;
+    }
+    &:last-child {
+      border-bottom: none;
     }
 
     &:nth-child(2) {

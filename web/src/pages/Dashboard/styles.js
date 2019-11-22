@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { fluidRange } from 'polished';
 
 export const SummaryCard = styled.div`
   color: white;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -13,10 +15,37 @@ export const SummaryCard = styled.div`
   }};
   border-radius: 20px;
   height: 120px;
-  margin-bottom: 15px;
+  ${fluidRange(
+    {
+      prop: 'font-size',
+      fromSize: '12px',
+      toSize: '16px',
+    },
+    '320px',
+    '991px'
+  )}
+  ${fluidRange(
+    {
+      prop: 'margin-bottom',
+      fromSize: '0px',
+      toSize: '15px',
+    },
+    '320px',
+    '991px'
+  )}
+  ${fluidRange(
+    {
+      prop: 'margin-right',
+      fromSize: '15px',
+      toSize: '0px',
+    },
+    '320px',
+    '991px'
+  )}
 
   &:last-child {
     margin-bottom: 0;
+    margin-right: 0;
   }
 
   p {
@@ -28,9 +57,14 @@ export const SummaryCard = styled.div`
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 350px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
   grid-gap: 1rem;
+
+  @media (min-width: 991px) {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 350px;
+  }
 `;
 
 export const SecondaryContainer = styled.div`
@@ -45,7 +79,10 @@ export const SecondaryContainer = styled.div`
 
 export const SummaryWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+
+  @media (min-width: 991px) {
+    flex-direction: column;
+  }
 `;
 
 export const Overview = styled.div`

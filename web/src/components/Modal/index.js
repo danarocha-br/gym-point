@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { PoseGroup } from 'react-pose';
 import { useDispatch } from 'react-redux';
+import { PoseGroup } from 'react-pose';
+import { useMediaQuery } from 'react-responsive';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 
-import { ModalWrapper, Overlay, Header, Body } from './styles';
+import { ModalWrapper, ModalWrapperMob, Overlay, Header, Body } from './styles';
 
 import { hideModal } from '~/store/reducers/modals/actions';
 
@@ -26,23 +27,50 @@ const Modal = ({ children, title }) => {
     });
   }
 
-  return (
-    <PoseGroup>
-      {isVisible && [
-        <Overlay key="overlay" onClick={() => handleHideModal()} />,
-        <ModalWrapper key="modal">
+  const isTabletOrMobileDevice = useMediaQuery({
+    query: '(max-width: 991px)',
+  });
+
+  function renderModal() {
+    if (isTabletOrMobileDevice === true) {
+      return (
+        <ModalWrapperMob key="modal">
           <Header>
             <h3>{title}</h3>
 
             <IoIosCloseCircleOutline
-              color="white"
+              color="var(--color-purple)"
               size="30px"
               onClick={() => handleHideModal()}
             />
           </Header>
 
           <Body>{children}</Body>
-        </ModalWrapper>,
+        </ModalWrapperMob>
+      );
+    }
+    return (
+      <ModalWrapper key="modal">
+        <Header>
+          <h3>{title}</h3>
+
+          <IoIosCloseCircleOutline
+            color="white"
+            size="30px"
+            onClick={() => handleHideModal()}
+          />
+        </Header>
+
+        <Body>{children}</Body>
+      </ModalWrapper>
+    );
+  }
+
+  return (
+    <PoseGroup>
+      {isVisible && [
+        <Overlay key="overlay" onClick={() => handleHideModal()} />,
+        renderModal(),
       ]}
     </PoseGroup>
   );

@@ -5,6 +5,7 @@ export const PageWrapper = posed.div({
   init: {
     display: 'flex',
     height: '100%',
+    width: 'auto',
     position: 'relative',
     left: 0,
     opacity: 1,
@@ -13,6 +14,7 @@ export const PageWrapper = posed.div({
       default: { duration: 300 },
     },
   },
+
   withModal: {
     display: 'flex',
     height: '100%',
@@ -26,11 +28,15 @@ export const PageWrapper = posed.div({
 });
 
 export const ColLeft = styled.div`
-  color: white;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 35px 70px 20px 0;
+  display: none;
+
+  @media (min-width: 991px) {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 35px 70px 20px 0;
+  }
 `;
 
 export const ColRight = styled.div`
