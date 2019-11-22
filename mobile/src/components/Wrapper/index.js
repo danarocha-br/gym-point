@@ -11,5 +11,6 @@ Wrapper.propTypes = {
   /**
    * Defines the children for the component.
    */
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array])
+    .isRequired,
 };

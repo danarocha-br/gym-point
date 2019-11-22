@@ -26,7 +26,11 @@ Button.propTypes = {
    */
   children: PropTypes.string.isRequired,
   /**
-   * Applies a style for the input.
+   * Applies a style for the button.
    */
   isLoading: PropTypes.bool,
+  /**
+   * Defines the function for the button.
+   */
+  onPress: PropTypes.func.isRequired,
 };

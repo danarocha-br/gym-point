@@ -14,5 +14,5 @@ export const Container = styled(RectButton)`
 export const Label = styled.Text`
   color: #fff;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 700;
 `;
