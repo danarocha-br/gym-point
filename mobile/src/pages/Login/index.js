@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Container, Form, FormInput, Logo } from './styles';
+import { loadStudentRequest } from '~/store/reducers/student/actions';
 
 import Wrapper from '~/components/Wrapper';
-import Input from '~/components/Input';
 import Button from '~/components/Button';
-
 import logo from '~/assets/logo.png';
 
 export default function Login() {
-  function handleSubmit() {}
+  const dispatch = useDispatch();
+
+  const [studentId, setStudentId] = useState('');
+  const isLoading = useSelector(state => state.student.loading);
+
+  function handleSubmit() {
+    dispatch(loadStudentRequest(studentId));
+  }
 
   return (
     <Wrapper>
@@ -25,8 +32,12 @@ export default function Login() {
             placeholder="Your Student ID"
             returnKeyType="send"
             onSubmitEdditing={handleSubmit}
+            value={studentId}
+            onChangeText={setStudentId}
           />
-          <Button onPress={handleSubmit}>Login</Button>
+          <Button onPress={handleSubmit} isLoading={isLoading}>
+            Login
+          </Button>
         </Form>
       </Container>
     </Wrapper>
