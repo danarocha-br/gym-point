@@ -28,6 +28,11 @@ export default function enrollments(state = INITIAL_STATE, action) {
       }
 
       // UPDATE
+      case '@enrollment/UPDATE_REQUEST': {
+        draft.loading = true;
+        break;
+      }
+
       case '@enrollment/UPDATE_SUCCESS': {
         draft.enrollment = action.payload.enrollment;
         draft.list = draft.list.filter(enrollment => {
@@ -40,6 +45,10 @@ export default function enrollments(state = INITIAL_STATE, action) {
       }
 
       // ADD
+      case '@enrollment/ADD_REQUEST': {
+        draft.loading = true;
+        break;
+      }
       case '@enrollment/ADD_SUCCESS': {
         draft.enrollment = action.payload.enrollment;
         draft.list = [...draft.list, action.payload.enrollment];

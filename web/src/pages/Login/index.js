@@ -20,7 +20,7 @@ const schema = Yup.object().shape({
 
 export default function Login() {
   const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
+  const isLoading = useSelector(state => state.auth.loading);
 
   function handleSubmit({ email, password }) {
     dispatch(signInRequest(email, password));
@@ -47,7 +47,7 @@ export default function Login() {
                   placeholder="Your password"
                 />
 
-                <Button label={loading ? 'Loading...' : 'Login'} onSubmit />
+                <Button label="Login" isLoading={isLoading} onSubmit />
               </Form>
             </Card>
           </Col>

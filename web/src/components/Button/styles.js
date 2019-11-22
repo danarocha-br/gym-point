@@ -7,7 +7,9 @@ export const ButtonWrapper = styled.button`
   font-weight: 600;
   background-color: ${props =>
     props.color === 'transparent' ? '#fff0' : 'var(--color-primary)'};
-  opacity: ${props => (props.isDisabled ? 0.5 : 1)};
+  opacity: ${props => (props.isDisabled || props.isLoading ? 0.5 : 1)};
+  cursor: ${props =>
+    props.isDisabled || props.isLoading ? 'initial' : 'pointer'};
   height: 50px;
   width: ${props => (props.kind === 'icon' ? '50px' : '100%')};
   border-radius: 13px;

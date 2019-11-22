@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '@rocketseat/unform';
 
 import { updateEnrollmentRequest } from '~/store/reducers/enrollments/actions';
@@ -9,6 +9,8 @@ import Form from '~/components/Form';
 import Button from '~/components/Button';
 
 export default function ModalAddEnrollment({ enrollment }) {
+  const isLoading = useSelector(state => state.enrollments.loading);
+
   const dispatch = useDispatch();
 
   const { id, student } = enrollment;
@@ -22,7 +24,7 @@ export default function ModalAddEnrollment({ enrollment }) {
       <Form initialData={enrollment} onSubmit={handleSubmit}>
         <Input name="plan_id" type="number" placeholder="Plan ID" />
         <Input name="start_date" placeholder="Start Date" />
-        <Button label="Update Enrollment" />
+        <Button label="Update Enrollment" isLoading={isLoading} />
       </Form>
     </Modal>
   );

@@ -28,6 +28,10 @@ export default function plans(state = INITIAL_STATE, action) {
       }
 
       // UPDATE
+      case '@plan/UPDATE_REQUEST': {
+        draft.loading = true;
+        break;
+      }
       case '@plan/UPDATE_SUCCESS': {
         draft.plan = action.payload.plan;
         draft.list = draft.list.filter(plan => {
@@ -37,6 +41,10 @@ export default function plans(state = INITIAL_STATE, action) {
       }
 
       // ADD
+      case '@plan/ADD_REQUEST': {
+        draft.loading = true;
+        break;
+      }
       case '@plan/ADD_SUCCESS': {
         draft.plan = action.payload.plan;
         draft.list = [...draft.list, action.payload.plan];

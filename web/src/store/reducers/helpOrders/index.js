@@ -29,7 +29,7 @@ export default function helpOrders(state = INITIAL_STATE, action) {
 
       // ANSWER ORDERS
       case '@order/ANSWER_REQUEST': {
-        draft.loading = false;
+        draft.loading = true;
         break;
       }
 

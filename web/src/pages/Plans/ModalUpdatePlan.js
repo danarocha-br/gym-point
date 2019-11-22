@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '@rocketseat/unform';
 
 import { updatePlanRequest } from '~/store/reducers/plans/actions';
@@ -9,6 +9,8 @@ import Form from '~/components/Form';
 import Button from '~/components/Button';
 
 export default function ModalUpdatePlan({ plan }) {
+  const isLoading = useSelector(state => state.plans.loading);
+
   const dispatch = useDispatch();
 
   const { id, price } = plan;
@@ -29,7 +31,7 @@ export default function ModalUpdatePlan({ plan }) {
         <Input name="title" placeholder="Plan title" />
         <Input name="duration" type="number" placeholder="Plan duration" />
         <Input name="price" type="number" placeholder="Plan price" />
-        <Button label="Update Plan" />
+        <Button label="Update Plan" isLoading={isLoading} />
       </Form>
     </Modal>
   );

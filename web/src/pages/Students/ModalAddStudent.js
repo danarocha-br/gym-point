@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Input } from '@rocketseat/unform';
 
 import { addStudentRequest } from '~/store/reducers/students/actions';
@@ -10,6 +10,8 @@ import Form from '~/components/Form';
 import Button from '~/components/Button';
 
 export default function ModalAddStudent() {
+  const isLoading = useSelector(state => state.students.loading);
+
   const dispatch = useDispatch();
 
   const schema = Yup.object().shape({
@@ -37,7 +39,7 @@ export default function ModalAddStudent() {
         <Input name="birthday" placeholder="Student birthday" />
         <Input name="weight" placeholder="Student weight" />
         <Input name="height" placeholder="Student height" />
-        <Button label="Add Student" />
+        <Button label="Add Student" isLoading={isLoading} />
       </Form>
     </Modal>
   );

@@ -28,6 +28,10 @@ export default function students(state = INITIAL_STATE, action) {
       }
 
       // UPDATE
+      case '@student/UPDATE_REQUEST': {
+        draft.loading = true;
+        break;
+      }
       case '@student/UPDATE_SUCCESS': {
         draft.loading = false;
         draft.student = action.payload.student;
@@ -35,6 +39,11 @@ export default function students(state = INITIAL_STATE, action) {
       }
 
       // ADD
+      case '@student/ADD_REQUEST': {
+        draft.loading = true;
+        break;
+      }
+
       case '@student/ADD_SUCCESS': {
         draft.student = action.payload.student;
         draft.list = [...draft.list, action.payload.student];

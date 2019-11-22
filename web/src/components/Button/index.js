@@ -19,7 +19,7 @@ export default function Button({
       type="submit"
       disabled={isDisabled}
       onClick={onClick}
-      loading={isLoading}
+      isLoading={isLoading}
       kind={kind}
       color={color}
     >
