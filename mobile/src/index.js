@@ -7,15 +7,15 @@ import { store, persistor } from './store';
 
 import { StatusBar } from 'react-native';
 
-import Routes from './routes';
+import App from './App';
 import colors from '~/styles/colors';
 
-export default function src() {
+export default function Root() {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <StatusBar barStyle="light-content" backgroundColor={colors.purple} />
-        <Routes />
+        <App />
       </PersistGate>
     </Provider>
   );
