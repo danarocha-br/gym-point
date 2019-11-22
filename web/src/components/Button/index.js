@@ -33,7 +33,7 @@ export default function Button({
 
 Button.defaultProps = {
   isDisabled: false,
-  isLoading: null,
+  isLoading: false,
   kind: 'default',
   color: 'primary',
   icon: null,

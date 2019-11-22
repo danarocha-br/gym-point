@@ -20,23 +20,23 @@ const upload = multer(multerConfig);
 routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
+routes.get('/students/:studentId', StudentController.show);
+routes.get('/students/:studentId/checkins', CheckinController.index);
+routes.post('/students/:studentId/checkins', CheckinController.store);
+routes.get('/students/:studentId/help-orders', HelpOrderController.index);
+routes.post('/students/:studentId/help-orders', HelpOrderController.store);
+
 routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
 
 routes.get('/students', StudentController.index);
 routes.post('/students', StudentController.store);
-routes.get('/students/:studentId', StudentController.show);
 routes.put('/students/:studentId', StudentController.update);
 routes.delete('/students/:studentId', StudentController.delete);
 
-routes.get('/students/:studentId/checkins', CheckinController.index);
-routes.post('/students/:studentId/checkins', CheckinController.store);
-
 routes.get('/help-orders', AdminHelpOrderController.index);
 routes.post('/help-orders/:orderId', AdminHelpOrderController.store);
-routes.get('/students/:studentId/help-orders', HelpOrderController.index);
-routes.post('/students/:studentId/help-orders', HelpOrderController.store);
 routes.delete(
   '/students/:studentId/help-orders/:orderId',
   HelpOrderController.delete
