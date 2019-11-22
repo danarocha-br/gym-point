@@ -6,7 +6,7 @@ import colors from '~/styles/colors';
 export const Container = styled(RectButton)`
   height: 60px;
   background: ${colors.primary};
-  border-radius: 8px;
+  border-radius: 13px;
   justify-content: center;
   align-items: center;
 `;
