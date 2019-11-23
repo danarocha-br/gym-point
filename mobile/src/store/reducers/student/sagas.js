@@ -6,8 +6,6 @@ import api from '~/services/api';
 
 import { loadStudentSuccess, loadStudentFailure } from './actions';
 
-import { hideModal } from '../modals/actions';
-
 function* loadStudent({ payload }) {
   try {
     const { id } = payload;

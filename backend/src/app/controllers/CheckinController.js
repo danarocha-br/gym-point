@@ -1,4 +1,4 @@
-import { subDays, isAfter } from 'date-fns';
+import { subDays, isAfter, isThisWeek } from 'date-fns';
 import { Op } from 'sequelize';
 
 import Checkin from '../models/Checkin';
@@ -17,13 +17,13 @@ class CheckinController {
       where: {
         student_id: student,
       },
-      include: [
-        {
-          model: Student,
-          as: 'student',
-          attributes: ['id', 'name', 'email'],
-        },
-      ],
+    });
+
+    checkins.map(checkin => {
+      const currentWeek = isThisWeek(new Date(checkin.createdAt));
+      checkin.count = currentWeek;
+
+      return checkin;
     });
 
     return res.json(checkins);
@@ -66,7 +66,9 @@ class CheckinController {
       },
     });
 
-    if (checkins.length >= 5) {
+    let checkinCount = 1 + checkins.length;
+
+    if (checkinCount >= 6) {
       return res
         .status(401)
         .json({ error: 'You have reached your checkin limit of 5 per week.' });
@@ -74,7 +76,7 @@ class CheckinController {
 
     const checkin = await Checkin.create({ student_id: student.id });
 
-    return res.json({ checkin });
+    return res.json({ checkin, count: checkinCount });
   }
 }
 

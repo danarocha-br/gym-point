@@ -6,9 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native';
 import { signOut } from '~/store/reducers/student/actions';
 
+import { Container, Header } from '~/styles/layout';
 import {
-  Container,
-  Header,
   Avatar,
   Name,
   Email,
@@ -20,6 +19,7 @@ import {
   Label,
   Logout,
 } from './styles';
+
 import Wrapper from '~/components/Wrapper';
 
 export default function Profile() {

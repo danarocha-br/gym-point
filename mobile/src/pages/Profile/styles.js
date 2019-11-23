@@ -2,15 +2,6 @@ import styled from 'styled-components/native';
 
 import colors from '~/styles/colors';
 
-export const Header = styled.SafeAreaView`
-  flex: 2;
-  align-items: center;
-  background-color: ${colors.purple};
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  margin-bottom: 30px;
-`;
-
 export const Title = styled.Text`
   color: white;
   font-size: 16px;
@@ -19,12 +10,6 @@ export const Title = styled.Text`
   text-transform: uppercase;
   opacity: 0.7;
   margin: 10px auto 30px;
-`;
-
-export const Container = styled.View`
-  flex: 3;
-  align-items: center;
-  padding: 30px;
 `;
 
 export const Avatar = styled.Image`
