@@ -20,3 +20,9 @@ export function loadStudentFailure(error) {
     payload: { error },
   };
 }
+
+export function signOut() {
+  return {
+    type: '@student/SIGN_OUT',
+  };
+}
