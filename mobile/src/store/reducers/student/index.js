@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  student: null,
+  profile: null,
   loading: false,
   logged: false,
   showError: null,
@@ -17,7 +17,7 @@ export default function students(state = INITIAL_STATE, action) {
       }
 
       case '@student/LOAD_SUCCESS': {
-        draft.student = action.payload.student;
+        draft.profile = action.payload.student;
         draft.loading = false;
         draft.logged = true;
         break;

@@ -25,6 +25,7 @@ routes.get('/students/:studentId/checkins', CheckinController.index);
 routes.post('/students/:studentId/checkins', CheckinController.store);
 routes.get('/students/:studentId/help-orders', HelpOrderController.index);
 routes.post('/students/:studentId/help-orders', HelpOrderController.store);
+routes.get('/enrollments/:enrollmentId', RegistrationContoller.show);
 
 routes.use(authMiddleware);
 
@@ -50,7 +51,6 @@ routes.delete('/plans/:planId', PlanController.delete);
 
 routes.post('/enrollments', RegistrationContoller.store);
 routes.get('/enrollments', RegistrationContoller.index);
-routes.get('/enrollments/:enrollmentId', RegistrationContoller.show);
 routes.put('/enrollments/:enrollmentId', RegistrationContoller.update);
 routes.delete('/enrollments/:enrollmentId', RegistrationContoller.delete);
 

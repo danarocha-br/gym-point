@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { isThisMonth, parseISO, getHours } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { makeCheckinRequest } from '~/store/reducers/checkins/actions';
 import api from '~/services/api';
 
+import { Alert } from 'react-native';
 import {
   Main,
   CheckinList,
@@ -13,32 +16,59 @@ import {
   Greeting,
   Container,
   Title,
-  Label,
 } from './styles';
 import { Header } from '~/styles/layout';
 import Wrapper from '~/components/Wrapper';
 import Checkin from '~/components/DataDisplay/Checkin';
 import illustration from '~/assets/Illustration.png';
+import ChartsContainer from './Charts';
+import { loadCheckinsRequest } from '../../store/reducers/checkins/actions';
 
 const Dashboard = () => {
-  const [checkins, setCheckins] = useState([]);
-  const student = useSelector(state => state.student.student);
+  // const [checkins, setCheckins] = useState([]);
+
+  const checkins = useSelector(state => state.checkins.list);
+  const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    async function loadCheckins() {
-      const response = await api.get(`students/${studentId}/checkins`);
-      setCheckins(response.data);
-    }
-    loadCheckins();
-  }, []);
+    dispatch(loadCheckinsRequest(studentId));
+  }, []); // eslint-disable-line
 
-  // Checkin count
+  function handleCheckin() {
+    dispatch(makeCheckinRequest(studentId));
+  }
 
+  // Checkin current week count
   const count = useMemo(
-    () => checkins.map(checkin => checkin.count).filter(Boolean).length,
+    () =>
+      checkins && checkins.map(checkin => checkin.count).filter(Boolean).length,
     [checkins]
   );
+
+  // Checkin current month count
+  const currentMonth =
+    checkins &&
+    checkins.map(checkin => isThisMonth(parseISO(checkin.createdAt)));
+
+  const countMonth =
+    checkins && useMemo(() => currentMonth.filter(Boolean).length, [checkins]);
+
+  // // Calculations
+  const checkinsLeftPercent = count * 20;
+  const checkinsThisMonth = countMonth * 5;
+  const totalCheckins = checkins && checkins.length * 0.4166;
+
+  // Time of the day for greeting
+  const time = getHours(new Date());
+
+  function getPeriodofDay() {
+    if (time > 5 && time < 12) return 'morning';
+    if (time > 12 && time < 18) return 'afternoon';
+    return 'night';
+  }
 
   return (
     <Wrapper color="light">
@@ -46,7 +76,7 @@ const Dashboard = () => {
         <Container>
           <Greeting>
             <HeaderTitle>Good </HeaderTitle>
-            <HeaderTitle>morning</HeaderTitle>
+            <HeaderTitle>{getPeriodofDay()}</HeaderTitle>
             <Name>{student.name}</Name>
           </Greeting>
           <Image source={illustration} resizeMode="contain" />
@@ -55,13 +85,24 @@ const Dashboard = () => {
 
       <Main>
         <Title>Checkin Status</Title>
-        <Label>This Week</Label>
-        <Label>{count}</Label>
-        <CheckinList
-          data={checkins}
-          keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <Checkin data={item} />}
-        />
+        {checkins && (
+          <>
+            <ChartsContainer
+              checkins={checkins}
+              current={checkinsLeftPercent}
+              month={checkinsThisMonth}
+              monthCalc={countMonth}
+              total={totalCheckins}
+              onCheckin={handleCheckin}
+            />
+
+            <CheckinList
+              data={checkins}
+              keyExtractor={item => String(item.id)}
+              renderItem={({ item }) => <Checkin data={item} />}
+            />
+          </>
+        )}
       </Main>
     </Wrapper>
   );

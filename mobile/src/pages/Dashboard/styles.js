@@ -50,7 +50,24 @@ export const Title = styled.Text`
 
 export const Label = styled.Text`
   color: ${colors.greyMd};
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   margin-top: 13px;
+`;
+
+export const LabelChart = styled.Text`
+  color: ${colors.greyDark};
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+export const Charts = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+`;
+
+export const ChartGroup = styled.View`
+  align-items: center;
 `;

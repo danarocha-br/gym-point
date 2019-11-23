@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'gympoint',
       storage: AsyncStorage,
-      whitelist: ['student'],
+      whitelist: ['enrollment'],
     },
     reducers
   );
