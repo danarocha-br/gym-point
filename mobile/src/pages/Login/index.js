@@ -12,7 +12,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const [studentId, setStudentId] = useState('');
-  const isLoading = useSelector(state => state.student.loading);
+  const isLoading = useSelector(state => state.enrollment.loading);
 
   function handleSubmit() {
     dispatch(loadStudentRequest(studentId));
@@ -29,7 +29,7 @@ export default function Login() {
             keyboardType="number-pad"
             autocorrect={false}
             autoCapitalize="none"
-            placeholder="Your Student ID"
+            placeholder="Your Enrollment ID"
             returnKeyType="send"
             onSubmitEdditing={handleSubmit}
             value={studentId}

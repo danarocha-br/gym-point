@@ -23,7 +23,7 @@ import {
 import Wrapper from '~/components/Wrapper';
 
 export default function Profile() {
-  const student = useSelector(state => state.student.student);
+  const student = useSelector(state => state.enrollment.student);
 
   const parsedBirthday = parseISO(student.birthday);
   const age = useMemo(() => differenceInYears(new Date(), parsedBirthday));

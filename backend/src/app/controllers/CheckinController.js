@@ -14,6 +14,7 @@ class CheckinController {
     }
 
     const checkins = await Checkin.findAll({
+      order: [['createdAt', 'DESC']],
       where: {
         student_id: student,
       },

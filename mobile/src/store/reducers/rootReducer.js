@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
 import student from './student';
+import checkins from './checkins';
 
 export default combineReducers({
-  student,
+  enrollment: student,
+  checkins,
 });
