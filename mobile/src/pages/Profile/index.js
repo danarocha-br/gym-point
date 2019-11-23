@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { parseISO, differenceInYears } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { TouchableOpacity } from 'react-native';
@@ -24,6 +25,9 @@ import Wrapper from '~/components/Wrapper';
 export default function Profile() {
   const student = useSelector(state => state.student.student);
 
+  const parsedBirthday = parseISO(student.birthday);
+  const age = useMemo(() => differenceInYears(new Date(), parsedBirthday));
+
   const dispatch = useDispatch();
 
   function handleSignOut() {
@@ -46,7 +50,7 @@ export default function Profile() {
             <IconFrame>
               <Icon name="cake-variant" size={25} color="#fff" />
             </IconFrame>
-            <Data>32</Data>
+            <Data>{age}</Data>
             <Label>age</Label>
           </DataGroup>
 
@@ -54,7 +58,7 @@ export default function Profile() {
             <IconFrame>
               <Icon name="scale-bathroom" size={25} color="#fff" />
             </IconFrame>
-            <Data>{student.weight}</Data>
+            <Data>{student.weight} kg</Data>
             <Label>Weight</Label>
           </DataGroup>
 
@@ -62,7 +66,7 @@ export default function Profile() {
             <IconFrame>
               <Icon name="ruler" size={25} color="#fff" />
             </IconFrame>
-            <Data>{student.height}</Data>
+            <Data>{student.height} m</Data>
             <Label>height</Label>
           </DataGroup>
         </Stats>

@@ -39,7 +39,7 @@ export const Avatar = styled.Image`
 export const Stats = styled.View`
   width: 100%;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-top: 35px;
   margin-bottom: auto;
 `;
