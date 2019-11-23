@@ -1,12 +1,10 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
-import { format, parseISO, differenceInYears } from 'date-fns';
+
 import { Alert } from 'react-native';
 
 import api from '~/services/api';
 
 import { loadStudentSuccess, loadStudentFailure } from './actions';
-
-import { hideModal } from '../modals/actions';
 
 function* loadStudent({ payload }) {
   try {

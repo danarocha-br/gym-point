@@ -29,6 +29,10 @@ export default function students(state = INITIAL_STATE, action) {
         draft.logged = false;
         break;
       }
+      case '@student/SIGN_OUT': {
+        draft.logged = false;
+        break;
+      }
     }
   });
 }
