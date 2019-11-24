@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TouchableOpacity } from 'react-native';
+
+import { TouchableOpacity, ActivityIndicator } from 'react-native';
 
 import { Charts, ChartGroup, Label, LabelChart } from './styles';
 import colors from '~/styles/colors';
@@ -13,6 +15,7 @@ export default function ChartsContainer({
   month,
   total,
   monthCalc,
+  isLoading,
 }) {
   return (
     <Charts>
@@ -41,12 +44,16 @@ export default function ChartsContainer({
         >
           {fill => (
             <TouchableOpacity onPress={onCheckin}>
-              <Icon
-                name="plus-circle"
-                size={43}
-                style={{ marginTop: 5, marginLeft: 1 }}
-                color={colors.green}
-              />
+              {isLoading ? (
+                <ActivityIndicator size="small" color={colors.green} />
+              ) : (
+                <Icon
+                  name="plus-circle"
+                  size={43}
+                  style={{ marginTop: 5, marginLeft: 1 }}
+                  color={colors.green}
+                />
+              )}
             </TouchableOpacity>
           )}
         </AnimatedCircularProgress>

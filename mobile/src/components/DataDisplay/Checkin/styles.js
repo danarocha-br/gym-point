@@ -21,7 +21,8 @@ export const Title = styled.Text`
 `;
 
 export const Time = styled.Text`
-  color: ${colors.greyDark};
-  font-size: 14px;
+  color: ${colors.greyMd};
+  font-size: 13px;
+  font-weight: 600;
   text-align: right;
 `;

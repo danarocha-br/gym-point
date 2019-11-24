@@ -27,22 +27,20 @@ export default function helpOrders(state = INITIAL_STATE, action) {
         break;
       }
 
-      // ANSWER ORDERS
-      case '@order/ANSWER_REQUEST': {
+      // QUESTION ORDERS
+      case '@order/QUESTION_REQUEST': {
         draft.loading = true;
         break;
       }
 
-      case '@order/ANSWER_SUCCESS': {
+      case '@order/QUESTION_SUCCESS': {
         draft.order = action.payload.order;
-        draft.list = draft.list.filter(order => {
-          return order.id !== action.payload.id;
-        });
+        draft.list = [...draft.list, action.payload.order];
         draft.loading = false;
         break;
       }
 
-      case '@order/ANSWER_FAILURE': {
+      case '@order/QUESTION_FAILURE': {
         draft.loading = false;
         break;
       }

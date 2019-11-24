@@ -31,7 +31,7 @@ export function* makeCheckin({ payload }) {
     const response = yield call(api.post, `/students/${id}/checkins`);
 
     yield put(makeCheckinSuccess(response.data));
-    yield put(loadCheckinsRequest());
+    yield put(loadCheckinsRequest(id));
   } catch (error) {
     Alert.alert(`Error: ${error.response.data.error}`);
     yield put(makeCheckinFailure());

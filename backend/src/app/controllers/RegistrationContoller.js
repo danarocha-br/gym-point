@@ -47,12 +47,12 @@ class RegistrationContoller {
         {
           model: Student,
           as: 'student',
-          attributes: ['id', 'name', 'email'],
+          attributes: ['id', 'name', 'email', 'birthday', 'height', 'weight'],
         },
         {
           model: Plan,
           as: 'plan',
-          attributes: ['id', 'title', 'price', 'duration'],
+          attributes: ['title'],
         },
       ],
     });

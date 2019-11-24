@@ -5,6 +5,7 @@ import colors from '~/styles/colors';
 export const Main = styled.View`
   flex: 5;
   padding: 0px 30px;
+  margin-top: 30px;
 `;
 
 export const Container = styled.View`
@@ -13,7 +14,10 @@ export const Container = styled.View`
 `;
 
 export const CheckinList = styled.FlatList.attrs({
-  contentContainerStyle: { paddingTop: 30 },
+  contentContainerStyle: {
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
   showsVerticalScrollIndicator: false,
 })`
   color: white;
@@ -66,6 +70,7 @@ export const Charts = styled.View`
   align-items: center;
   justify-content: space-between;
   margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 export const ChartGroup = styled.View`
