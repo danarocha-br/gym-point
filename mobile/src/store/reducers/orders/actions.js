@@ -1,8 +1,9 @@
 // GET ALL HELP ORDERS
 
-export function loadOrdersRequest() {
+export function loadOrdersRequest(id) {
   return {
     type: '@order/LOAD_REQUEST',
+    payload: { id },
   };
 }
 
@@ -20,24 +21,24 @@ export function loadOrdersFailure(error) {
   };
 }
 
-// ANSWER ORDER
+// ASK ORDER
 
-export function answerOrderRequest(id, answer) {
+export function questionOrderRequest(id, question) {
   return {
-    type: '@order/ANSWER_REQUEST',
-    payload: { id, answer },
+    type: '@order/QUESTION_REQUEST',
+    payload: { id, question },
   };
 }
 
-export function answerOrderSuccess(order) {
+export function questionOrderSuccess(order) {
   return {
-    type: '@order/ANSWER_SUCCESS',
+    type: '@order/QUESTION_SUCCESS',
     payload: { order },
   };
 }
 
-export function answerOrderFailure() {
+export function questionOrderFailure() {
   return {
-    type: '@order/ANSWER_FAILURE',
+    type: '@order/QUESTION_FAILURE',
   };
 }

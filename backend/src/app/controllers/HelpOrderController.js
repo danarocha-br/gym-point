@@ -8,6 +8,7 @@ import HelpOrder from '../models/HelpOrder';
 class HelpOrderController {
   async index(req, res) {
     const helpOrders = await HelpOrder.findAll({
+      order: [['createdAt', 'DESC']],
       where: {
         student_id: req.params.studentId,
       },
@@ -16,7 +17,7 @@ class HelpOrderController {
         {
           model: Student,
           as: 'student',
-          attributes: ['id', 'name', 'email'],
+          attributes: ['id'],
         },
       ],
     });
