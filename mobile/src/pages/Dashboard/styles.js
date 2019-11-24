@@ -5,6 +5,7 @@ import colors from '~/styles/colors';
 export const Main = styled.View`
   flex: 5;
   padding: 0px 30px;
+  margin-top: 30px;
 `;
 
 export const Container = styled.View`

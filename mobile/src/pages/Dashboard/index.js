@@ -122,9 +122,9 @@ const Dashboard = () => {
             data={checkins}
             extraData={checkins}
             keyExtractor={item => String(item.id)}
-            ListEmptyComponent="no items"
+            // ListEmptyComponent="no items"
             renderItem={({ item, index }) => (
-              <Checkin data={item} index={index} isLoading={isLoading} />
+              <Checkin data={item} index={index} />
             )}
           />
         )}
