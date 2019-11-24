@@ -1,10 +1,6 @@
-export const showModal = (modalType, modalProps) => {
+export const showModal = () => {
   return {
     type: '@modal/SHOW_MODAL',
-    payload: {
-      modalType,
-      modalProps,
-    },
   };
 };
 
