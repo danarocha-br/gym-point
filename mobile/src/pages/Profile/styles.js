@@ -2,16 +2,6 @@ import styled from 'styled-components/native';
 
 import colors from '~/styles/colors';
 
-export const Title = styled.Text`
-  color: white;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
-  text-transform: uppercase;
-  opacity: 0.7;
-  margin: 10px auto 30px;
-`;
-
 export const Avatar = styled.Image`
   width: 120px;
   height: 120px;

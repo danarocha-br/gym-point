@@ -6,12 +6,11 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { TouchableOpacity } from 'react-native';
 import { signOut } from '~/store/reducers/student/actions';
 
-import { Container, Header } from '~/styles/layout';
+import { Container, Header, Title } from '~/styles/layout';
 import {
   Avatar,
   Name,
   Email,
-  Title,
   Stats,
   DataGroup,
   IconFrame,
@@ -23,9 +22,12 @@ import {
 import Wrapper from '~/components/Wrapper';
 
 export default function Profile() {
-  const student = useSelector(state => state.enrollment.student);
+  const student = useSelector(state => state.enrollment.profile.student);
+  const enrollment = useSelector(state => state.enrollment.profile);
+  const plan = useSelector(state => state.enrollment.profile.plan.title);
 
   const parsedBirthday = parseISO(student.birthday);
+  const started = parseISO(enrollment.start_date);
   const age = useMemo(() => differenceInYears(new Date(), parsedBirthday));
 
   const dispatch = useDispatch();
@@ -38,6 +40,8 @@ export default function Profile() {
     <Wrapper color="light">
       <Header>
         <Title>Profile</Title>
+        <Title>{plan} Plan</Title>
+
         <Avatar />
       </Header>
 
