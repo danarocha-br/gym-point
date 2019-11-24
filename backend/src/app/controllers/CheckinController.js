@@ -14,7 +14,7 @@ class CheckinController {
     }
 
     const checkins = await Checkin.findAll({
-      order: [['createdAt', 'DESC']],
+      order: [['createdAt', 'ASC']],
       where: {
         student_id: student,
       },
@@ -77,7 +77,7 @@ class CheckinController {
 
     const checkin = await Checkin.create({ student_id: student.id });
 
-    return res.json({ checkin, count: checkinCount });
+    return res.json({ checkin });
   }
 }
 

@@ -13,7 +13,10 @@ export const Container = styled.View`
 `;
 
 export const CheckinList = styled.FlatList.attrs({
-  contentContainerStyle: { paddingTop: 30 },
+  contentContainerStyle: {
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
   showsVerticalScrollIndicator: false,
 })`
   color: white;
@@ -66,6 +69,7 @@ export const Charts = styled.View`
   align-items: center;
   justify-content: space-between;
   margin-top: 15px;
+  margin-bottom: 15px;
 `;
 
 export const ChartGroup = styled.View`

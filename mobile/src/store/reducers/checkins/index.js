@@ -1,7 +1,7 @@
 import produce from 'immer';
 
 const INITIAL_STATE = {
-  checkin: null,
+  current: {},
   list: null,
   loading: false,
   showError: null,
@@ -16,7 +16,7 @@ export default function checkins(state = INITIAL_STATE, action) {
       }
 
       case '@checkin/LOAD_SUCCESS': {
-        draft.list = action.payload.checkins;
+        draft.list = [...action.payload.checkins];
         draft.loading = false;
         break;
       }
@@ -32,8 +32,9 @@ export default function checkins(state = INITIAL_STATE, action) {
         break;
       }
       case '@checkin/CHECKIN_SUCCESS': {
-        draft.checkin = action.payload.checkin;
+        draft.current = action.payload.checkin;
         draft.list = [...draft.list, action.payload.checkin];
+        draft.loading = false;
         break;
       }
 
