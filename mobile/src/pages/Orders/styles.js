@@ -55,5 +55,6 @@ export const Label = styled.Text`
 `;
 
 export const ChartGroup = styled.View`
+  color: ${colors.greyMd};
   align-items: center;
 `;
