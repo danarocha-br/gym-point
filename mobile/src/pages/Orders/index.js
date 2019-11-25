@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import ContentLoader, { Rect, Circle } from 'react-content-loader/native';
 
 import { Dimensions, View, Animated } from 'react-native';
 import { loadOrdersRequest } from '~/store/reducers/orders/actions';
@@ -20,6 +21,7 @@ export default function Orders({ navigation }) {
   const orders = useSelector(state => state.orders.list);
   const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
+  const isLoading = useSelector(state => state.orders.loading);
 
   const dispatch = useDispatch();
 
@@ -28,10 +30,10 @@ export default function Orders({ navigation }) {
   }, []); // eslint-disable-line
 
   // Open Modal
-  const modal = useSelector(state => state.modals.modal);
-  const [modalAnimation] = useState(new Animated.Value(70));
-  const [backgroundAnimation] = useState(new Animated.Value(1));
   const screenHeight = Dimensions.get('window').height;
+  const modal = useSelector(state => state.modals.modal);
+  const [modalAnimation] = useState(new Animated.Value(-screenHeight));
+  const [backgroundAnimation] = useState(new Animated.Value(1));
 
   useEffect(() => {
     if (modal === null) {
@@ -64,7 +66,9 @@ export default function Orders({ navigation }) {
   const answer = orders && orders.map(order => order.answer);
   const answersCount = answer && answer.filter(item => item !== null).length;
   const ordersResult =
-    (Math.round((answersCount / questionsCount) * 100) * 100) / 100;
+    orders.length === 0
+      ? 0
+      : (Math.round((answersCount / questionsCount) * 100) * 100) / 100;
 
   return (
     <>
@@ -97,17 +101,31 @@ export default function Orders({ navigation }) {
           </AnimatedCircularProgress>
           <Label>Answered Questions</Label>
 
-          <OrderList
-            data={orders}
-            extraData={orders}
-            keyExtractor={order => String(order.id)}
-            renderItem={({ item: order }) => (
-              <Order
-                data={order}
-                onPress={() => navigation.navigate('OrderDetails', { order })}
-              />
-            )}
-          />
+          {isLoading ? (
+            <ContentLoader
+              height={300}
+              width={400}
+              speed={2}
+              primaryColor="#f3f3f3"
+              secondaryColor={colors.greyLight}
+            >
+              <Circle cx="50" cy="50" r="40" />
+              <Circle cx="180" cy="50" r="40" />
+              <Circle cx="300" cy="50" r="40" />
+            </ContentLoader>
+          ) : (
+            <OrderList
+              data={orders}
+              extraData={orders}
+              keyExtractor={order => String(order.id)}
+              renderItem={({ item: order }) => (
+                <Order
+                  data={order}
+                  onPress={() => navigation.navigate('OrderDetails', { order })}
+                />
+              )}
+            />
+          )}
 
           <View
             style={{

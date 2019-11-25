@@ -26,7 +26,6 @@ import { loadCheckinsRequest } from '../../store/reducers/checkins/actions';
 
 const Dashboard = () => {
   const checkins = useSelector(state => state.checkins.list);
-  const isLoading = useSelector(state => state.checkins.isLoading);
   const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
 
