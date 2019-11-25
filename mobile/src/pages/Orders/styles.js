@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 
 import Input from '~/components/Input';
-import Button from '~/components/Button';
 import colors from '~/styles/colors';
 
 export const OrderList = styled.FlatList.attrs({
   contentContainerStyle: {
     paddingTop: 30,
     paddingBottom: 30,
+    width: '100%',
   },
   showsVerticalScrollIndicator: false,
 })``;
@@ -39,4 +39,21 @@ export const CloseBtn = styled.TouchableOpacity`
   align-items: flex-end;
   position: relative;
   top: -10px;
+`;
+
+export const LabelChart = styled.Text`
+  color: ${colors.greyDark};
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+export const Label = styled.Text`
+  color: ${colors.greyMd};
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+`;
+
+export const ChartGroup = styled.View`
+  align-items: center;
 `;

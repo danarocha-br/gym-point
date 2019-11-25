@@ -21,17 +21,15 @@ export default function Order({ data }) {
   return (
     <Container answered={answered}>
       <Group>
-        <Title answered={answered}>
-          <Icon
-            name="check-circle"
-            size={20}
-            color={!answered ? colors.green : colors.greyLight}
-          />
-          {'  '}
-          Answered
-        </Title>
-        <Time>{!data.createdAt ? 'right now' : dateParsed}</Time>
+        <Title answered={answered}>Answered</Title>
+        <Icon
+          name="check-circle"
+          size={20}
+          color={!answered ? colors.green : colors.greyLight}
+        />
       </Group>
+
+      <Time>{!data.createdAt ? 'right now' : dateParsed}</Time>
 
       <Content numberOfLines={3}>{data.question}</Content>
     </Container>

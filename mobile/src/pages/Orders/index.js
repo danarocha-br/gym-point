@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 import { Dimensions, View, Animated } from 'react-native';
 import { loadOrdersRequest } from '~/store/reducers/orders/actions';
 import { showModal } from '~/store/reducers/modals/actions';
 
-import { Container, Header, Title, AddButton } from '~/styles/layout';
-import { OrderList } from './styles';
+import { Container, Header, Title } from '~/styles/layout';
+import { OrderList, LabelChart, Label } from './styles';
 
 import Wrapper from '~/components/Wrapper';
 import Order from '~/components/DataDisplay/Order';
 import Button from '~/components/Button';
 import AddNew from './AddNew';
-import { Circle } from 'react-content-loader/native';
+import colors from '~/styles/colors';
 
 export default function Orders() {
   const orders = useSelector(state => state.orders.list);
-  const isLoading = useSelector(state => state.orders.isLoading);
   const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
 
@@ -59,6 +59,12 @@ export default function Orders() {
     }).start();
   }
 
+  // get status for the chart
+  const questionsCount = orders && orders.length;
+  const answer = orders && orders.map(order => order.answer);
+  const answersCount = answer && answer.filter(item => item !== null).length;
+  const ordersResult = ((answersCount / questionsCount) * 100).toFixed(1);
+
   return (
     <>
       <AnimatedContainer style={{ top: modalAnimation, zIndex: 10 }}>
@@ -76,13 +82,33 @@ export default function Orders() {
             opacity: backgroundAnimation,
           }}
         >
+          <AnimatedCircularProgress
+            size={100}
+            width={5}
+            fill={ordersResult}
+            tintColor={colors.primary}
+            backgroundColor={colors.greyLight}
+            lineCap="round"
+          >
+            {fill => <LabelChart>{ordersResult}%</LabelChart>}
+          </AnimatedCircularProgress>
+          <Label>Answered Questions</Label>
+
           <OrderList
             data={orders}
             extraData={orders}
             keyExtractor={item => String(item.id)}
             renderItem={({ item }) => <Order data={item} />}
           />
-          <View style={{ alignItems: 'flex-end', width: '100%' }}>
+
+          <View
+            style={{
+              alignItems: 'flex-end',
+              width: '100%',
+              position: 'absolute',
+              bottom: 30,
+            }}
+          >
             <Button circle onPress={handleShowModal}>
               <Icon name="plus" size={40} />
             </Button>
