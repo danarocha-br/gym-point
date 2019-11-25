@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 import colors from '../../styles/colors';
-import { family, size } from '../../styles/fonts';
 
 export const Container = styled.View`
   background-color: white;
@@ -26,12 +25,10 @@ export const Header = styled.View`
 
 export const Title = styled.Text`
   color: ${colors.greyDark};
-  font-family: ${family.medium};
-  font-size: ${size.type14};
+  font-size: 16;
+  font-weight: 600;
   align-items: center;
-  text-align: center;
-  margin-left: auto;
-  padding-left: 16%;
+  padding-top: 2px;
 `;
 
 export const BackButton = styled.TouchableOpacity`
