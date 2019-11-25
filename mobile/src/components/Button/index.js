@@ -32,7 +32,7 @@ Button.propTypes = {
   /**
    * Defines the label for the button.
    */
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
   /**
    * Applies a style for the button.
    */

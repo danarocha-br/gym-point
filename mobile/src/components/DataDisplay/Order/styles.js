@@ -2,10 +2,11 @@ import styled from 'styled-components/native';
 
 import colors from '~/styles/colors';
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   height: auto;
-  margin-bottom: 10px;
-  padding: 20px;
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px 20px 20px 20px;
   background-color: ${props =>
     props.answered ? 'white' : colors.greyLightest};
   border: ${props => (props.answered ? 'none' : '1px solid #ddd6f3')};
@@ -14,7 +15,7 @@ export const Container = styled.View`
 export const Group = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 20px;
 `;
 
@@ -28,11 +29,13 @@ export const Time = styled.Text`
   color: ${colors.greyMd};
   font-size: 13px;
   font-weight: 600;
-  text-align: right;
-  padding-top: 5px;
+  align-items: flex-start;
+  margin-top: -20px;
+  margin-bottom: 15px;
 `;
 
 export const Content = styled.Text`
-  color: ${colors.greyDark};
+  color: ${props => (!props.answered ? colors.greyMd : colors.greyDark)};
   font-size: 14px;
+  font-weight: 500;
 `;

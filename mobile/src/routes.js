@@ -1,10 +1,14 @@
+import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Login from './pages/Login';
 import Dashboard from '~/pages/Dashboard';
 import Orders from '~/pages/Orders';
 import Profile from '~/pages/Profile';
+import OrderDetails from '~/pages/Orders/OrderDetails';
 import colors from '~/styles/colors';
 
 export default (logged = false) =>
@@ -17,7 +21,32 @@ export default (logged = false) =>
         App: createBottomTabNavigator(
           {
             Dashboard,
-            Orders,
+            Questions: {
+              screen: createStackNavigator(
+                {
+                  Orders,
+                  OrderDetails,
+                },
+                {
+                  defaultNavigationOptions: {
+                    headerTransparent: true,
+                    headerTintColor: colors.greyMd,
+                    headerLeftContainerStyle: {
+                      marginLeft: 20,
+                    },
+                  },
+                }
+              ),
+              navigationOptions: {
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon
+                    name="comment-question-outline"
+                    size={25}
+                    color={tintColor}
+                  />
+                ),
+              },
+            },
             Profile,
           },
           {

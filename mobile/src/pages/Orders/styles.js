@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 
 import Input from '~/components/Input';
-import Button from '~/components/Button';
 import colors from '~/styles/colors';
 
 export const OrderList = styled.FlatList.attrs({
   contentContainerStyle: {
     paddingTop: 30,
     paddingBottom: 30,
+    width: '100%',
   },
   showsVerticalScrollIndicator: false,
 })``;
@@ -39,4 +39,66 @@ export const CloseBtn = styled.TouchableOpacity`
   align-items: flex-end;
   position: relative;
   top: -10px;
+`;
+
+export const LabelChart = styled.Text`
+  color: ${colors.greyDark};
+  font-size: 20px;
+  font-weight: bold;
+`;
+
+export const Label = styled.Text`
+  color: ${colors.greyMd};
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+export const ChartGroup = styled.View`
+  color: ${colors.greyMd};
+  align-items: center;
+`;
+
+export const TitleRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Title = styled.Text`
+  color: ${colors.greyMd};
+  font-size: 15px;
+  font-weight: 600;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-transform: uppercase;
+`;
+
+export const Time = styled.Text`
+  color: ${colors.greyMd};
+  font-size: 13px;
+  font-weight: 600;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-right: 20px;
+`;
+
+export const Content = styled.Text`
+  color: ${colors.greyDark};
+  font-size: 16px;
+  font-weight: 500;
+  align-items: flex-start;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+export const QuestionsWrapper = styled.SafeAreaView`
+  margin: 120px 20px 20px 20px;
+  padding-top: 40px;
+`;
+
+export const ContentContainer = styled.View`
+  margin-bottom: 40px;
 `;

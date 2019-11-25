@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Container, Title, Time, Group, Content } from './styles';
 import colors from '~/styles/colors';
 
-export default function Order({ data }) {
+export default function Order({ data, onPress }) {
   const dateParsed = useMemo(() => {
     return (
       data.createdAt &&
@@ -19,21 +19,21 @@ export default function Order({ data }) {
   const answered = useMemo(() => !data.answer);
 
   return (
-    <Container answered={answered}>
+    <Container answered={answered} onPress={onPress}>
       <Group>
-        <Title answered={answered}>
-          <Icon
-            name="check-circle"
-            size={20}
-            color={!answered ? colors.green : colors.greyLight}
-          />
-          {'  '}
-          Answered
-        </Title>
-        <Time>{!data.createdAt ? 'right now' : dateParsed}</Time>
+        <Title answered={answered}>Answered</Title>
+        <Icon
+          name="check-circle"
+          size={20}
+          color={!answered ? colors.green : colors.greyLight}
+        />
       </Group>
 
-      <Content numberOfLines={3}>{data.question}</Content>
+      <Time>{!data.createdAt ? 'right now' : dateParsed}</Time>
+
+      <Content answered={answered} numberOfLines={3}>
+        {data.question}
+      </Content>
     </Container>
   );
 }

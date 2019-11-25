@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import ContentLoader, { Rect, Circle } from 'react-content-loader/native';
 
 import { Dimensions, View, Animated } from 'react-native';
 import { loadOrdersRequest } from '~/store/reducers/orders/actions';
 import { showModal } from '~/store/reducers/modals/actions';
 
-import { Container, Header, Title, AddButton } from '~/styles/layout';
-import { OrderList } from './styles';
+import { Container, Header, Title } from '~/styles/layout';
+import { OrderList, LabelChart, Label } from './styles';
 
 import Wrapper from '~/components/Wrapper';
 import Order from '~/components/DataDisplay/Order';
 import Button from '~/components/Button';
 import AddNew from './AddNew';
-import { Circle } from 'react-content-loader/native';
+import colors from '~/styles/colors';
 
-export default function Orders() {
+export default function Orders({ navigation }) {
   const orders = useSelector(state => state.orders.list);
-  const isLoading = useSelector(state => state.orders.isLoading);
   const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
+  const isLoading = useSelector(state => state.orders.loading);
 
   const dispatch = useDispatch();
 
@@ -28,10 +30,10 @@ export default function Orders() {
   }, []); // eslint-disable-line
 
   // Open Modal
-  const modal = useSelector(state => state.modals.modal);
-  const [modalAnimation] = useState(new Animated.Value(70));
-  const [backgroundAnimation] = useState(new Animated.Value(1));
   const screenHeight = Dimensions.get('window').height;
+  const modal = useSelector(state => state.modals.modal);
+  const [modalAnimation] = useState(new Animated.Value(-screenHeight));
+  const [backgroundAnimation] = useState(new Animated.Value(1));
 
   useEffect(() => {
     if (modal === null) {
@@ -59,6 +61,15 @@ export default function Orders() {
     }).start();
   }
 
+  // get status for the chart
+  const questionsCount = orders && orders.length;
+  const answer = orders && orders.map(order => order.answer);
+  const answersCount = answer && answer.filter(item => item !== null).length;
+  const ordersResult =
+    orders.length === 0
+      ? 0
+      : (Math.round((answersCount / questionsCount) * 100) * 100) / 100;
+
   return (
     <>
       <AnimatedContainer style={{ top: modalAnimation, zIndex: 10 }}>
@@ -74,15 +85,56 @@ export default function Orders() {
           style={{
             transform: [{ scale: backgroundAnimation }],
             opacity: backgroundAnimation,
+            marginLeft: -5,
+            marginRight: -5,
           }}
         >
-          <OrderList
-            data={orders}
-            extraData={orders}
-            keyExtractor={item => String(item.id)}
-            renderItem={({ item }) => <Order data={item} />}
-          />
-          <View style={{ alignItems: 'flex-end', width: '100%' }}>
+          <AnimatedCircularProgress
+            size={100}
+            width={5}
+            fill={ordersResult}
+            tintColor={colors.primary}
+            backgroundColor={colors.greyLight}
+            lineCap="round"
+          >
+            {fill => <LabelChart>{ordersResult}%</LabelChart>}
+          </AnimatedCircularProgress>
+          <Label>Answered Questions</Label>
+
+          {isLoading ? (
+            <ContentLoader
+              height={300}
+              width={400}
+              speed={2}
+              primaryColor="#f3f3f3"
+              secondaryColor={colors.greyLight}
+            >
+              <Circle cx="50" cy="50" r="40" />
+              <Circle cx="180" cy="50" r="40" />
+              <Circle cx="300" cy="50" r="40" />
+            </ContentLoader>
+          ) : (
+            <OrderList
+              data={orders}
+              extraData={orders}
+              keyExtractor={order => String(order.id)}
+              renderItem={({ item: order }) => (
+                <Order
+                  data={order}
+                  onPress={() => navigation.navigate('OrderDetails', { order })}
+                />
+              )}
+            />
+          )}
+
+          <View
+            style={{
+              alignItems: 'flex-end',
+              width: '100%',
+              position: 'absolute',
+              bottom: 30,
+            }}
+          >
             <Button circle onPress={handleShowModal}>
               <Icon name="plus" size={40} />
             </Button>
@@ -97,8 +149,5 @@ const AnimatedContainer = Animated.createAnimatedComponent(View);
 const AnimatedBackground = Animated.createAnimatedComponent(Container);
 
 Orders.navigationOptions = {
-  tabBarLabel: 'Help',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="comment-question-outline" size={25} color={tintColor} />
-  ),
+  headerShown: false,
 };

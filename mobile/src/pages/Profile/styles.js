@@ -6,9 +6,7 @@ export const Avatar = styled.Image`
   width: 120px;
   height: 120px;
   border-radius: 60px;
-  background-color: ${colors.blue};
-  position: relative;
-  top: 140px;
+  background-color: ${colors.primary};
 `;
 
 export const Stats = styled.View`
@@ -16,7 +14,6 @@ export const Stats = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin-top: 35px;
-  margin-bottom: auto;
 `;
 
 export const DataGroup = styled.View`
@@ -64,4 +61,32 @@ export const Logout = styled.Text`
   font-weight: 600;
   text-align: center;
   padding-bottom: 30px;
+`;
+
+export const Table = styled.View`
+  margin-top: 40px;
+  margin-bottom: auto;
+`;
+
+export const Row = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  border-bottom-width: 1;
+  border-bottom-color: ${colors.greyLight};
+  padding: 10px 0;
+`;
+
+export const RowTitle = styled.Text`
+  color: ${colors.greyMd};
+  font-size: 15px;
+  margin-right: auto;
+`;
+
+export const RowData = styled.Text`
+  color: ${colors.greyDark};
+  font-size: 16px;
+  font-weight: 600;
+  text-align: right;
 `;
