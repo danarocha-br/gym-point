@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import colors from '~/styles/colors';
 
-export const Main = styled.View`
+export const Main = styled.ScrollView`
   flex: 5;
   padding: 0px 30px;
   margin-top: 30px;

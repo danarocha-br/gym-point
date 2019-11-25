@@ -51,9 +51,9 @@ const Dashboard = () => {
   const countMonth = checkins && currentMonth.filter(Boolean).length;
 
   // // Calculations
-  const checkinsLeftPercent = count === 0 ? 100 : (5 - count) * 20;
+  const checkinsLeftPercent = (count * 100) / 5;
   const checkinsThisMonth = countMonth * 5;
-  const totalCheckins = checkins && checkins.length * 0.4166;
+  const totalCheckins = checkins && (checkins.length * 100) / 240;
 
   // Time of the day for greeting
   const time = getHours(new Date());

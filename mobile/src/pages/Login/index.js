@@ -35,7 +35,7 @@ export default function Login() {
             value={studentId}
             onChangeText={setStudentId}
           />
-          <Button onPress={handleSubmit} isLoading={isLoading}>
+          <Button fullWidth onPress={handleSubmit} isLoading={isLoading}>
             Login
           </Button>
         </Form>
