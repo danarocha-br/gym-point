@@ -1,13 +1,12 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
 import { parseISO, formatRelative } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { Container, Title, Time, Group, Content } from './styles';
 import colors from '~/styles/colors';
 
-export default function Order({ data }) {
+export default function Order({ data, onPress }) {
   const dateParsed = useMemo(() => {
     return (
       data.createdAt &&
@@ -19,10 +18,8 @@ export default function Order({ data }) {
 
   const answered = useMemo(() => !data.answer);
 
-  const dispatch = useDispatch();
-
   return (
-    <Container answered={answered} onPress={() => {}}>
+    <Container answered={answered} onPress={onPress}>
       <Group>
         <Title answered={answered}>Answered</Title>
         <Icon

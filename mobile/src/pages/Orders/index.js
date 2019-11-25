@@ -16,7 +16,7 @@ import Button from '~/components/Button';
 import AddNew from './AddNew';
 import colors from '~/styles/colors';
 
-export default function Orders() {
+export default function Orders({ navigation }) {
   const orders = useSelector(state => state.orders.list);
   const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
@@ -63,7 +63,8 @@ export default function Orders() {
   const questionsCount = orders && orders.length;
   const answer = orders && orders.map(order => order.answer);
   const answersCount = answer && answer.filter(item => item !== null).length;
-  const ordersResult = ((answersCount / questionsCount) * 100).toFixed(0);
+  const ordersResult =
+    (Math.round((answersCount / questionsCount) * 100) * 100) / 100;
 
   return (
     <>
@@ -99,8 +100,13 @@ export default function Orders() {
           <OrderList
             data={orders}
             extraData={orders}
-            keyExtractor={item => String(item.id)}
-            renderItem={({ item }) => <Order data={item} />}
+            keyExtractor={order => String(order.id)}
+            renderItem={({ item: order }) => (
+              <Order
+                data={order}
+                onPress={() => navigation.navigate('OrderDetails', { order })}
+              />
+            )}
           />
 
           <View
@@ -125,8 +131,5 @@ const AnimatedContainer = Animated.createAnimatedComponent(View);
 const AnimatedBackground = Animated.createAnimatedComponent(Container);
 
 Orders.navigationOptions = {
-  tabBarLabel: 'Help',
-  tabBarIcon: ({ tintColor }) => (
-    <Icon name="comment-question-outline" size={25} color={tintColor} />
-  ),
+  headerShown: false,
 };

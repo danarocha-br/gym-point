@@ -85,12 +85,20 @@ export const Time = styled.Text`
 
 export const Content = styled.Text`
   color: ${colors.greyDark};
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   align-items: flex-start;
+  margin-top: 15px;
   margin-bottom: 15px;
   padding-left: 20px;
   padding-right: 20px;
 `;
 
-export const ContentContainer = styled.View``;
+export const QuestionsWrapper = styled.SafeAreaView`
+  margin: 120px 20px 20px 20px;
+  padding-top: 40px;
+`;
+
+export const ContentContainer = styled.View`
+  margin-bottom: 40px;
+`;
