@@ -8,7 +8,7 @@ export default function modals(state = INITIAL_STATE, action) {
   return produce(state, draft => {
     switch (action.type) {
       case '@modal/SHOW_MODAL': {
-        draft.modal = true;
+        draft.modal = [action.payload, true];
         break;
       }
 

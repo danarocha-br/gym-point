@@ -5,7 +5,7 @@ import colors from '~/styles/colors';
 export const Container = styled.TouchableOpacity`
   height: auto;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   padding: 10px 20px 20px 20px;
   background-color: ${props =>
     props.answered ? 'white' : colors.greyLightest};
@@ -35,7 +35,7 @@ export const Time = styled.Text`
 `;
 
 export const Content = styled.Text`
-  color: ${colors.greyDark};
+  color: ${props => (!props.answered ? colors.greyMd : colors.greyDark)};
   font-size: 14px;
   font-weight: 500;
 `;

@@ -63,7 +63,7 @@ export default function Orders() {
   const questionsCount = orders && orders.length;
   const answer = orders && orders.map(order => order.answer);
   const answersCount = answer && answer.filter(item => item !== null).length;
-  const ordersResult = ((answersCount / questionsCount) * 100).toFixed(1);
+  const ordersResult = ((answersCount / questionsCount) * 100).toFixed(0);
 
   return (
     <>
@@ -80,6 +80,8 @@ export default function Orders() {
           style={{
             transform: [{ scale: backgroundAnimation }],
             opacity: backgroundAnimation,
+            marginLeft: -5,
+            marginRight: -5,
           }}
         >
           <AnimatedCircularProgress

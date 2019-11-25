@@ -10,7 +10,7 @@ export const Header = styled.SafeAreaView`
 export const Container = styled.View`
   flex: 3;
   align-items: center;
-  padding: 30px;
+  padding: 25px;
 `;
 
 export const Title = styled.Text`

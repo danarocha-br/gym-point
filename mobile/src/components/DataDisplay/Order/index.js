@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { parseISO, formatRelative } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -18,8 +19,10 @@ export default function Order({ data }) {
 
   const answered = useMemo(() => !data.answer);
 
+  const dispatch = useDispatch();
+
   return (
-    <Container answered={answered}>
+    <Container answered={answered} onPress={() => {}}>
       <Group>
         <Title answered={answered}>Answered</Title>
         <Icon
@@ -31,7 +34,9 @@ export default function Order({ data }) {
 
       <Time>{!data.createdAt ? 'right now' : dateParsed}</Time>
 
-      <Content numberOfLines={3}>{data.question}</Content>
+      <Content answered={answered} numberOfLines={3}>
+        {data.question}
+      </Content>
     </Container>
   );
 }

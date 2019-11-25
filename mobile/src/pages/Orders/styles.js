@@ -52,9 +52,45 @@ export const Label = styled.Text`
   font-size: 15px;
   font-weight: bold;
   margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 export const ChartGroup = styled.View`
   color: ${colors.greyMd};
   align-items: center;
 `;
+
+export const TitleRow = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const Title = styled.Text`
+  color: ${colors.greyMd};
+  font-size: 15px;
+  font-weight: 600;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-transform: uppercase;
+`;
+
+export const Time = styled.Text`
+  color: ${colors.greyMd};
+  font-size: 13px;
+  font-weight: 600;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-right: 20px;
+`;
+
+export const Content = styled.Text`
+  color: ${colors.greyDark};
+  font-size: 15px;
+  font-weight: 500;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+export const ContentContainer = styled.View``;
