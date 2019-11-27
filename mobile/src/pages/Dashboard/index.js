@@ -2,10 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isThisMonth, parseISO, getHours } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ContentLoader, { Rect, Circle } from 'react-content-loader/native';
 
 import { makeCheckinRequest } from '~/store/reducers/checkins/actions';
-import colors from '~/styles/colors';
+import { loadCheckinsRequest } from '../../store/reducers/checkins/actions';
 
 import {
   Main,
@@ -22,7 +21,8 @@ import Wrapper from '~/components/Wrapper';
 import Checkin from '~/components/DataDisplay/Checkin';
 import illustration from '~/assets/Illustration.png';
 import ChartsContainer from './Charts';
-import { loadCheckinsRequest } from '../../store/reducers/checkins/actions';
+import Empty from '~/components/Empty/';
+import { SkeletonContent } from './Skeleton';
 
 const Dashboard = () => {
   const checkins = useSelector(state => state.checkins.list);
@@ -82,17 +82,7 @@ const Dashboard = () => {
         <Title>Checkin Status</Title>
 
         {!checkins ? (
-          <ContentLoader
-            height={300}
-            width={400}
-            speed={2}
-            primaryColor="#f3f3f3"
-            secondaryColor={colors.greyLight}
-          >
-            <Circle cx="50" cy="50" r="40" />
-            <Circle cx="180" cy="50" r="40" />
-            <Circle cx="300" cy="50" r="40" />
-          </ContentLoader>
+          <SkeletonGraph />
         ) : (
           <ChartsContainer
             checkins={checkins}
@@ -105,15 +95,7 @@ const Dashboard = () => {
         )}
 
         {!checkins ? (
-          <ContentLoader
-            speed={2}
-            primaryColor="#f3f3f3"
-            secondaryColor={colors.greyLight}
-          >
-            <Rect x="0" y="0" rx="4" ry="4" width="320" height="50" />
-            <Rect x="0" y="60" rx="4" ry="4" width="320" height="50" />
-            <Rect x="0" y="120" rx="4" ry="4" width="320" height="50" />
-          </ContentLoader>
+          <SkeletonContent />
         ) : (
           <CheckinList
             ref={flatList}
@@ -121,7 +103,13 @@ const Dashboard = () => {
             data={checkins}
             extraData={checkins}
             keyExtractor={item => String(item.id)}
-            // ListEmptyComponent="no items"
+            ListEmptyComponent={() => (
+              <Empty
+                src=""
+                title="No checkins yet"
+                content="Make your first checkin by clicking on the green add button."
+              />
+            )}
             renderItem={({ item, index }) => (
               <Checkin data={item} index={index} />
             )}
