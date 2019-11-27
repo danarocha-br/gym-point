@@ -65,7 +65,7 @@ export const Logout = styled.Text`
 
 export const Table = styled.View`
   margin-top: 40px;
-  margin-bottom: auto;
+  margin-bottom: 60px;
 `;
 
 export const Row = styled.View`

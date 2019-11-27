@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import colors from '~/styles/colors';
 
 export const Main = styled.ScrollView`
-  flex: 5;
+  flex: 4;
   padding: 0px 30px;
   margin-top: 30px;
 `;
@@ -44,6 +44,8 @@ export const Name = styled.Text`
 
 export const Image = styled.Image`
   flex: 1;
+  position: relative;
+  right: -12px;
 `;
 
 export const Title = styled.Text`

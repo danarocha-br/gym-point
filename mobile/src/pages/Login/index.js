@@ -19,27 +19,25 @@ export default function Login() {
   }
 
   return (
-    <Wrapper>
-      <Container>
-        <Logo source={logo} />
+    <Container>
+      <Logo source={logo} />
 
-        <Form>
-          <FormInput
-            icon="account-box"
-            keyboardType="number-pad"
-            autocorrect={false}
-            autoCapitalize="none"
-            placeholder="Your Enrollment ID"
-            returnKeyType="send"
-            onSubmitEdditing={handleSubmit}
-            value={studentId}
-            onChangeText={setStudentId}
-          />
-          <Button fullWidth onPress={handleSubmit} isLoading={isLoading}>
-            Login
-          </Button>
-        </Form>
-      </Container>
-    </Wrapper>
+      <Form>
+        <FormInput
+          icon="account-box"
+          keyboardType="number-pad"
+          autocorrect={false}
+          autoCapitalize="none"
+          placeholder="Your Enrollment ID"
+          returnKeyType="send"
+          onSubmitEdditing={handleSubmit}
+          value={studentId}
+          onChangeText={setStudentId}
+        />
+        <Button fullWidth onPress={handleSubmit} isLoading={isLoading}>
+          Login
+        </Button>
+      </Form>
+    </Container>
   );
 }

@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import ContentLoader, { Rect, Circle } from 'react-content-loader/native';
 
 import { Dimensions, View, Animated } from 'react-native';
 import { loadOrdersRequest } from '~/store/reducers/orders/actions';
@@ -15,7 +13,9 @@ import Wrapper from '~/components/Wrapper';
 import Order from '~/components/DataDisplay/Order';
 import Button from '~/components/Button';
 import AddNew from './AddNew';
-import colors from '~/styles/colors';
+import Chart from './Chart';
+import Skeleton from './Skeleton';
+import Empty from '~/components/Empty/';
 
 export default function Orders({ navigation }) {
   const orders = useSelector(state => state.orders.list);
@@ -66,7 +66,7 @@ export default function Orders({ navigation }) {
   const answer = orders && orders.map(order => order.answer);
   const answersCount = answer && answer.filter(item => item !== null).length;
   const ordersResult =
-    orders.length === 0
+    orders && orders.length === 0
       ? 0
       : (Math.round((answersCount / questionsCount) * 100) * 100) / 100;
 
@@ -89,35 +89,22 @@ export default function Orders({ navigation }) {
             marginRight: -5,
           }}
         >
-          <AnimatedCircularProgress
-            size={100}
-            width={5}
-            fill={ordersResult}
-            tintColor={colors.primary}
-            backgroundColor={colors.greyLight}
-            lineCap="round"
-          >
-            {fill => <LabelChart>{ordersResult}%</LabelChart>}
-          </AnimatedCircularProgress>
-          <Label>Answered Questions</Label>
+          <Chart data={ordersResult} />
 
           {isLoading ? (
-            <ContentLoader
-              height={300}
-              width={400}
-              speed={2}
-              primaryColor="#f3f3f3"
-              secondaryColor={colors.greyLight}
-            >
-              <Circle cx="50" cy="50" r="40" />
-              <Circle cx="180" cy="50" r="40" />
-              <Circle cx="300" cy="50" r="40" />
-            </ContentLoader>
+            <Skeleton />
           ) : (
             <OrderList
               data={orders}
               extraData={orders}
               keyExtractor={order => String(order.id)}
+              ListEmptyComponent={() => (
+                <Empty
+                  src=""
+                  title="No help orders yet"
+                  content="If you need any help from our instructors, go ahead and ask your first question."
+                />
+              )}
               renderItem={({ item: order }) => (
                 <Order
                   data={order}
@@ -130,9 +117,9 @@ export default function Orders({ navigation }) {
           <View
             style={{
               alignItems: 'flex-end',
+              justifyContent: 'flex-end',
               width: '100%',
-              position: 'absolute',
-              bottom: 30,
+              marginTop: 30,
             }}
           >
             <Button circle onPress={handleShowModal}>
