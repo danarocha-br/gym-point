@@ -22,7 +22,7 @@ import Checkin from '~/components/DataDisplay/Checkin';
 import illustration from '~/assets/Illustration.png';
 import ChartsContainer from './Charts';
 import Empty from '~/components/Empty/';
-import { SkeletonContent } from './Skeleton';
+import { SkeletonContent, SkeletonGraph } from './Skeleton';
 
 const Dashboard = () => {
   const checkins = useSelector(state => state.checkins.list);
@@ -63,7 +63,15 @@ const Dashboard = () => {
     return 'night';
   }
 
-  const flatList = useRef(null);
+  // const flatList = useRef(null);
+
+  const didMountRef = useRef(false);
+
+  useEffect(() => {
+    if (didMountRef.current) {
+      dispatch(loadCheckinsRequest(studentId));
+    } else didMountRef.current = true;
+  }, []);
 
   return (
     <Wrapper color="light">
@@ -98,11 +106,11 @@ const Dashboard = () => {
           <SkeletonContent />
         ) : (
           <CheckinList
-            ref={flatList}
-            onContentSizeChange={() => flatList.current.scrollToEnd()}
             data={checkins}
             extraData={checkins}
-            keyExtractor={item => String(item.id)}
+            keyExtractor={checkin =>
+              String(Math.floor(Math.random(checkin.id)))
+            }
             ListEmptyComponent={() => (
               <Empty
                 src=""
@@ -110,8 +118,8 @@ const Dashboard = () => {
                 content="Make your first checkin by clicking on the green add button."
               />
             )}
-            renderItem={({ item, index }) => (
-              <Checkin data={item} index={index} />
+            renderItem={({ item: checkin, index }) => (
+              <Checkin data={checkin} index={index} />
             )}
           />
         )}

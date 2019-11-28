@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 import colors from '~/styles/colors';
 
-export const Main = styled.ScrollView`
+export const Main = styled.View`
   flex: 4;
   padding: 0px 30px;
   margin-top: 30px;
@@ -21,6 +21,7 @@ export const CheckinList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
   color: white;
+  height: 100%;
 `;
 
 export const Greeting = styled.View`
@@ -45,7 +46,8 @@ export const Name = styled.Text`
 export const Image = styled.Image`
   flex: 1;
   position: relative;
-  right: -12px;
+  right: -5px;
+  top: 8px;
 `;
 
 export const Title = styled.Text`
@@ -77,4 +79,10 @@ export const Charts = styled.View`
 
 export const ChartGroup = styled.View`
   align-items: center;
+`;
+
+export const CloseBtn = styled.TouchableOpacity`
+  align-items: flex-end;
+  position: relative;
+  top: -10px;
 `;

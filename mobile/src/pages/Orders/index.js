@@ -7,7 +7,7 @@ import { loadOrdersRequest } from '~/store/reducers/orders/actions';
 import { showModal } from '~/store/reducers/modals/actions';
 
 import { Container, Header, Title } from '~/styles/layout';
-import { OrderList, LabelChart, Label } from './styles';
+import { OrderList } from './styles';
 
 import Wrapper from '~/components/Wrapper';
 import Order from '~/components/DataDisplay/Order';
