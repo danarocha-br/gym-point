@@ -30,10 +30,9 @@ export function makeCheckinRequest(id) {
   };
 }
 
-export function makeCheckinSuccess(checkin) {
+export function makeCheckinSuccess() {
   return {
     type: '@checkin/CHECKIN_SUCCESS',
-    payload: { checkin },
   };
 }
 
