@@ -94,38 +94,41 @@ export default function Orders({ navigation }) {
           {isLoading ? (
             <Skeleton />
           ) : (
-            <OrderList
-              data={orders}
-              extraData={orders}
-              keyExtractor={order => String(order.id)}
-              ListEmptyComponent={() => (
-                <Empty
-                  src=""
-                  title="No help orders yet"
-                  content="If you need any help from our instructors, go ahead and ask your first question."
-                />
-              )}
-              renderItem={({ item: order }) => (
-                <Order
-                  data={order}
-                  onPress={() => navigation.navigate('OrderDetails', { order })}
-                />
-              )}
-            />
+            <>
+              <OrderList
+                data={orders}
+                extraData={orders}
+                keyExtractor={order => String(order.id)}
+                ListEmptyComponent={() => (
+                  <Empty
+                    src=""
+                    title="No help orders yet"
+                    content="If you need any help from our instructors, go ahead and ask your first question."
+                  />
+                )}
+                renderItem={({ item: order }) => (
+                  <Order
+                    data={order}
+                    onPress={() =>
+                      navigation.navigate('OrderDetails', { order })
+                    }
+                  />
+                )}
+              />
+              <View
+                style={{
+                  alignItems: 'flex-end',
+                  justifyContent: 'flex-end',
+                  width: '100%',
+                  marginTop: 30,
+                }}
+              >
+                <Button circle onPress={handleShowModal}>
+                  <Icon name="plus" size={40} />
+                </Button>
+              </View>
+            </>
           )}
-
-          <View
-            style={{
-              alignItems: 'flex-end',
-              justifyContent: 'flex-end',
-              width: '100%',
-              marginTop: 30,
-            }}
-          >
-            <Button circle onPress={handleShowModal}>
-              <Icon name="plus" size={40} />
-            </Button>
-          </View>
         </AnimatedBackground>
       </Wrapper>
     </>

@@ -24,6 +24,7 @@ import illustration from '~/assets/Illustration.png';
 import ChartsContainer from './Charts';
 import Empty from '~/components/Empty/';
 import { SkeletonContent, SkeletonGraph } from './Skeleton';
+import checkins from '../../store/reducers/checkins/index';
 
 const Dashboard = () => {
   const checkins = useSelector(state => state.checkins.list);
@@ -82,7 +83,6 @@ const Dashboard = () => {
 
       <Main>
         <Title>Checkin Status</Title>
-
         {!checkins ? (
           <SkeletonGraph />
         ) : (
@@ -101,7 +101,7 @@ const Dashboard = () => {
         ) : (
           <CheckinList
             data={checkins}
-            extraData={checkins}
+            extraData={checkins.length}
             keyExtractor={(item, index) => item + index}
             ListEmptyComponent={() => (
               <Empty
