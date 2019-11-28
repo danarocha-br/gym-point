@@ -70,16 +70,17 @@ Finally, you will need a rest client to test "**GymPoint**". Here are some:
 
 ## :rocket: Built With
 
-- [NodJS](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/)
 - [Docker](https://www.docker.com/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Redis](https://redis.io/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [Expo](https://expo.io/)
-- [React-Native](https://facebook.github.io/react-native/)
+- [React Native](https://facebook.github.io/react-native/)
 - [React Native Gesture Handler](https://kmagiera.github.io/react-native-gesture-handler/)
 - [React Navigation](https://reactnavigation.org/)
+- [React JS](https://reactjs.org/)
 - [Redux](https://redux.js.org/)
+- [Sagas](https://redux-saga.js.org/)
 - [PropTypes](https://github.com/facebook/prop-types)
 
 ## Tools
@@ -95,8 +96,6 @@ Finally, you will need a rest client to test "**GymPoint**". Here are some:
 ## What's next
 
 - [ ] REST API (with Node js) - tests
-- [ ] iOS & Android Apps (based on react-native)
-- [ ] Website App in any browser (based on react)
 
 ---
 
