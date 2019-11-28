@@ -37,6 +37,7 @@ function* loadStudents({ payload }) {
     yield put(loadStudentsSuccess(students));
   } catch (error) {
     yield put(loadStudentsFailure(error));
+    console.tron.log(error);
   }
 }
 
