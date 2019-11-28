@@ -26,11 +26,13 @@ export default function checkins(state = INITIAL_STATE, action) {
         draft.showError = action.payload.error;
         break;
       }
+
       // ADD
       case '@checkin/CHECKIN_REQUEST': {
         draft.loading = true;
         break;
       }
+
       case '@checkin/CHECKIN_SUCCESS': {
         draft.current = action.payload.checkin;
         draft.list = [...draft.list, action.payload.checkin];

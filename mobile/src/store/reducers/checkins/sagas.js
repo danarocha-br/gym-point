@@ -1,6 +1,5 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { Alert } from 'react-native';
-import { parseISO, formatRelative } from 'date-fns';
 
 import api from '~/services/api';
 
@@ -24,6 +23,7 @@ export function* loadCheckins({ payload }) {
     yield put(loadCheckinsFailure());
   }
 }
+
 export function* makeCheckin({ payload }) {
   try {
     const { id } = payload;
@@ -31,6 +31,7 @@ export function* makeCheckin({ payload }) {
     const response = yield call(api.post, `/students/${id}/checkins`);
 
     yield put(makeCheckinSuccess(response.data));
+
     yield put(loadCheckinsRequest(id));
   } catch (error) {
     Alert.alert(`Error: ${error.response.data.error}`);

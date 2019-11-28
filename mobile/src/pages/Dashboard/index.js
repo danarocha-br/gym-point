@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isThisMonth, parseISO, getHours } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import { makeCheckinRequest } from '~/store/reducers/checkins/actions';
 import { loadCheckinsRequest } from '../../store/reducers/checkins/actions';
+
+import { Animated } from 'react-native';
 
 import {
   Main,
@@ -22,7 +23,7 @@ import Checkin from '~/components/DataDisplay/Checkin';
 import illustration from '~/assets/Illustration.png';
 import ChartsContainer from './Charts';
 import Empty from '~/components/Empty/';
-import { SkeletonContent } from './Skeleton';
+import { SkeletonContent, SkeletonGraph } from './Skeleton';
 
 const Dashboard = () => {
   const checkins = useSelector(state => state.checkins.list);
@@ -63,7 +64,8 @@ const Dashboard = () => {
     return 'night';
   }
 
-  const flatList = useRef(null);
+  // header animation
+  const [scrollOffset, setScrollOffeset] = useState(new Animated.Value(0));
 
   return (
     <Wrapper color="light">
@@ -98,11 +100,9 @@ const Dashboard = () => {
           <SkeletonContent />
         ) : (
           <CheckinList
-            ref={flatList}
-            onContentSizeChange={() => flatList.current.scrollToEnd()}
             data={checkins}
             extraData={checkins}
-            keyExtractor={item => String(item.id)}
+            keyExtractor={(item, index) => item + index}
             ListEmptyComponent={() => (
               <Empty
                 src=""
@@ -110,8 +110,8 @@ const Dashboard = () => {
                 content="Make your first checkin by clicking on the green add button."
               />
             )}
-            renderItem={({ item, index }) => (
-              <Checkin data={item} index={index} />
+            renderItem={({ item: checkin, index }) => (
+              <Checkin data={checkin} index={index} />
             )}
           />
         )}
