@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import logo from '~/assets/logo.svg';
 import { Nav, Menu, Profile, ProfileList } from './styles';
-import { signOut } from '~/store/actions';
+import { signOut } from '~/store/reducers/auth/actions';
 
 export default function Header() {
   const [visible, setVisibility] = useState(false);

@@ -8,7 +8,7 @@ import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Form from '~/components/Form';
 import Avatar from '~/components/Avatar';
-import { updateProfileRequest } from '~/store/actions';
+import { updateProfileRequest } from '~/store/reducers/user/actions';
 
 const schema = Yup.object().shape({
   name: Yup.string(),
