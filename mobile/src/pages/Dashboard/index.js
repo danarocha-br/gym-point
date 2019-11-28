@@ -1,10 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isThisMonth, parseISO, getHours } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import { makeCheckinRequest } from '~/store/reducers/checkins/actions';
 import { loadCheckinsRequest } from '../../store/reducers/checkins/actions';
+
+import { Animated } from 'react-native';
 
 import {
   Main,
@@ -63,15 +64,8 @@ const Dashboard = () => {
     return 'night';
   }
 
-  // const flatList = useRef(null);
-
-  const didMountRef = useRef(false);
-
-  useEffect(() => {
-    if (didMountRef.current) {
-      dispatch(loadCheckinsRequest(studentId));
-    } else didMountRef.current = true;
-  }, []);
+  // header animation
+  const [scrollOffset, setScrollOffeset] = useState(new Animated.Value(0));
 
   return (
     <Wrapper color="light">
@@ -108,9 +102,7 @@ const Dashboard = () => {
           <CheckinList
             data={checkins}
             extraData={checkins}
-            keyExtractor={checkin =>
-              String(Math.floor(Math.random(checkin.id)))
-            }
+            keyExtractor={(item, index) => item + index}
             ListEmptyComponent={() => (
               <Empty
                 src=""
