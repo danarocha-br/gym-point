@@ -15,6 +15,7 @@ export const SummaryCard = styled.div`
   }};
   border-radius: 20px;
   height: 120px;
+  padding: 10px;
   ${fluidRange(
     {
       prop: 'font-size',
@@ -58,23 +59,13 @@ export const SummaryCard = styled.div`
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr;
   grid-gap: 1rem;
 
   @media (min-width: 991px) {
     grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 350px;
+    height: calc(100% - 60px);
   }
-`;
-
-export const SecondaryContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 120px;
-  grid-gap: 1rem;
-  background-color: #ebeef1;
-  border-radius: 20px;
-  margin-top: 20px;
 `;
 
 export const SummaryWrapper = styled.div`
@@ -88,7 +79,8 @@ export const SummaryWrapper = styled.div`
 export const Overview = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: ${props => (props.bordered ? 'initial' : 'space-between')};
+  align-items: ${props => (props.bordered ? 'center' : '')};
   background-color: ${props => (props.bordered ? '' : '#ebeef1')};
   border: ${props => (props.bordered ? '2px solid var(--color-blue)' : '')};
   padding: 20px;

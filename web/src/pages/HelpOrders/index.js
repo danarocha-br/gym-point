@@ -18,13 +18,19 @@ export default function HelpOrders() {
   const hasError = useSelector(state => state.orders.showError);
   const modal = useSelector(state => state.modals.modal);
 
+  const filteredOrders = useMemo(
+    () => orders && orders.filter(order => !order.answer),
+    [orders]
+  );
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadOrdersRequest());
   }, []); // eslint-disable-line
 
-  const ordersTotal = useMemo(() => orders && orders.length, [orders]);
+  const openOrdersTotal = orders && filteredOrders.length;
+  const ordersTotal = orders && orders.length;
 
   const [columns] = useState([
     { path: 'student', label: 'Student' },
@@ -54,10 +60,12 @@ export default function HelpOrders() {
         <h3>Managing Student Questions</h3>
         <Stats
           label="Current Open Questions"
+          data={openOrdersTotal <= 0 || null ? '0' : `${openOrdersTotal}`}
+        />
+        <Stats
+          label="Total Questions Asked"
           data={ordersTotal <= 0 || null ? '0' : `${ordersTotal}`}
         />
-        <Stats label="Total Questions Asked" data="10" />
-        <Stats label="Avg Questions Asked per Student" data="10" />
       </ColLeft>
 
       <ColRight>
@@ -72,7 +80,7 @@ export default function HelpOrders() {
             <Table
               isLoading={isLoading}
               columns={columns}
-              data={orders}
+              data={filteredOrders}
               ariaLabel="orders"
             />
           )}

@@ -45,5 +45,5 @@ FormWrapper.propTypes = {
   /**
    * If need an initial data.
    */
-  initialData: PropTypes.objectOf(PropTypes.any),
+  initialData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 };

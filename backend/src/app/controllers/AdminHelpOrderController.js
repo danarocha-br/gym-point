@@ -9,7 +9,7 @@ class AdminHelpOrderController {
   async index(req, res) {
     const helpOrders = await HelpOrder.findAll({
       where: {
-        answer: null,
+        // answer: null,
       },
       order: [['createdAt']],
       attributes: ['id', 'question', 'answer', 'answer_at', 'createdAt'],

@@ -13,13 +13,13 @@ import {
   SummaryCard,
   SummaryWrapper,
   Container,
-  SecondaryContainer,
   Overview,
   IconFrame,
 } from './styles';
 
 import Card from '~/components/Card';
 import Gym from '~/assets/gym.svg';
+import OrdersChart from './ordersChart';
 
 export default function Dashboard() {
   const dispatch = useDispatch();
@@ -35,6 +35,7 @@ export default function Dashboard() {
   const students = useSelector(state => state.students.list);
   const enrollments = useSelector(state => state.enrollments.list);
   const plans = useSelector(state => state.plans.list);
+  const orders = useSelector(state => state.orders.list);
   const studentsTotal = useMemo(() => students && students.length, [students]);
 
   // AVG Active Registered Students
@@ -45,6 +46,21 @@ export default function Dashboard() {
 
   // AVG Plans
   const getPlansTotal = plans && plans.length;
+
+  // CHART Data
+
+  // get status for the chart
+  const questionsCount = orders && orders.length;
+  const answer = orders && orders.map(order => order.answer);
+  const answersCount = answer && answer.filter(item => item !== null).length;
+
+  const chartData = [
+    {
+      angle: questionsCount,
+      color: '#536cfa',
+    },
+    { angle: answersCount, color: '#ebeef1' },
+  ];
 
   return (
     <PageWrapper>
@@ -111,11 +127,16 @@ export default function Dashboard() {
               <strong style={{ color: 'var(--color-blue)' }}>
                 Help Orders
               </strong>
+
+              <OrdersChart data={chartData} />
+              <p style={{ paddingBottom: 15 }}>
+                Total Questions: <strong>{questionsCount}</strong>
+              </p>
+              <p>
+                Open Questions: <strong>{answersCount}</strong>
+              </p>
             </Overview>
           </Container>
-          <SecondaryContainer>
-            <p>some content goes here ... </p>
-          </SecondaryContainer>
         </Card>
       </ColRight>
     </PageWrapper>

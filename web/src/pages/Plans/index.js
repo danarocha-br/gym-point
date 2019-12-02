@@ -25,7 +25,7 @@ export default function Plans() {
 
   useEffect(() => {
     dispatch(loadPlansRequest());
-  }, []);
+  }, []); // eslint-disable-line
 
   const plansTotal = useMemo(() => plans && plans.length, [plans]);
 

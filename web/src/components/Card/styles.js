@@ -6,7 +6,7 @@ export const CardWrapper = styled.div`
   ${fluidRange(
     {
       prop: 'padding',
-      fromSize: '15px',
+      fromSize: '20px',
       toSize: '35px',
     },
     '320px',

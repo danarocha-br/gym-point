@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 
 import { Wrapper, Col, Container } from './styles';
@@ -8,6 +7,7 @@ import logo from '~/assets/logoNegative.svg';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Form from '~/components/Form';
+import TextInput from '~/components/Form/TextInput';
 
 import { signInRequest } from '~/store/reducers/auth/actions';
 
@@ -40,11 +40,17 @@ export default function Login() {
           <Col>
             <Card>
               <Form schema={schema} onSubmit={handleSubmit}>
-                <Input name="email" type="email" placeholder="Your email" />
-                <Input
+                <TextInput
+                  name="email"
+                  title="Your e-mail"
+                  type="email"
+                  required
+                />
+                <TextInput
                   name="password"
+                  title="Your Password"
                   type="password"
-                  placeholder="Your password"
+                  required
                 />
 
                 <Button label="Login" isLoading={isLoading} onSubmit />

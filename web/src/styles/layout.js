@@ -36,6 +36,10 @@ export const ColLeft = styled.div`
     flex-direction: column;
     flex: 1;
     padding: 35px 70px 20px 0;
+
+    h3 {
+      margin-bottom: 60px;
+    }
   }
 `;
 
