@@ -44,6 +44,11 @@ export default function enrollments(state = INITIAL_STATE, action) {
         break;
       }
 
+      case '@enrollment/UPDATE_FAILURE': {
+        draft.loading = false;
+        break;
+      }
+
       // ADD
       case '@enrollment/ADD_REQUEST': {
         draft.loading = true;
@@ -52,6 +57,10 @@ export default function enrollments(state = INITIAL_STATE, action) {
       case '@enrollment/ADD_SUCCESS': {
         draft.enrollment = action.payload.enrollment;
         draft.list = [...draft.list, action.payload.enrollment];
+        break;
+      }
+      case '@enrollment/ADD_FAILURE': {
+        draft.loading = false;
         break;
       }
 

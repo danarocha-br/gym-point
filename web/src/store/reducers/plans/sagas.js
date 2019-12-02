@@ -45,6 +45,7 @@ function* addPlan({ payload }) {
       `There was an error when adding the plans: ${error.response.data.error}`
     );
     yield put(addPlanFailure(error));
+    yield put(hideModal());
   }
 }
 
@@ -68,6 +69,7 @@ function* updatePlan({ payload }) {
       `There was an error when updating the plan: ${error.response.data.error}`
     );
     yield put(updatePlanFailure());
+    yield put(hideModal());
   }
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Input } from '@rocketseat/unform';
-import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { PageWrapper, ColLeft, ColRight } from '~/styles/layout';
 import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Form from '~/components/Form';
+import TextInput from '~/components/Form/TextInput';
 import Avatar from '~/components/Avatar';
 import { updateProfileRequest } from '~/store/reducers/user/actions';
 
@@ -43,24 +43,24 @@ export default function Profile() {
         <Card fullHeight>
           <Form schema={schema} initialData={profile} onSubmit={handleSubmit}>
             <Avatar name="avatar_id" />
-            <Input name="name" placeholder="Your name" />
-            <Input name="email" type="email" placeholder="Your email" />
+            <TextInput name="name" title="Your name" />
+            <TextInput name="email" type="email" title="Your email" />
 
             <hr />
-            <Input
+            <TextInput
               name="oldPassword"
               type="password"
-              placeholder="Your password"
+              title="Your password"
             />
-            <Input
+            <TextInput
               name="newPassword"
               type="password"
-              placeholder="New password"
+              title="New password"
             />
-            <Input
+            <TextInput
               name="confirmPassword"
               type="password"
-              placeholder="Confirm your password"
+              title="Confirm your password"
             />
 
             <Button

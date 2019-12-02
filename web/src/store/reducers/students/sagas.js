@@ -30,7 +30,7 @@ function* loadStudents({ payload }) {
         ...student,
         birthday: format(parsedBirthday, 'yyyy-MM-dd'),
         age: differenceInYears(new Date(), parsedBirthday),
-        updatedAt: format(parsedUpdated, 'dd/MM/yyyy'),
+        updatedAt: format(parsedUpdated, 'yyyy-MM-dd'),
       };
     });
 
@@ -56,6 +56,7 @@ function* addStudent({ payload }) {
       `There was an error when adding the student: ${error.response.data.error}`
     );
     yield put(addStudentFailure(error));
+    yield put(hideModal());
   }
 }
 
@@ -75,6 +76,7 @@ function* updateStudent({ payload }) {
       `There was an error when updating the student: ${error.response.data.error}`
     );
     yield put(updateStudentFailure());
+    yield put(hideModal());
   }
 }
 

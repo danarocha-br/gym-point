@@ -75,9 +75,6 @@ export default function Plans() {
     <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Gym Plans</h3>
-        <p style={{ marginBottom: '30px' }}>
-          Check out some data from current plans.
-        </p>
 
         <Stats
           label="Current Plans"

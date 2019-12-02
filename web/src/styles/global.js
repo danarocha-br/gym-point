@@ -115,21 +115,23 @@ export default createGlobalStyle`
 
   input, textarea {
     color: var(--color-grey-dark);
-    font-size: 16px;
     font-weight: 500;
     border: 1px solid #d9dfe5;
-    border-radius: 4px;
-    height: 50px;
+    height: 55px;
+    border-radius: 7px;
     padding: 0 15px;
+    box-sizing: border-box;
+    width: 100%;
 
     &::placeholder {
       color: var(--color-grey-md);
-      font-weight: 400;
+      opacity: 0.7;
     }
   }
 
   textarea {
     padding: 10px;
+    font-size: 16px;
   }
 
 

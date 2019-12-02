@@ -39,18 +39,27 @@ export default function plans(state = INITIAL_STATE, action) {
         });
         break;
       }
+      case '@plan/UPDATE_FAILURE': {
+        draft.loading = false;
+        break;
+      }
 
       // ADD
       case '@plan/ADD_REQUEST': {
         draft.loading = true;
         break;
       }
+
       case '@plan/ADD_SUCCESS': {
         draft.plan = action.payload.plan;
         draft.list = [...draft.list, action.payload.plan];
         break;
       }
 
+      case '@plan/ADD_FAILURE': {
+        draft.loading = false;
+        break;
+      }
       // DELETE
       case '@plan/DELETE_REQUEST': {
         draft.loading = false;

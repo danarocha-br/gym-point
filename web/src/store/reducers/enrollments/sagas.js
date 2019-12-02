@@ -32,8 +32,8 @@ function* loadEnrollments() {
         student: enrollment.student.name,
         plan: enrollment.plan.title,
         plan_id: enrollment.plan.id,
-        start_date: format(parsedStartDate, 'dd/MM/yyyy'),
-        end_date: format(parsedEndDate, 'dd/MM/yyyy'),
+        start_date: format(parsedStartDate, 'yyyy-MM-dd'),
+        end_date: format(parsedEndDate, 'yyyy-MM-dd'),
       };
     });
 
@@ -56,6 +56,7 @@ function* addEnrollment({ payload }) {
       `There was an error when adding the enrollments: ${error.response.data.error}`
     );
     yield put(addEnrollmentFailure(error));
+    yield put(hideModal());
   }
 }
 
@@ -77,6 +78,7 @@ function* updateEnrollment({ payload }) {
       `There was an error when updating the enrollment: ${error.response.data.error}`
     );
     yield put(updateEnrollmentFailure());
+    yield put(hideModal());
   }
 }
 

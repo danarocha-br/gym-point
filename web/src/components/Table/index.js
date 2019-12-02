@@ -9,12 +9,15 @@ import TableBody from './TableBody';
 export default function Table({ columns, data, ariaLabel, isLoading }) {
   return (
     <>
-      {isLoading && <Skeleton count={6} height={50} />}
-      {data && (
-        <TableWrapper role="table" aria-label={ariaLabel}>
-          <TableHeader columns={columns} />
-          <TableBody columns={columns} data={data} />
-        </TableWrapper>
+      {isLoading ? (
+        <Skeleton count={6} height={50} />
+      ) : (
+        data && (
+          <TableWrapper role="table" aria-label={ariaLabel}>
+            <TableHeader columns={columns} />
+            <TableBody columns={columns} data={data} />
+          </TableWrapper>
+        )
       )}
     </>
   );

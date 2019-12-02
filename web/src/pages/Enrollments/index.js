@@ -76,9 +76,6 @@ export default function Enrollments() {
     <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Enrollments</h3>
-        <p style={{ marginBottom: '30px' }}>
-          Check out some data from current enrollments.
-        </p>
 
         <Stats
           label="Current Enrollments"

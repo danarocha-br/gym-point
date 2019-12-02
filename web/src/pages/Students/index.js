@@ -76,9 +76,7 @@ export default function Students() {
     <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Students</h3>
-        <p style={{ marginBottom: '30px' }}>
-          Check out some data from students.
-        </p>
+
         <Stats
           label="Total of Students"
           data={studentsTotal <= 0 || null ? '0' : `${studentsTotal}`}

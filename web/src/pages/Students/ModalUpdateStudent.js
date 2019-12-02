@@ -1,12 +1,12 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from '@rocketseat/unform';
 
 import { updateStudentRequest } from '~/store/reducers/students/actions';
 
 import Modal from '~/components/Modal';
 import Form from '~/components/Form';
+import TextInput from '~/components/Form/TextInput';
 import Button from '~/components/Button';
 
 export default function ModalAddStudent({ student }) {
@@ -15,17 +15,11 @@ export default function ModalAddStudent({ student }) {
   const dispatch = useDispatch();
 
   const schema = Yup.object().shape({
-    name: Yup.string().required(),
-    email: Yup.string()
-      .email()
-      .required(),
-    birthday: Yup.date().required(),
-    weight: Yup.number()
-      .positive()
-      .required(),
-    height: Yup.number()
-      .positive()
-      .required(),
+    name: Yup.string(),
+    email: Yup.string().email(),
+    birthday: Yup.date(),
+    weight: Yup.number().positive(),
+    height: Yup.number().positive(),
   });
 
   const { id } = student;
@@ -33,14 +27,15 @@ export default function ModalAddStudent({ student }) {
   function handleSubmit({ name, email, birthday, weight, height }) {
     dispatch(updateStudentRequest(id, name, email, birthday, weight, height));
   }
+
   return (
     <Modal title={`Edit ${student.name} Details:`}>
       <Form schema={schema} initialData={student} onSubmit={handleSubmit}>
-        <Input name="name" placeholder="Student name" />
-        <Input name="email" type="email" placeholder="Student e-mail" />
-        <Input name="birthday" placeholder="Student birthday" />
-        <Input name="weight" placeholder="Student weight" />
-        <Input name="height" placeholder="Student height" />
+        <TextInput name="name" title="Name" />
+        <TextInput name="email" type="email" title="E-mail" />
+        <TextInput name="birthday" title="E-mail" />
+        <TextInput name="height" title="Height" />
+        <TextInput name="weight" title="Weight" />
         <Button label="Update Data" isLoading={isLoading} />
       </Form>
     </Modal>

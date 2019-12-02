@@ -1,11 +1,12 @@
 import React from 'react';
+import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from '@rocketseat/unform';
 
 import { addPlanRequest } from '~/store/reducers/plans/actions';
 
 import Modal from '~/components/Modal';
 import Form from '~/components/Form';
+import TextInput from '~/components/Form/TextInput';
 import Button from '~/components/Button';
 
 export default function ModalAddPlan() {
@@ -13,15 +14,30 @@ export default function ModalAddPlan() {
 
   const dispatch = useDispatch();
 
+  const schema = Yup.object().shape({
+    title: Yup.string().required('Please insert a title.'),
+    duration: Yup.number()
+      .positive()
+      .required('Please insert a plan duration.'),
+    price: Yup.number()
+      .positive()
+      .required('Please insert a plan price.'),
+  });
+
   function handleSubmit({ title, duration, price }) {
     dispatch(addPlanRequest(title, duration, price));
   }
   return (
     <Modal title="Add New Plan">
-      <Form onSubmit={handleSubmit}>
-        <Input name="title" placeholder="Plan title" />
-        <Input name="duration" type="number" placeholder="Plan duration" />
-        <Input name="price" type="number" placeholder="Plan price" />
+      <Form schema={schema} onSubmit={handleSubmit}>
+        <TextInput name="title" title="Plan title" required />
+        <TextInput
+          name="duration"
+          type="number"
+          title="Plan duration"
+          required
+        />
+        <TextInput name="price" type="number" title="Plan price" required />
         <Button label="Add Plan" isLoading={isLoading} />
       </Form>
     </Modal>

@@ -1,12 +1,13 @@
 import React from 'react';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { Input } from '@rocketseat/unform';
 
 import { addStudentRequest } from '~/store/reducers/students/actions';
 
 import Modal from '~/components/Modal';
 import Form from '~/components/Form';
+import TextInput from '~/components/Form/TextInput';
+import DatePicker from '~/components/Form/DatePicker';
 import Button from '~/components/Button';
 
 export default function ModalAddStudent() {
@@ -15,17 +16,17 @@ export default function ModalAddStudent() {
   const dispatch = useDispatch();
 
   const schema = Yup.object().shape({
-    name: Yup.string().required(),
+    name: Yup.string().required('Please insert the student name'),
     email: Yup.string()
       .email()
-      .required(),
-    birthday: Yup.date().required(),
+      .required('Please insert the student e-mail'),
+    birthday: Yup.date().required('Please insert the student birthday'),
     weight: Yup.number()
       .positive()
-      .required(),
+      .required('Please insert the student weight'),
     height: Yup.number()
       .positive()
-      .required(),
+      .required('Please insert the student height'),
   });
 
   function handleSubmit({ name, email, birthday, weight, height }) {
@@ -34,11 +35,11 @@ export default function ModalAddStudent() {
   return (
     <Modal title="Add New Student">
       <Form onSubmit={handleSubmit} schema={schema}>
-        <Input name="name" placeholder="Student name" />
-        <Input name="email" type="email" placeholder="Student email" />
-        <Input name="birthday" placeholder="Student birthday" />
-        <Input name="weight" placeholder="Student weight" />
-        <Input name="height" placeholder="Student height" />
+        <TextInput name="name" title="Name" required />
+        <TextInput name="email" type="email" title="Email" required />
+        <DatePicker name="birthday" />
+        <TextInput name="height" title="Height" required />
+        <TextInput name="weight" title="Weight" required />
         <Button label="Add Student" isLoading={isLoading} />
       </Form>
     </Modal>

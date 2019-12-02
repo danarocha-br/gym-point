@@ -20,6 +20,7 @@ export function InputText({ style, name, title, type, ...rest }) {
 
 InputText.defaultProps = {
   style: {},
+  type: 'text',
 };
 
 InputText.propTypes = {
@@ -34,7 +35,7 @@ InputText.propTypes = {
   /**
    * Define the label type for the input.
    */
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   /**
    * Applies a style for the input.
    */

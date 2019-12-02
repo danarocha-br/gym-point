@@ -5,28 +5,24 @@ import { size } from '~/styles/typography';
 
 export const Container = styled.div`
   position: relative;
-  margin-bottom: 10px;
 
   label::before {
     content: attr(data-title);
     color: var(--color-grey-md);
-    font-size: ${size.type14};
+    font-size: ${size.type16};
+    font-weight: 500;
+    opacity: 0.7;
     position: absolute;
     top: 0;
     left: 15px;
-    line-height: 47px;
+    line-height: 50px;
     transition: 300ms all;
   }
 
   input {
     color: var(--color-grey-dark);
     font-size: ${size.type14};
-    width: 100%;
     line-height: 40px;
-    padding: 0 15px;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 7px;
 
     &:focus {
       outline: 0;
@@ -41,9 +37,8 @@ export const Container = styled.div`
   input:focus + label::before,
   input:valid + label::before {
     line-height: 20px;
-    font-size: ${size.type12};
-    top: -10px;
-    background: #fff;
+    font-size: 11px;
+    top: 4px;
     padding: 0 6px;
     left: 9px;
   }

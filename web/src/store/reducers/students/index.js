@@ -37,16 +37,23 @@ export default function students(state = INITIAL_STATE, action) {
         draft.student = action.payload.student;
         break;
       }
+      case '@student/UPDATE_FAILURE': {
+        draft.loading = false;
+        break;
+      }
 
       // ADD
       case '@student/ADD_REQUEST': {
         draft.loading = true;
         break;
       }
-
       case '@student/ADD_SUCCESS': {
         draft.student = action.payload.student;
         draft.list = [...draft.list, action.payload.student];
+        draft.loading = false;
+        break;
+      }
+      case '@student/ADD_FAILURE': {
         draft.loading = false;
         break;
       }
