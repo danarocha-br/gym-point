@@ -75,13 +75,17 @@ Finally, you will need a rest client to test "**GymPoint**". Here are some:
 - [PostgreSQL](https://www.postgresql.org/)
 - [Redis](https://redis.io/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [React Native](https://facebook.github.io/react-native/)
+- [React Native](https://facebook.github.io/react-native/) - Build the native app using JavaScript and React
 - [React Native Gesture Handler](https://kmagiera.github.io/react-native-gesture-handler/)
-- [React Navigation](https://reactnavigation.org/)
+- [React Navigation](https://reactnavigation.org/) - Router
 - [React JS](https://reactjs.org/)
-- [Redux](https://redux.js.org/)
-- [Sagas](https://redux-saga.js.org/)
+- [Redux](https://redux.js.org/) - React State Manager
+- [Redux-Sagas](https://redux-saga.js.org/) - Side-Effect model for Redux
 - [PropTypes](https://github.com/facebook/prop-types)
+- [Axios](https://github.com/axios/axios) - HTTP Client
+- [ESlint](https://eslint.org/) - Linter
+- [Reactotron](https://infinite.red/reactotron) - Inspector
+- [Styled-Components](https://www.styled-components.com/) - Styles
 
 ## Tools
 
