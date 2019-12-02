@@ -18,12 +18,19 @@ import Error from '~/components/Error';
 import Stats from '~/components/Stats';
 
 export default function Students() {
-  const students = useSelector(state => state.students.list);
+  const students = useSelector(state => state.students.list) || [];
   const isLoading = useSelector(state => state.students.loading);
   const hasError = useSelector(state => state.students.showError);
   const modal = useSelector(state => state.modals.modal);
+  const [search, setSearch] = useState(null);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (search !== null) {
+      dispatch(loadStudentsRequest(search));
+    }
+  }, [search]); // eslint-disable-line
 
   useEffect(() => {
     dispatch(loadStudentsRequest());
@@ -91,7 +98,13 @@ export default function Students() {
         <Card fullHeight>
           <Form>
             <Search>
-              <Input name="search" placeholder="Search a student..." />
+              <Input
+                name="search"
+                type="text"
+                placeholder="Search a student..."
+                checked={search}
+                onChange={e => setSearch(e.target.value)}
+              />
               <Button
                 kind="icon"
                 icon="plus"

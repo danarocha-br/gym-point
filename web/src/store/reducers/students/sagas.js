@@ -20,7 +20,14 @@ import { hideModal } from '../modals/actions';
 
 function* loadStudents({ payload }) {
   try {
-    const response = yield call(api.get, 'students');
+    const { search } = payload;
+    let response = null;
+
+    if (search) {
+      response = yield call(api.get, `students/?name=${search}`);
+    } else {
+      response = yield call(api.get, 'students');
+    }
 
     const students = response.data.map(student => {
       const parsedBirthday = parseISO(student.birthday);
@@ -37,7 +44,6 @@ function* loadStudents({ payload }) {
     yield put(loadStudentsSuccess(students));
   } catch (error) {
     yield put(loadStudentsFailure(error));
-    console.tron.log(error);
   }
 }
 
@@ -51,7 +57,6 @@ function* addStudent({ payload }) {
     yield put(addStudentSuccess(response.data));
     yield put(loadStudentsRequest());
   } catch (error) {
-    console.tron.log(error);
     toast.error(
       `There was an error when adding the student: ${error.response.data.error}`
     );

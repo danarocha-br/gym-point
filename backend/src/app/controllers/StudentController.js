@@ -20,7 +20,6 @@ class StudentController {
 
       return res.status(200).json(students);
     }
-
     // All Students
 
     const { page = 1 } = req.query;
