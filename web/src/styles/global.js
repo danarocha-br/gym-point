@@ -37,7 +37,7 @@ export default createGlobalStyle`
     --color-grey-light: #ddd6f3;
     --color-grey-lightest: #f5f7fa;
     --color-blue: #536cfa;
-    --color-purple: #3b3179;
+    --color-purple: #432f94;
 }
 
   a {
@@ -127,14 +127,16 @@ export default createGlobalStyle`
       color: var(--color-grey-md);
       opacity: 0.7;
     }
+
+    &:disabled {
+      background-color: #d9dfe5;
+    }
   }
 
   textarea {
     padding: 10px;
     font-size: 16px;
   }
-
-
 
   #root .react-loading-skeleton {
     border-radius: 14px;

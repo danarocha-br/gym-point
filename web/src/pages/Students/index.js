@@ -16,6 +16,7 @@ import Button from '~/components/Button';
 import Table from '~/components/Table';
 import Error from '~/components/Error';
 import Stats from '~/components/Stats';
+import StatsContainer from '~/components/Stats/Container';
 
 export default function Students() {
   const students = useSelector(state => state.students.list) || [];
@@ -84,14 +85,16 @@ export default function Students() {
       <ColLeft>
         <h3>Managing Students</h3>
 
-        <Stats
-          label="Total of Students"
-          data={studentsTotal <= 0 || null ? '0' : `${studentsTotal}`}
-        />
-        <Stats
-          label="Age Average of Students"
-          data={students ? studentsAverageAge() : '0'}
-        />
+        <StatsContainer>
+          <Stats
+            label="Total of Students"
+            data={studentsTotal <= 0 || null ? '0' : `${studentsTotal}`}
+          />
+          <Stats
+            label="Age Average of Students"
+            data={students ? studentsAverageAge() : '0'}
+          />
+        </StatsContainer>
       </ColLeft>
 
       <ColRight>

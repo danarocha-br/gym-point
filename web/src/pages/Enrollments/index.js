@@ -15,6 +15,7 @@ import Button from '~/components/Button';
 import Table from '~/components/Table';
 import Error from '~/components/Error';
 import Stats from '~/components/Stats';
+import StatsContainer from '~/components/Stats/Container';
 
 export default function Enrollments() {
   const enrollments = useSelector(state => state.enrollments.list);
@@ -77,10 +78,12 @@ export default function Enrollments() {
       <ColLeft>
         <h3>Managing Enrollments</h3>
 
-        <Stats
-          label="Current Enrollments"
-          data={enrollmentsTotal <= 0 || null ? '0' : `${enrollmentsTotal}`}
-        />
+        <StatsContainer>
+          <Stats
+            label="Current Enrollments"
+            data={enrollmentsTotal <= 0 || null ? '0' : `${enrollmentsTotal}`}
+          />
+        </StatsContainer>
       </ColLeft>
 
       <ColRight>

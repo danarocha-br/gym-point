@@ -10,6 +10,7 @@ import Card from '~/components/Card';
 import Button from '~/components/Button';
 import Table from '~/components/Table';
 import Stats from '~/components/Stats';
+import StatsContainer from '~/components/Stats/Container';
 import Error from '~/components/Error';
 
 export default function HelpOrders() {
@@ -58,14 +59,17 @@ export default function HelpOrders() {
     <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Student Questions</h3>
-        <Stats
-          label="Current Open Questions"
-          data={openOrdersTotal <= 0 || null ? '0' : `${openOrdersTotal}`}
-        />
-        <Stats
-          label="Total Questions Asked"
-          data={ordersTotal <= 0 || null ? '0' : `${ordersTotal}`}
-        />
+
+        <StatsContainer>
+          <Stats
+            label="Current Open Questions"
+            data={openOrdersTotal <= 0 || null ? '0' : `${openOrdersTotal}`}
+          />
+          <Stats
+            label="Total Questions Asked"
+            data={ordersTotal <= 0 || null ? '0' : `${ordersTotal}`}
+          />
+        </StatsContainer>
       </ColLeft>
 
       <ColRight>

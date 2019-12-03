@@ -30,14 +30,15 @@ export default function ModalAddPlan() {
   return (
     <Modal title="Add New Plan">
       <Form schema={schema} onSubmit={handleSubmit}>
-        <TextInput name="title" title="Plan title" required />
+        <TextInput name="title" title="Plan Title" required />
         <TextInput
           name="duration"
           type="number"
-          title="Plan duration"
+          title="Plan Duration"
           required
         />
-        <TextInput name="price" type="number" title="Plan price" required />
+        <TextInput name="price" type="number" title="Plan Price" required />
+
         <Button label="Add Plan" isLoading={isLoading} />
       </Form>
     </Modal>

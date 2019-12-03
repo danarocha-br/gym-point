@@ -1,7 +1,8 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaUserGraduate, FaCheckCircle } from 'react-icons/fa';
 import { MdGroup } from 'react-icons/md';
+import posed from 'react-pose';
 
 import { loadStudentsRequest } from '~/store/reducers/students/actions';
 import { loadPlansRequest } from '~/store/reducers/plans/actions';
@@ -47,8 +48,6 @@ export default function Dashboard() {
   // AVG Plans
   const getPlansTotal = plans && plans.length;
 
-  // CHART Data
-
   // get status for the chart
   const questionsCount = orders && orders.length;
   const answer = orders && orders.map(order => order.answer);
@@ -61,6 +60,27 @@ export default function Dashboard() {
     },
     { angle: answersCount, color: '#ebeef1' },
   ];
+
+  // Table Animation
+  const Table = posed.ul({
+    start: {
+      x: '0%',
+      delayChildren: 200,
+      staggerChildren: 50,
+    },
+    end: { x: '-100%', delay: 300 },
+  });
+
+  const Item = posed.li({
+    start: { y: 0, opacity: 1 },
+    end: { y: 20, opacity: 0 },
+  });
+
+  const [isAnimated, setAnimation] = useState(false);
+
+  useEffect(() => {
+    setTimeout(setAnimation({ isAnimated: !isAnimated }), 1000);
+  }, [isAnimated]);
 
   return (
     <PageWrapper>
@@ -109,17 +129,19 @@ export default function Dashboard() {
 
             <Overview>
               <strong>Gym Plans</strong>
-              <ul>
-                <li>
+
+              <Table pose={isAnimated ? 'start' : 'end'}>
+                <Item>
                   Total Plans <strong>{getPlansTotal}</strong>
-                </li>
-                <li>
+                </Item>
+                <Item>
                   Most Popular Plan <strong>Gold</strong>
-                </li>
-                <li>
+                </Item>
+                <Item>
                   Least Popular Plan <strong>Start</strong>
-                </li>
-              </ul>
+                </Item>
+              </Table>
+
               <img src={Gym} alt="gym" />
             </Overview>
 

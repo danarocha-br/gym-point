@@ -14,6 +14,7 @@ import Button from '~/components/Button';
 import Table from '~/components/Table';
 import Error from '~/components/Error';
 import Stats from '~/components/Stats';
+import StatsContainer from '~/components/Stats/Container';
 
 export default function Plans() {
   const plans = useSelector(state => state.plans.list);
@@ -75,17 +76,18 @@ export default function Plans() {
     <PageWrapper pose={pose}>
       <ColLeft>
         <h3>Managing Gym Plans</h3>
-
-        <Stats
-          label="Current Plans"
-          data={plansTotal <= 0 || null ? '0' : `${plansTotal}`}
-        />
-        <Stats
-          label="Age Average Plans Price"
-          data={plans ? getPlansAvgPrice() : '0'}
-        />
-        <Stats label="Most Popular Plan" data="Start" />
-        <Stats label="Least Popular Plan" data="Gold" />
+        <StatsContainer>
+          <Stats
+            label="Current Plans"
+            data={plansTotal <= 0 || null ? '0' : `${plansTotal}`}
+          />
+          <Stats
+            label="Age Average Plans Price"
+            data={plans ? getPlansAvgPrice() : '0'}
+          />
+          <Stats label="Most Popular Plan" data="Start" />
+          <Stats label="Least Popular Plan" data="Gold" />
+        </StatsContainer>
       </ColLeft>
 
       <ColRight>
