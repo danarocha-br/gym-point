@@ -45,6 +45,15 @@ export default function Plans() {
     return parseInt(getPlansPriceResult / plansTotal, 0);
   }
 
+  function handleDelete(id) {
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this item?'
+    );
+    if (confirmation) {
+      dispatch(deletePlanRequest(id));
+    }
+  }
+
   const [columns] = useState([
     { path: 'title', label: 'Plan' },
     { path: 'duration', suffix: '/month', label: 'Duration' },
@@ -57,7 +66,7 @@ export default function Plans() {
             kind="icon"
             icon="trash"
             color="transparent"
-            onClick={() => dispatch(deletePlanRequest(plan.id))}
+            onClick={() => handleDelete(plan.id)}
           />
           <Button
             kind="icon"

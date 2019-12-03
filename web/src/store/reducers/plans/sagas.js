@@ -36,6 +36,8 @@ function* addPlan({ payload }) {
   try {
     const response = yield call(api.post, '/plans', payload);
 
+    toast.success('Plan added successfully.');
+
     yield put(hideModal());
     yield put(loadPlansRequest());
 
@@ -60,6 +62,8 @@ function* updatePlan({ payload }) {
       price,
     });
 
+    toast.success('Plan data updated successfully.');
+
     yield put(updatePlanSuccess(response.data));
 
     yield put(hideModal());
@@ -77,6 +81,8 @@ function* deletePlan({ payload }) {
   try {
     const { id } = payload;
     yield call(api.delete, `/plans/${id}`);
+
+    toast.success('Plan deleted successfully.');
 
     yield put(deletePlanSuccess(id));
 

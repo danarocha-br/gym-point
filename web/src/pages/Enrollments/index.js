@@ -33,6 +33,15 @@ export default function Enrollments() {
     enrollments,
   ]);
 
+  function handleDelete(id) {
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this item?'
+    );
+    if (confirmation) {
+      dispatch(deleteEnrollmentRequest(id));
+    }
+  }
+
   const [columns] = useState([
     { path: 'student', label: 'Student' },
     { path: 'plan', label: 'Plan' },
@@ -56,7 +65,7 @@ export default function Enrollments() {
             kind="icon"
             icon="trash"
             color="transparent"
-            onClick={() => dispatch(deleteEnrollmentRequest(enrollment.id))}
+            onClick={() => handleDelete(enrollment.id)}
           />
           <Button
             kind="icon"

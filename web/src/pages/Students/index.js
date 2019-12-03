@@ -48,6 +48,15 @@ export default function Students() {
     return parseInt(ageSumResult / studentsTotal, 0);
   }
 
+  function handleDelete(id) {
+    const confirmation = window.confirm(
+      'Are you sure you want to delete this item?'
+    );
+    if (confirmation) {
+      dispatch(deleteStudentRequest(id));
+    }
+  }
+
   const [columns] = useState([
     { path: 'name', label: 'Name' },
     { path: 'email', label: 'Email' },
@@ -63,7 +72,7 @@ export default function Students() {
             kind="icon"
             icon="trash"
             color="transparent"
-            onClick={() => dispatch(deleteStudentRequest(student.id))}
+            onClick={() => handleDelete(student.id)}
           />
           <Button
             kind="icon"

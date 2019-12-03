@@ -47,6 +47,7 @@ function* addEnrollment({ payload }) {
   try {
     const response = yield call(api.post, '/enrollments', payload);
 
+    toast.success('Student enrolled successfully.');
     yield put(hideModal());
     yield put(loadEnrollmentsRequest());
 
@@ -69,6 +70,8 @@ function* updateEnrollment({ payload }) {
       start_date,
     });
 
+    toast.success('Enrollment updated successfully.');
+
     yield put(updateEnrollmentSuccess(response.data));
     yield put(loadEnrollmentsRequest());
 
@@ -86,6 +89,8 @@ function* deleteEnrollment({ payload }) {
   try {
     const { id } = payload;
     yield call(api.delete, `/enrollments/${id}`);
+
+    toast.success('Enrollment cancelled successfully.');
 
     yield put(deleteEnrollmentSuccess(id));
 

@@ -41,6 +41,7 @@ export const TableWrapper = styled.table`
   td {
     border-bottom: 1px dashed var(--color-grey-light);
     font-size: ${size.type12};
+    padding-left: 15px;
 
     &:first-child {
       font-weight: 500;
@@ -56,6 +57,7 @@ export const TableWrapper = styled.table`
 
     @media (min-width: 991px) {
       font-size: 15px;
+      padding-left: 0;
     }
   }
 `;

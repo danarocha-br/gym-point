@@ -71,6 +71,8 @@ function* updateStudent({ payload }) {
 
     const response = yield call(api.put, `/students/${id}`, payload);
 
+    toast.success('Student data updated successfully.');
+
     yield put(updateStudentSuccess(response.data));
 
     yield put(loadStudentsRequest());
@@ -89,6 +91,8 @@ function* deleteStudent({ payload }) {
   try {
     const { id } = payload;
     yield call(api.delete, `/students/${id}`);
+
+    toast.success('Student deleted successfully.');
 
     yield put(deleteStudentSuccess(id));
 
