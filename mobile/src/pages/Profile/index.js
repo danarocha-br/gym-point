@@ -13,7 +13,6 @@ import {
   Email,
   Stats,
   DataGroup,
-  IconFrame,
   Data,
   Label,
   Logout,
@@ -55,25 +54,16 @@ export default function Profile() {
 
         <Stats>
           <DataGroup>
-            <IconFrame>
-              <Icon name="cake-variant" size={25} color="#fff" />
-            </IconFrame>
             <Data>{age}</Data>
             <Label>age</Label>
           </DataGroup>
 
           <DataGroup>
-            <IconFrame>
-              <Icon name="scale-bathroom" size={25} color="#fff" />
-            </IconFrame>
             <Data>{student.weight} kg</Data>
             <Label>Weight</Label>
           </DataGroup>
 
           <DataGroup>
-            <IconFrame>
-              <Icon name="ruler" size={25} color="#fff" />
-            </IconFrame>
             <Data>{student.height} m</Data>
             <Label>height</Label>
           </DataGroup>

@@ -1,12 +1,26 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { parseISO, formatRelative } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { Animated } from 'react-native';
 import { Container, Title, Time, Group, Content } from './styles';
 import colors from '~/styles/colors';
 
-export default function Order({ data, onPress }) {
+export default function Order({ data, onPress, index }) {
+  const [isAnimated] = useState(new Animated.Value(-100));
+
+  useEffect(() => {
+    Animated.sequence([
+      Animated.delay(index * 50),
+      Animated.spring(isAnimated, {
+        toValue: 1,
+        duration: 300,
+        delay: 200,
+      }),
+    ]).start();
+  });
+
   const dateParsed = useMemo(() => {
     return (
       data.createdAt &&
@@ -19,7 +33,20 @@ export default function Order({ data, onPress }) {
   const answered = useMemo(() => !data.answer);
 
   return (
-    <Container answered={answered} onPress={onPress}>
+    <AnimatedContainer
+      style={{
+        transform: [
+          {
+            translateY: isAnimated.interpolate({
+              inputRange: [0, 1],
+              outputRange: [-300, 1],
+            }),
+          },
+        ],
+      }}
+      answered={answered}
+      onPress={onPress}
+    >
       <Group>
         <Title answered={answered}>Answered</Title>
         <Icon
@@ -34,9 +61,10 @@ export default function Order({ data, onPress }) {
       <Content answered={answered} numberOfLines={3}>
         {data.question}
       </Content>
-    </Container>
+    </AnimatedContainer>
   );
 }
+const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 Order.propTypes = {
   /**

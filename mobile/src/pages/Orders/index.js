@@ -106,9 +106,10 @@ export default function Orders({ navigation }) {
                     content="If you need any help from our instructors, go ahead and ask your first question."
                   />
                 )}
-                renderItem={({ item: order }) => (
+                renderItem={({ item: order, index }) => (
                   <Order
                     data={order}
+                    index={index}
                     onPress={() =>
                       navigation.navigate('OrderDetails', { order })
                     }
