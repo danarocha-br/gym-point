@@ -2,7 +2,7 @@
   GymPoint
 </h1>
 
-A simple project to manage gym, representing my journey in learning NodeJS while implementing ReactJS and React Native. Still under development.
+This is the end result for the final Rocketseat GoStack challenge. This is a simple project for a gym management. The aim was to develop the backend, front and mobile app using Javascript as a stack.
 
  <p>
    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/danarocha-br/gym-point?style=for-the-badge">
@@ -13,6 +13,9 @@ A simple project to manage gym, representing my journey in learning NodeJS while
 ## Screenshots
 
 <img alt="Web" title="web" width="800" src="example/screenshots/web.gif">
+<img alt="Responsive" title="responsive" width="800" src="example/screenshots/responsive.gif">
+<img alt="Mobile" title="mobile" width="800" src="example/screenshots/mob1.gif">
+<img alt="Mobile" title="mobile" width="800" src="example/screenshots/mob2.gif">
 
 ## Browser Support
 
