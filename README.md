@@ -12,11 +12,12 @@ This is the end result for the final Rocketseat GoStack challenge. This is a sim
 
 ## Screenshots
 <div>
-  <img alt="Mobile" title="mobile" height="600" src="example/screenshots/mob1.gif">
-<img alt="Mobile" title="mobile" height="600" src="example/screenshots/mob2.gif">
-  </div>
+  <img alt="Mobile" title="mobile" height="600" src="example/screenshots/mob1.gif" style="margin-right: 20px">
+  <img alt="Mobile" title="mobile" height="600" src="example/screenshots/mob2.gif">
+</div>
+
 <img alt="Web" title="web" width="800" src="example/screenshots/web.gif">
-<img alt="Responsive" title="responsive" height="600" src="example/screenshots/responsive.gif">
+
 
 
 
