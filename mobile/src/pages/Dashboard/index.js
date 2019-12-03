@@ -24,10 +24,10 @@ import illustration from '~/assets/Illustration.png';
 import ChartsContainer from './Charts';
 import Empty from '~/components/Empty/';
 import { SkeletonContent, SkeletonGraph } from './Skeleton';
-import checkins from '../../store/reducers/checkins/index';
 
 const Dashboard = () => {
   const checkins = useSelector(state => state.checkins.list);
+  const isLoading = useSelector(state => state.checkins.loading);
   const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
 
@@ -70,16 +70,55 @@ const Dashboard = () => {
 
   return (
     <Wrapper color="light">
-      <Header>
+      <AnimatedHeader
+        style={[
+          {
+            height: scrollOffset.interpolate({
+              inputRange: [0, 100],
+              outputRange: [238, 80],
+              extrapolate: 'clamp',
+            }),
+          },
+        ]}
+      >
         <Container>
           <Greeting>
-            <HeaderTitle>Good </HeaderTitle>
-            <HeaderTitle>{getPeriodofDay()}</HeaderTitle>
-            <Name>{student.name}</Name>
+            <AnimatedHeaderTitle
+              style={{
+                opacity: scrollOffset.interpolate({
+                  inputRange: [50, 100],
+                  outputRange: [1, 0],
+                  extrapolate: 'clamp',
+                }),
+              }}
+            >
+              Good {getPeriodofDay()},
+            </AnimatedHeaderTitle>
+            <AnimatedName
+              style={{
+                top: scrollOffset.interpolate({
+                  inputRange: [90, 100],
+                  outputRange: [0, -90],
+                  extrapolate: 'clamp',
+                }),
+              }}
+            >
+              {student.name}
+            </AnimatedName>
           </Greeting>
-          <Image source={illustration} resizeMode="contain" />
+          <Animated.Image
+            style={{
+              opacity: scrollOffset.interpolate({
+                inputRange: [0, 1],
+                outputRange: [1, 0],
+                extrapolate: 'clamp',
+              }),
+            }}
+            source={illustration}
+            resizeMode="contain"
+          />
         </Container>
-      </Header>
+      </AnimatedHeader>
 
       <Main>
         <Title>Checkin Status</Title>
@@ -100,16 +139,26 @@ const Dashboard = () => {
           <SkeletonContent />
         ) : (
           <CheckinList
+            scrollEventThrottle={16}
+            onScroll={Animated.event([
+              {
+                nativeEvent: {
+                  contentOffset: { y: scrollOffset },
+                },
+              },
+            ])}
             data={checkins}
             extraData={checkins.length}
             keyExtractor={(item, index) => item + index}
-            ListEmptyComponent={() => (
-              <Empty
-                src=""
-                title="No checkins yet"
-                content="Make your first checkin by clicking on the green add button."
-              />
-            )}
+            ListEmptyComponent={() =>
+              !isLoading && (
+                <Empty
+                  src=""
+                  title="No checkins yet"
+                  content="Make your first checkin by clicking on the green add button."
+                />
+              )
+            }
             renderItem={({ item: checkin, index }) => (
               <Checkin data={checkin} index={index} />
             )}
@@ -121,6 +170,10 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+const AnimatedHeader = Animated.createAnimatedComponent(Header);
+const AnimatedName = Animated.createAnimatedComponent(Name);
+const AnimatedHeaderTitle = Animated.createAnimatedComponent(HeaderTitle);
 
 Dashboard.navigationOptions = {
   tabBarLabel: 'Dashboard',

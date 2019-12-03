@@ -5,6 +5,6 @@ export default colors = {
   greyLight: '#ddd6f3',
   greyLightest: '#f5f7fa',
   blue: '#536cfa',
-  purple: '#3b3179',
+  purple: '#432f94',
   green: '#33B978',
 };

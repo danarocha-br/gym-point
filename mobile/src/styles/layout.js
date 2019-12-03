@@ -4,7 +4,6 @@ export const Header = styled.SafeAreaView`
   background-color: ${colors.purple};
   border-bottom-left-radius: 37px;
   border-bottom-right-radius: 37px;
-  z-index: 10;
 `;
 
 export const Container = styled.View`

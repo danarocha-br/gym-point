@@ -75,6 +75,7 @@ export const Charts = styled.View`
   justify-content: space-between;
   margin-top: 15px;
   margin-bottom: 15px;
+  z-index: 100;
 `;
 
 export const ChartGroup = styled.View`
