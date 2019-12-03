@@ -18,7 +18,7 @@ import Skeleton from './Skeleton';
 import Empty from '~/components/Empty/';
 
 export default function Orders({ navigation }) {
-  const orders = useSelector(state => state.orders.list);
+  const orders = useSelector(state => state.orders.list || []);
   const student = useSelector(state => state.enrollment.profile.student);
   const studentId = student.id;
   const isLoading = useSelector(state => state.orders.loading);
@@ -89,7 +89,7 @@ export default function Orders({ navigation }) {
             marginRight: -5,
           }}
         >
-          <Chart data={ordersResult} />
+          {questionsCount > 0 && <Chart data={ordersResult} />}
 
           {isLoading ? (
             <Skeleton />

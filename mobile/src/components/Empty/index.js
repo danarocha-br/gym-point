@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Container, Image, Title, Content } from './styles';
+import empty from '~/assets/empty.png';
 
-export default function Empty({ title, content, src }) {
+export default function Empty({ title, content }) {
   return (
     <Container>
-      <Image source={src} />
+      <Image source={empty} resizeMode="center" />
       <Title>{title}</Title>
       <Content>{content}</Content>
     </Container>
@@ -14,10 +15,6 @@ export default function Empty({ title, content, src }) {
 }
 
 Empty.propTypes = {
-  /**
-   * Defines the illustration for the empty view.
-   */
-  src: PropTypes.string.isRequired,
   /**
    * Defines the title for the empty view.
    */

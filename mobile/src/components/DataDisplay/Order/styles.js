@@ -12,6 +12,7 @@ export const Container = styled.TouchableOpacity`
   border: ${props => (props.answered ? 'none' : '1px solid #ddd6f3')};
   border-radius: 10px;
 `;
+
 export const Group = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -23,6 +24,7 @@ export const Title = styled.Text`
   color: ${props => (props.answered ? colors.greyMd : colors.green)};
   font-size: 15px;
   font-weight: 600;
+  width: 90%;
 `;
 
 export const Time = styled.Text`
@@ -38,4 +40,5 @@ export const Content = styled.Text`
   color: ${props => (!props.answered ? colors.greyMd : colors.greyDark)};
   font-size: 14px;
   font-weight: 500;
+  height: auto;
 `;

@@ -7,7 +7,6 @@ export const OrderList = styled.FlatList.attrs({
   contentContainerStyle: {
     paddingTop: 30,
     paddingBottom: 30,
-    width: '100%',
   },
   showsVerticalScrollIndicator: false,
 })``;
