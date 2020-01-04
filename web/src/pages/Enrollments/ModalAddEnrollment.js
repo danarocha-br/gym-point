@@ -64,13 +64,18 @@ export default function ModalAddEnrollment() {
   return (
     <Modal title="Make a New Enrollment">
       <Form schema={schema} onSubmit={handleSubmit}>
-        <Select
+        {/* <Select
           cacheOptions
           // defaultOptions={getStudents}
           // loadOptions={promiseOptions}
           options={getStudents}
+        /> */}
+        <TextInput
+          name="student_id"
+          type="number"
+          title="Student ID"
+          required
         />
-
         <TextInput name="plan_id" type="number" title="Plan ID" required />
         <DatePicker name="start_date" />
         <TextInput name="end_date" type="number" title="End Date" disabled />

@@ -2,7 +2,7 @@
   GymPoint
 </h1>
 
-This is the end result for the final Rocketseat GoStack challenge. This is a simple project for a gym management. The aim was to develop the backend, front and mobile app using Javascript as a stack.
+This is the end result for the final Rocketseat GoStack challenge. This is a simple project for a gym management. The aim was to develop the backend, front and mobile app using Javascript as a stack. Currently, only tested in iOS environment.
 
  <p>
    <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/danarocha-br/gym-point?style=for-the-badge">
